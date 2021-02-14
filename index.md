@@ -1,6 +1,7 @@
-# Online-Course-Platform
+# Bilkent University
+## CS 353 - Database Systems Course Project (Spring 2021)
+## Online Course Platform
 
-### CS-353 Term Project Group 1
 
 
 ##### Group Members:
