@@ -1,5 +1,7 @@
 # Online-Course-Platform
+
 ### CS-353 Term Project Group 1
+
 
 ##### Group Members:
 
@@ -10,6 +12,7 @@ Cemre Biltekin
 Mustafa Yaşar
 
 Oğuz Kaan İmamoğlu
+
 
 
 ##### Deliverables
