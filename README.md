@@ -17,5 +17,5 @@ Oğuz Kaan İmamoğlu
 
 ##### Deliverables
 
-Proposal:[Github](https://github.com/OguzKaanImamoglu/Online-Course-Platform/raw/main/hw1_spring21%20(1).pdf)
+Proposal:[Github](https://github.com/OguzKaanImamoglu/Online-Course-Platform/blob/main/Group%201%20Proposal.pdf)
 
