@@ -68,6 +68,7 @@
         <meta charset="utf-8">
         <title>Login</title>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
         <link href="style.css" rel="stylesheet" type="text/css">
     </head>
     <body>
@@ -84,8 +85,8 @@
                 <input type="password" name="password" placeholder="Password" id="password" required>
                                 <span class="error"><?php echo $username_email_error;?></span>
                 <span class="error"><?php echo $password_error;?></span>
+                <div class="text-center">Does not have an account? <a href="sign-up/student.php">Sign Up</a></div>
                 <input type="submit" value="Login">
-
             </form>
         </div>
     </body>

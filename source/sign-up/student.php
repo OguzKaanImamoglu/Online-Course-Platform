@@ -27,6 +27,7 @@ if (isset($_POST['save'])) {
     echo "\ncpass " . $cpass . "\n";
     echo "\nbirth: " . $date_of_birth . "\n";
 
+    /*INSERT INTO person (username, email, name, surname, password, date_of_birth) VALUES ('ayse123', 'ayse@hotmail.com', 'ayse', 'lastname', 'asdasd', '2021-05-09')*/
     $sql = "INSERT INTO person (username, email, name, surname, password, date_of_birth)
             VALUES ('$username', '$email', '$first_name', '$last_name', '$password', '$date_of_birth')";
 
@@ -44,7 +45,7 @@ if (isset($_POST['save'])) {
         $person_id = mysqli_insert_id($link);
         echo " Person id: " . $person_id;
 
-        $sql = "INSERT INTO course_creator(student_id, wallet) VALUES ('$person_id', '0')";
+        $sql = "INSERT INTO student(student_id, wallet) VALUES ('$person_id', '0')";
 
         if ( !mysqli_query($link, $sql) ) {
             echo "ERROR : COULD NOT BE ADDED " . mysqli_error($link);
@@ -115,7 +116,7 @@ if (isset($_POST['save'])) {
                 <div class="form-group">
                     <button type="submit" name="save" class="btn btn-success btn-lg btn-block">Register Now</button>
                 </div>
-                <div class="text-center">Already have an account? <a href="login.php">Sign in</a></div>
+                <div class="text-center">Already have an account? <a href="../index.php">Sign in</a></div>
             </form>
         </div>
     </div>
