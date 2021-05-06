@@ -48,7 +48,9 @@ if (isset($_POST['save'])) {
 
         if ( !mysqli_query($link, $sql) ) {
             echo "ERROR : COULD NOT BE ADDED " . mysqli_error($link);
-        } 
+        } else {
+            header("Location: ../index.php");
+        }
     }
   }
 }
