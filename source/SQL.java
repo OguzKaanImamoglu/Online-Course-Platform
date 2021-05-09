@@ -5,7 +5,7 @@ class SQL{
             Class.forName("com.mysql.jdbc.Driver");
 
             Connection con=DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3307/project2","mustafa","123456");
+                    "jdbc:mysql://dijkstra.cs.bilkent.edu.tr:3306/can_alpay","can.alpay","lY38nY8F");
 
             Statement stmt=con.createStatement();
             DatabaseMetaData meta = con.getMetaData();
