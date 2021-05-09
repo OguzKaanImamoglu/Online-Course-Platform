@@ -3,6 +3,8 @@
     $password_error = "";
     session_start();
 
+    
+
     include('sign-up/database.php');
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
