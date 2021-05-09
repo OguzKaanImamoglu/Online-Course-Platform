@@ -29,9 +29,32 @@ if (isset($_POST['publish'])) {
 		if (!mysqli_query($link, $sql)) {
 			echo "ERROR : COULD NOT BE ADDED" . mysqli_error($link);
 		} else {
-			echo " SUCCESSFULLY ADDED ";
 			$course_id = mysqli_insert_id($link);
-			echo "    $course_id    ";
+
+			for ($i = 0; $i < count($_SESSION['lecture_array']); $i++) {
+				$lecture_name = $_SESSION['lecture_array'][$i]->lecture_name;
+				$lecture_description = $_SESSION['lecture_array'][$i]->lecture_description;
+				$lecture_duration = $_SESSION['lecture_array'][$i]->lecture_duration;
+
+				$sql = "INSERT INTO lecture(course_id, lecture_name, duration, description) 
+						VALUES ('$course_id', '$lecture_name', '$lecture_duration', '$lecture_description')";
+
+				if (!mysqli_query($link, $sql)) {
+					echo "ERROR : COULD NOT BE ADDED" . mysqli_error($link);
+				}	
+			}
+
+			for ($i = 0; $i < count($_SESSION['assignment_array']); $i++) {
+				$assignment_question = $_SESSION['assignment_array'][i]->assignment_question;
+				$assignment_threshold = $_SESSION['assignment_threshold'][i]->assignment_threshold;
+
+				$sql = "INSERT INTO assignment(assignment_question, threshold, course_id)
+						VALUES  ('$assignment_question', '$assignment_threshold', '$course_id')";
+
+				if (!mysqli_query($link, $sql)) {
+					echo "ERROR : COULD NOT BE ADDED" . mysqli_error($link);
+				}
+			}
 		}
 	}
 }
@@ -45,7 +68,7 @@ if (isset($_POST['publish'])) {
 </head>
 <body>  
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="">Home</a>
+		<a class="navbar-brand" href="home.php">Home</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -53,10 +76,10 @@ if (isset($_POST['publish'])) {
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item">
-					<a class="nav-link" href="#">Discount Offers<span class="sr-only">(current)</span></a>
+					<a class="nav-link" href="discount-offers.php">Discount Offers<span class="sr-only">(current)</span></a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="publish-course.php">Publish New Course</a>
+				<li class="nav-item active">
+					<a class="nav-link" href="">Publish New Course</a>
 				</li>
 			</ul>
 		</div>

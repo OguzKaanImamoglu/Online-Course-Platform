@@ -33,7 +33,7 @@ $wallet = $row["wallet"];
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item">
-					<a class="nav-link" href="#">Discount Offers<span class="sr-only">(current)</span></a>
+					<a class="nav-link" href="discount-offers.php">Discount Offers<span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="publish-course.php">Publish New Course</a>
@@ -47,32 +47,53 @@ $wallet = $row["wallet"];
 			<h1 class="display-4">Welcome <?php echo "$name $surname"?></h1>
 			<hr class="my-4">
 			<p class="lead">
-				My Wallet: 
+				Your Wallet: 
 				<i class="fa fa-usd fa-lg" aria-hidden="true"></i>
 				<?php echo "$wallet" ?>
 			</p>
-			<h3 class="display-5 mb-4">My Courses</h3>
+			<h3 class="display-5 mb-4">Your Courses</h3>
 			<?php 
+			
+			$sql = "SELECT  \n"
 
-			$sql = "SELECT 	C.course_id, C.course_name, C.average_rating, total_student, 
-			D.percentage, (CASE WHEN CURRENT_DATE >= D.start_date AND 
-			CURRENT_DATE < D.end_date AND D.is_allowed
-			THEN C.course_price * (( 100 - D.percentage ) / 100)
-			ELSE c.course_price END) as price
-			FROM		course C LEFT OUTER JOIN discount D ON 
-			C.course_id = D.discounted_course_id, 
-			(SELECT 	course_id, COUNT(student_id) AS total_student
-			FROM 		enrolls
-			WHERE 	course_id IN (SELECT course_id
-			FROM course
-			WHERE course_creator_id = @course_creator_id)
-			GROUP BY 	course_id) course_student
-			WHERE 	course_student.course_id = C.course_id";
+			    . "  C.course_id, C.course_name, C.average_rating, total_student, \n"
+
+			    . "  D.percentage, (CASE WHEN CURRENT_DATE >= D.start_date AND \n"
+
+			    . "  CURRENT_DATE < D.end_date AND D.is_allowed THEN C.course_price * (( 100 - D.percentage ) / 100)\n"
+
+			    . "    ELSE C.course_price END) as price\n"
+
+			    . "FROM course C \n"
+
+			    . "LEFT OUTER JOIN discount D \n"
+
+			    . "  ON  C.course_id = D.discounted_course_id\n"
+
+			    . "LEFT JOIN ( SELECT course_id, COUNT(student_id) AS total_student\n"
+
+			    . "  FROM        enrolls\n"
+
+			    . "  WHERE   course_id IN (\n"
+
+			    . "    SELECT course_id\n"
+
+			    . "    FROM course\n"
+
+			    . "    WHERE course_creator_id = 2)\n"
+
+			    . "  GROUP BY    course_id) course_student\n"
+
+			    . "  ON C.course_id = course_student.course_id";
+			
+
+			//$sql = "SELECT course_id, course_name, average_rating, course_price as price FROM course WHERE course_creator_id='$person_id'";
 
 			$result2 = mysqli_query($link, $sql);
 
 			if (!$result2) {
 				echo "There is no course found.";
+				echo " " . $link -> error;
 			} else {
 				$count2 = mysqli_num_rows($result);
 	 			echo "$count2";
@@ -87,19 +108,30 @@ $wallet = $row["wallet"];
 							<th scope='col'>Students</th>
 							<th scope='col'>Discount</th>
 						</thead>
-					</table>
-					</tbody>
+					<tbody>
 					";
 
 					while ($q_result = mysqli_fetch_array($result2)) {
 						echo "<tr><th scope='row'>" . $q_result["course_id"] .
 							"</th><td>" . $q_result["course_name"] .
 							"</td><td>" . $q_result["price"] . 
-							"</td><td>" . $q_result["average_rating"] .
-							"</td><td>" . $q_result["total_student"].
-							"</td><td>" . $q_result['percentage'] .
-							"</td></tr>";
+							"</td><td>" . $q_result["average_rating"];
+
+							if (is_null($q_result["total_student"])) {
+								echo "</td><td> 0";
+							} else {
+								echo "</td><td>" . $q_result["total_student"];
+							}
+
+							if (is_null($q_result["percentage"])) {
+								echo "</td><td> 0";
+							} else {
+								echo "</td><td>" . $q_result["percentage"];
+							}
+							echo "</td></tr>";
 					}
+					echo "</tbody>";
+					echo "</table>";
 				} else {
 					echo "There is no course found.";
 				}
