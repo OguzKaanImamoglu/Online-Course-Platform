@@ -271,7 +271,7 @@ class SQL{
             exist = meta.getTables(null, null, "discount", null);
             if (!exist.next()) {
                 stmt.executeUpdate("CREATE TABLE discount(\n" +
-                        "\tdiscount_id INT PRIMARY KEY,\n" +
+                        "\tdiscount_id INT PRIMARY KEY AUTO_INCREMENT,\n" +
                         "\tdiscounted_course_id INT,\n" +
                         "\tallower_course_creator_id INT,\n" +
                         "\tis_allowed BOOLEAN,\n" +
@@ -294,7 +294,7 @@ class SQL{
             exist = meta.getTables(null, null, "refund", null);
             if (!exist.next()) {
                 stmt.executeUpdate("CREATE TABLE refund(\n" +
-                        "\trefund_id INT PRIMARY KEY,\n" +
+                        "\trefund_id INT PRIMARY KEY AUTO_INCREMENT,\n" +
                         "\treason VARCHAR(320) NOT NULL,\n" +
                         "\tis_assessed BOOLEAN DEFAULT FALSE,\n" +
                         "\tis_approved BOOLEAN DEFAULT FALSE\n" +
