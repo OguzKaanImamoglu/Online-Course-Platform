@@ -8,6 +8,7 @@ define('DB_SERVER', '127.0.0.1');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', 'password');
 define('DB_NAME', 'project353');
+//require_once('../../pushpad-php/init.php');
 
 $charset = "utf8mb4";
     try {

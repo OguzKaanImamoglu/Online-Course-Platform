@@ -9,7 +9,7 @@ $person_id = $_SESSION['person_id'];
 $name = $_SESSION['name'];
 $surname = $_SESSION['surname'];
 
-$sql = "SELECT wallet FROM course_creator WHERE course_creator_id='$person_id'";
+$sql = "SELECT lecture FROM course_creator WHERE course_creator_id='$person_id'";
 
 $result = mysqli_query($link,$sql);
 $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
