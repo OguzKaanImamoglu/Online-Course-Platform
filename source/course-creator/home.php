@@ -39,6 +39,9 @@ $wallet = $row["wallet"];
 					<a class="nav-link" href="publish-course.php">Publish New Course</a>
 				</li>
 			</ul>
+			<ul class="nav navbar-nav navbar-right">
+      			<li><a href="../logout.php">Logout</a></li>
+    		</ul>
 		</div>
 	</nav>
 
