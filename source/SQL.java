@@ -3,9 +3,12 @@ class SQL{
     public static void main(String args[]){
         try{
             Class.forName("com.mysql.jdbc.Driver");
-
+        /*
             Connection con=DriverManager.getConnection(
                     "jdbc:mysql://dijkstra.cs.bilkent.edu.tr:3306/can_alpay","can.alpay","lY38nY8F");
+        */
+            Connection con=DriverManager.getConnection(
+                    "jdbc:mysql://127.0.0.1/project353?characterEncoding=latin1&useConfigs=maxPerformance","root","password");
 
             Statement stmt=con.createStatement();
             DatabaseMetaData meta = con.getMetaData();
