@@ -95,7 +95,7 @@ $wallet = $row["wallet"];
 				echo "There is no course found.";
 				echo " " . $link -> error;
 			} else {
-				$count2 = mysqli_num_rows($result);
+				$count2 = mysqli_num_rows($result2);
 	 			echo "$count2";
 
 				if ($count2 > 0) {

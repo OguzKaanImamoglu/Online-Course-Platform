@@ -30,7 +30,7 @@ $wallet = $row["wallet"];
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item">
-					<a class="nav-link" href="#">Course Market <span class="sr-only">(current)</span></a>
+					<a class="nav-link" href="course-market.php">Course Market <span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#">My Courses</a>
@@ -65,7 +65,7 @@ $wallet = $row["wallet"];
 				<a class="btn btn-success btn-md" href="add-money.php" role="button">Add Money</a>
 			</p>
 			<p class="lead mt-4">
-				<a class="btn btn-success btn-lg" href="#" role="button">Course Market</a>
+				<a class="btn btn-success btn-lg" href="course-market.php" role="button">Course Market</a>
 				<a class="btn btn-success btn-lg" href="#" role="button">My Courses</a>
 			</p>
 		</div>
