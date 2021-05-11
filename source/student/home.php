@@ -33,7 +33,7 @@ $wallet = $row["wallet"];
 					<a class="nav-link" href="course-market.php">Course Market <span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Your Courses</a>
+					<a class="nav-link" href="my-courses.php">My Courses</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="add-money.php">Add Money</a>
@@ -69,7 +69,7 @@ $wallet = $row["wallet"];
 			</p>
 			<p class="lead mt-4">
 				<a class="btn btn-success btn-lg" href="course-market.php" role="button">Course Market</a>
-				<a class="btn btn-success btn-lg" href="#" role="button">Your Courses</a>
+				<a class="btn btn-success btn-lg" href="my-courses.php" role="button">My Courses</a>
 			</p>
 		</div>
 	</div>
