@@ -42,6 +42,10 @@ $wallet = $row["wallet"];
 					<a class="nav-link" href="add-money.php">Add Money</a>
 				</li>
 			</ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="../logout.php">Logout</a></li>
+            </ul>
+        </div>
 		</div>
 	</nav>
 

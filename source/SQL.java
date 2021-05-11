@@ -243,7 +243,7 @@ class SQL{
             exist = meta.getTables(null, null, "question", null);
             if (!exist.next()) {
                 stmt.executeUpdate("CREATE TABLE question(\n" +
-                        "\t\tquestion_id INT PRIMARY KEY,\n" +
+                        "\t\tquestion_id INT PRIMARY KEY AUTO_INCREMENT,\n" +
                         "\t\tquestion_text VARCHAR(200) NOT NULL,\n" +
                         "\t\tdate DATE NOT NULL\n" +
                         ") ENGINE = INNODB;\n");

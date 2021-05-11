@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:mysql://dijkstra.cs.bilkent.edu.tr:3306/can_alpay</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="project353@127.0.0.1" uuid="80607941-cc84-4361-8aa9-5469c9c03627">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1:3306/project353</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
