@@ -36,8 +36,8 @@ if (isset($_POST['publish'])) {
 				$lecture_description = $_SESSION['lecture_array'][$i]->lecture_description;
 				$lecture_duration = $_SESSION['lecture_array'][$i]->lecture_duration;
 
-				$sql = "INSERT INTO lecture(course_id, lecture_name, duration, description) 
-						VALUES ('$course_id', '$lecture_name', '$lecture_duration', '$lecture_description')";
+				$sql = "INSERT INTO lecture(course_id, lecture_id, lecture_name, duration, description) 
+						VALUES ('$course_id', '$i', '$lecture_name', '$lecture_duration', '$lecture_description')";
 
 				if (!mysqli_query($link, $sql)) {
 					echo "ERROR : COULD NOT BE ADDED" . mysqli_error($link);
@@ -56,6 +56,9 @@ if (isset($_POST['publish'])) {
 				}
 			}
 		}
+
+		$_SESSION['lecture_array'] = array();
+		$_SESSION['assignment_array'] = array();
 	}
 }
 ?>
