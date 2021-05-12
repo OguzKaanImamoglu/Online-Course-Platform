@@ -59,6 +59,8 @@ $surname = $_SESSION['surname'];
 							<th scope='col'>Course Id</th>
 							<th scope='col'>Course Name</th>
 							<th scope='col'>Instructor Name</th>
+                            <th scope='col'>Progress</th>
+                            <th scope='col'></th>
 							</thead>
 							<tbody>
 							";
@@ -67,13 +69,64 @@ $surname = $_SESSION['surname'];
                     echo "<tr><th scope='row'>" . $q_result["course_id"] .
                         "</th><td>" . $q_result["course_name"] .
                         "</td><td>" . $q_result["name"]. " " . $q_result["surname"];
+                    
+
+                    $student_id = $person_id;
+                    $course_id = $q_result["course_id"];
+
+                    $sql2 = "SELECT  course_id, student_id, COUNT(lecture_id) as lecture_count
+                        FROM    progresses
+                        WHERE   student_id = '$person_id' AND course_id='$course_id'
+                        GROUP BY course_id, student_id";
+
+                    $result2 = mysqli_query($link,$sql2);
+
+                    if (!$result2) {
+                        echo "There is no course found.";
+                        echo " " . $link -> error;
+                        die();
+                    } else {
+                        $row = mysqli_fetch_array($result2,MYSQLI_ASSOC);
+
+                        if (is_null($row)) {
+                            echo "<td>0";
+                        } elseif (is_null($row["lecture_count"]) || $row["lecture_count"] == "" || $row["lecture_count"] == 0) {
+                            echo "<td>0";
+                        } else {
+                            $watched_lecture_count = $row["lecture_count"];
+
+                            $sql3 = "SELECT course_id, COUNT(lecture_id) as total_lecture_count
+                                    FROM  lecture
+                                    WHERE course_id='$course_id'
+                                    GROUP BY    course_id";
+
+                            $result3 = mysqli_query($link, $sql3);
+
+                            if (!$result3) {
+                                echo "Failed.";;
+                                echo " " . $link -> error;;
+                                die();
+                            }
+
+                            $total_row = mysqli_fetch_array($result3, MYSQLI_ASSOC);
+
+                            if (!is_null($total_row)) {
+                                $total_lecture_count = $total_row["total_lecture_count"];
+                            }
+
+                            echo $total_lecture_count . " " . $watched_lecture_count;
+
+                            $progress_percentage = $watched_lecture_count * 100 / $total_lecture_count;
+
+                            echo "<td>" . number_format($progress_percentage) . "%";
+                        }
+                    }
                     echo /** @lang text */
                         "<td>
                         <form action='course-page.php' method='post' id='formHiddenInputValue' name='formHiddenInputValue'>
                             <input type='hidden' id='cid' name='cid' value='" . $q_result["course_id"] . "' />
                              <button onclick=\"location.href=course-page.php'\" class=\"mt-2 text-center btn btn-success\" >Course Page</button>
                                                 </form></td>";
-
                     echo "</td></tr>";
 
                 }
