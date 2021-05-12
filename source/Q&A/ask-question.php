@@ -28,7 +28,6 @@ if (isset($_POST['sendQuestion'])) {
         $result = mysqli_query($link, $sql);
 
         $sql = "SELECT MAX(question_id) as question_id FROM question";
-
         $result = mysqli_query($link, $sql);
 
         $row = mysqli_fetch_array($result);
