@@ -76,6 +76,72 @@ if (!$result = mysqli_query($link,$sql)) {
 				</a>
 			</div>
 			<div class="col-md-8" style="background-color: #dadada;">
+				<dl class="row">
+					<dt class="col-sm-3 mt-4">Course Instructor</dt>
+					<dd class="col-sm-9 mt-4"><?php echo $creator_name . " " . $creator_surname; ?></dd>
+
+					<dt class="col-sm-3 mt-4">Language</dt>
+					<dd class="col-sm-9 mt-4"><?php echo $language; ?></dd>
+
+					<dt class="col-sm-3 mt-4">Course Description</dt>
+					<dd class="col-sm-9 mt-4"><?php echo $course_description; ?></dd>
+
+					<dt class="col-sm-3 mt-4">Average Rating</dt>
+					<dd class="col-sm-9 mt-4"><?php echo $average_rating; ?></dd>
+
+					<?php 
+						$sql = "SELECT 	C.course_id, C.course_name, C.language, C.average_rating, C.category,\n"
+
+					. "P.name, P.surname, D.percentage, D.start_date, D.end_date, \n"
+
+					. "D.is_allowed, (CASE WHEN CURRENT_DATE <= D.end_date AND \n"
+
+					. "CURRENT_DATE >= D.start_date AND D.is_allowed\n"
+
+					. "           				THEN C.course_price * (( 100 - D.percentage ) / 100)\n"
+
+					. "           				ELSE C.course_price END) as price\n"
+
+					. "FROM 		course C LEFT OUTER JOIN discount D ON \n"
+
+					. "C.course_id = D.discounted_course_id LEFT JOIN person P ON C.course_creator_id = P.person_id WHERE C.course_id='$selected_course_id'";
+
+
+
+
+					if (!$result = mysqli_query($link,$sql)) {
+						echo "There is no course found.";
+						echo " " . $link -> error;
+					} else {
+						$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+
+						if ($row["is_allowed"] == 0 || $row["is_allowed"] == "" || is_null($row["is_allowed"])) {
+							echo "
+								<dt class='col-sm-3 mt-4'>Price</dt>
+								<dd class='col-sm-9 mt-4'>" . number_format($row["price"], 2) . "$</dd>
+							";
+
+							echo "
+								<dt class='col-sm-3 mt-4'>Discount</dt>
+								<dd class='col-sm-9 mt-4'> There is no discount on this course. </dd>
+							";
+						} else {
+							echo "
+								<dt class='col-sm-3 mt-4'>Price</dt>
+								<dd class='col-sm-9 mt-4'>" . number_format($row["price"], 2) . "$</dd>
+							";
+
+							echo "
+								<dt class='col-sm-3 mt-4'>Discount</dt>
+								<dd class='col-sm-9 mt-4'>" . $row["percentage"] . " </dd>
+							";
+						}
+					}
+
+					 ?>
+				
+
+				</dl>
 			</div>
 			<div class="col-md-2 text-center">
 				<a href="add-wishlist.php?course_id=<?php print $selected_course_id?>">
@@ -113,7 +179,7 @@ if (!$result = mysqli_query($link,$sql)) {
 					if (!$count) {
 						echo "There is no comment in this course.";
 					} else {
-
+						
 					}
 				}
 				?>

@@ -5,8 +5,6 @@ include('../sign-up/database.php');
 $student_id = $_SESSION["person_id"];
 $courses = $_SESSION["courses_in_cart"];
 
-print_r($courses);
-
 foreach ($courses as $key => $value) {
 	$course_id = $value;
 
@@ -34,7 +32,59 @@ foreach ($courses as $key => $value) {
 		$sql = "INSERT INTO enrolls(student_id, course_id, purchased_price, purchase_date)
 				VALUES ('$student_id', '$course_id', '$purchased_price', CURDATE())";
 
-		
+		if(!mysqli_query($link, $sql)) {
+			echo "could not enroll.";
+			die();
+		}
+
+		$sql = "UPDATE 	student
+				SET 	wallet = wallet - " . $purchased_price . "
+				WHERE	student_id='$student_id'";
+
+		if (!mysqli_query($link, $sql)) {
+			echo "could not decrease wallet";
+			die();
+		}
+
+		$sql = "SELECT 	course_creator_id
+				FROM	course
+				WHERE	course_id='$course_id'";
+
+
+		if(!mysqli_query($link, $sql)) {
+			echo "course_creator_id not found";
+			die();
+		}
+
+		$result = mysqli_query($link, $sql);
+
+		$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+
+		$course_creator_id = $row["course_creator_id"];
+
+		$sql = "UPDATE	course_creator
+				SET		wallet = wallet + '$purchased_price'
+				WHERE	course_creator_id = '$course_creator_id'";
+
+		if (!mysqli_query($link, $sql)) {
+			echo "Course creator's wallet not increased.";
+			die();
+		}
+
+		$sql = "DELETE FROM adds_to_wishlist
+				WHERE		student_id='$student_id' AND course_id='$course_id'";
+
+		if (!mysqli_query($link, $sql)) {
+			echo "course could not be added from wishlist";
+		}
+
+		$sql = "DELETE FROM	adds_to_cart
+				WHERE 		student_id='$student_id' AND course_id='$course_id'";
+
+		if (!mysqli_query($link, $sql)) {
+			echo "course could not be deleted from cart";
+			die();
+		}
 	}
 }
 
