@@ -52,7 +52,7 @@ $cname = $row1['course_name'];
 
 <div class="container">
     <button onclick="location.href='request-refund.php'" class="mt-2 text-center btn btn-primary">Request Refund</button>
-    <button onclick="location.href='question-answers.php'" class="mt-2 text-center btn btn-primary">Q&A Page</button>
+    <button onclick="location.href='../Q&A/q&aforcourse.php'" class="mt-2 text-center btn btn-primary">Q&A Page</button>
     <button onclick="location.href='assignments.php'" class="mt-2 text-center btn btn-primary">Assignments</button>
     <button onclick="location.href='rate.php'" class="mt-2 text-center btn btn-primary">Rate</button>
     <div class="jumbotron mt-4">

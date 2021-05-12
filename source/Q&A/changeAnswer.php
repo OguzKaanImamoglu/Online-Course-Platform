@@ -1,46 +1,53 @@
 <?php
+
 session_start();
+
 include('../sign-up/database.php');
 
 $person_id = $_SESSION['person_id'];
-$name = $_SESSION['name'];
-$surname = $_SESSION['surname'];
-$course_id = $_SESSION['course_id'];
 
-$course_id = 4;
+if(isset($_POST['question_id'])) {
+    $_SESSION['question_id'] = $_POST['question_id'];
+}
 
-$sql = "SELECT course_name FROM course WHERE course_id='$course_id'";
+$question_id = $_SESSION['question_id'];
+
+//echo "<script>alert('$question_id');</script>";
+
+$sql = "SELECT question_text FROM question WHERE question_id='$question_id'";
 
 $result = mysqli_query($link,$sql);
 $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+$question_text = $row['question_text'];
 
-$course_name = $row['course_name'];
 
-if (isset($_POST['sendQuestion'])) {
-    $question= $_POST['question'];
+$sql = "SELECT answer_text FROM answers WHERE question_id = '$question_id'";
 
-    if($question == ""){
-        $message = "Enter your question before sending!";
+$result = mysqli_query($link,$sql);
+$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+$question_answer = $row['answer_text'];
+
+
+if (isset($_POST['sendAnswer'])) {
+    $answer= $_POST['answer'];
+
+    if($answer == ""){
+        $message = "Enter answer before sending!";
     }
     else {
-        $sql = "INSERT INTO question(question_text, date) VALUES('$question', CURDATE())";
+        $sql = "UPDATE answers SET answer_text = '$answer' WHERE question_id = '$question_id'";
 
         $result = mysqli_query($link, $sql);
 
-        $sql = "SELECT MAX(question_id) as question_id FROM question";
-        $result = mysqli_query($link, $sql);
-
-        $row = mysqli_fetch_array($result);
-        $question_id = $row['question_id'];
-
-        $sql = "INSERT INTO asks(question_id,student_id, course_id) VALUES('$question_id', '$person_id','$course_id')";
-        $result = mysqli_query($link, $sql);
-
-        $message = "Question is sent to the teacher";
+        $message = "Answer saved";
     }
 
-    echo "<script>alert('$message');</script>";
+    //echo "<script>alert('$message');</script>";
+    header("Refresh:0");
 }
+
+
+
 
 ?>
 
@@ -52,7 +59,7 @@ if (isset($_POST['sendQuestion'])) {
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="../student/home.php">Home</a>
+    <a class="navbar-brand" href="">Home</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -60,37 +67,33 @@ if (isset($_POST['sendQuestion'])) {
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Course Market <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="../course-creator/discount-offers.php">Discount Offers<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">My Courses</a>
+                <a class="nav-link" href="../course-creator/publish-course.php">Publish New Course</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="../student/add-money.php">Add Money</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="../Q&A/myQuestions.php">My Questions</a>
-            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../logout.php">Logout</a></li>
         </ul>
     </div>
 </nav>
-
 <div class="container">
     <div class="jumbotron mt-4">
         <form action="" method="post">
-            <h2 class="display-4">What do you want to ask in <?php echo "$course_name"?></h2>
+            <h2 class="display-4">Answer</h2>
             <!--<p class="lead">You can add money to your wallet below.</p>-->
             <hr class="my-4">
             <p class="lead">
                 <i class="" aria-hidden="true"></i>
-                <?php echo "Type your question below" ?>
+                <?php echo "Question is: $question_text" ?> </p><p class = 'lead'><b>
+                    <?php echo "Answer: $question_answer" ?></b>
             </p>
-            <textarea id="question" name="question" rows="6" cols="100"></textarea>
+            <textarea id="answer" name="answer" rows="6" cols="100"></textarea>
             <p>
-                <button type="submit" name="sendQuestion" class="btn btn-success btn-md mt-4" role="button">Submit your question</button>
-                <a class="btn btn-success btn-md mt-4" href="q&aforcourse.php" role="button">Return Course Questions</a>
-                <a class="btn btn-success btn-md mt-4" href="#" role="button">Return to the Course Page</a>
-                <a class="btn btn-success btn-md mt-4 float-right" href="../Q&A/myQuestions.php" role="button">Open My Questions</a>
+                <button type="submit" name="sendAnswer" class="btn btn-success btn-md mt-4" role="button">Submit Answer</button>
+                <a class="btn btn-success btn-md mt-4" href="course_creator_view_Questions.php" role="button">Return Course Questions</a>
+            <a class="btn btn-success btn-md mt-4 float-right" href="#" role="button">Return Course Page</a>
 
             </p>
         </form>

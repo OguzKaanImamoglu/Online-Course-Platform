@@ -26,10 +26,10 @@ $sql = "SELECT A.question_id, C.course_name, C.course_id, Q.question_text, Q.dat
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Course Market <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="../student/course-market.php">Course Market <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">My Courses</a>
+                <a class="nav-link" href="../student/my-courses.php">My Courses</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="../student/add-money.php">Add Money</a>
@@ -90,7 +90,7 @@ $sql = "SELECT A.question_id, C.course_name, C.course_id, Q.question_text, Q.dat
                     echo "<tr data-toggle='collapse' data-target='#collapsedRow_$i' class='accordion-toggle'>
                           <td>" . $q_result["course_name"] . "</td><td>". $q_result["date"] . "</td>".
                          "<td>" . $q_result["question_text"] .
-                        "</td><td>" . "<a class=\"btn btn-primary accordion-toggle collapsed\" data-parent='#accordion2' data-toggle=\"collapse\" data-target=\"#collapseOne_$i\" href=\"#collapseOne_$i\" >Answer</a></td>" .
+                        "</td><td>" . "<a class=\"btn btn-primary accordion-toggle collapsed\" data-parent='#accordion2' data-toggle=\"collapse\" data-target=\"#collapseOne_$i\" href=\"#collapseOne_$i\" role='button'>Answer</a></td>" .
                         "</tr><tr><td coldspan='12' class='hiddenRow' ><div class='accordion-body collapse' id='collapsedRow_$i'>
                         $html</div></td></tr>";
                     //"<button type='button' class='btn btn-success' data-toggle='modal' data-target='#exampleModal' id='submit'> Answer</button>";

@@ -100,7 +100,7 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
                     }
 
                     echo "<tr data-toggle='collapse' data-target='#collapsedRow_$i' class='accordion-toggle'><td>" . $q_result["question_text"] .
-                        "</td><td>" . "<a class=\"btn btn-primary accordion-toggle collapsed\" data-parent='#accordion2' data-toggle=\"collapse\" data-target=\"#collapseOne_$i\" href=\"#collapseOne_$i\" >Answer</a></td>" .
+                        "</td><td>" . "<a class=\"btn btn-primary accordion-toggle collapsed\" data-parent='#accordion2' data-toggle=\"collapse\" data-target=\"#collapseOne_$i\" href=\"#collapseOne_$i\" role='button'>Answer</a></td>" .
                         "</tr><tr><td coldspan='12' class='hiddenRow' ><div class='accordion-body collapse' id='collapsedRow_$i'>
                         $html</div></td></tr>";
                         //"<button type='button' class='btn btn-success' data-toggle='modal' data-target='#exampleModal' id='submit'> Answer</button>";
@@ -117,39 +117,14 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
         ?>
         <br></br>
         <!--<a class="btn btn-success btn-lg" href="publish-course.php" role="button">Return to the Course Page</a>-->
-        <a class="btn btn-success btn-lg ml-4" href="#" role="button">Return Course</a>
+        <a class="btn btn-success btn-lg ml-4" href="../student/course-page.php" role="button">Return Course</a>
         <a class="btn btn-success btn-lg ml-4" href="ask-question.php" role="button">Ask Question</a>
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
 </body>
-
-<!--<script type="text/javascript">
-    $("#submit").click(function () {
-        var rid = $("#rid").val();
-        var str = "Request " + rid;
-
-
-        var sname = $("#sname").val();
-        var cname = $("#cname").val();
-        var creatorname = $("#creator-name").val();
-        var price = $("#price").val();
-        var reason = $("#reason").val();
-        var s = "Student Name: " + sname;
-        var c = "Course Name: " + cname;
-        var ccname = "Instructor Name: " + creatorname;
-        var fee = "Fee: " + price;
-        var reas = "Reason: " + reason;
-
-        $("#exampleModalLabel").html(str);
-        $("#modal_footer").html(
-            "<a href='reject-refund.php?rid=" + rid + "' class='button-class'>Reject</a><a href='accept-refund.php?rid=" + rid + "' class='button-class'>Accept</a>"
-        );
-        $("#modal_body").html("<br>" + s + "</br><br>" + c + "</br><br>" + ccname + "</br><br>" + fee + "</br><br>" + reas + "</br><br>");
-
-
-    });
-</script>-->
 </html>

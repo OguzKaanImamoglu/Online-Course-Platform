@@ -54,6 +54,8 @@ if($count > 0){
     echo 'BBB';
 }
 */
+$button_ids = "#";
+$update = "#";
 
 ?>
 
@@ -120,7 +122,7 @@ if($count > 0){
             echo "Error on trying to reach the questions!";
             echo " " . $link -> error;
         }
-        else{
+        else {
 
             $count = mysqli_num_rows($result);
             //echo "$count2";
@@ -131,9 +133,9 @@ if($count > 0){
                         </thead>
                 <tbody>";
 
-                $i=0;
+                $i = 0;
                 $j = 0;
-                $k = 0;
+
                 while ($q_result = mysqli_fetch_array($result)) {
                     $search = $q_result['question_id'];
 
@@ -143,18 +145,23 @@ if($count > 0){
                     $count2 = mysqli_num_rows($result3);
 
                     if ($count2 == 0) {
-
-                        $html ="<div>
-                            <textarea id='newAnswer_$search' name='newAnswer_$search' rows='6' cols='100'></textarea>
-                            <button type='submit' name='sendAnswer_$search' class='btn btn-success btn-md mt-4' role='button'>Submit answer</button>
-                            </div>";
-                    }
-                    else{
+                        if($button_ids == "#")   $button_ids = $button_ids. $search;
+                        else    $button_ids = $button_ids . ",#" . $search;
+                        $field = "$". "_SESSION['new_Answer_$'". "search]";
+                        $html = "<div>
+                            <!--<button type='submit' name='sendAnswer_$search' class='btn btn-success btn-md mt-4' role='button'>Submit answer</button>
+                            -->
+                            <form name='sendAnswer_$search' action='addAnswer.php' method='post' id = 'sendAnswer_$search'></form>
+                            <textarea id='newAnswer_$search' name='newAnswer_$search' rows='6' cols='100' value=\"<?php echo $field; ?>\"></textarea>
+                            <button type='button' class='btn btn-success' data-toggle='modal' id = '$search' value='$search'>Send Answer
+                            </button></div>";
+                    } else {
                         $q_result2 = mysqli_fetch_array($result3);
-
+                        if($update == "#")  $update = $update. 'updateAnswer_' . $search;
+                        else    $update = $update . ",#updateAnswer_" . $search;
                         $html = "<div>" .
                             $q_result2['answer_text']
-                            . "</div><div><button type='submit' name='updateAnswer_$search' class='btn btn-success btn-md mt-4' role='button'>Change answer</button>
+                            . "</div><div><button type='submit' id='updateAnswer_$search' value = '$search' class='btn btn-success btn-md mt-4' role='button'>Change answer</button>
 </div>";
                     }
 
@@ -165,17 +172,12 @@ if($count > 0){
                     //"<button type='button' class='btn btn-success' data-toggle='modal' data-target='#exampleModal' id='submit'> Answer</button>";
                     //"<a class 'btn btn-success btn-lg' href='publish-course.php' data-toggle='modal' data-target='#exampleModal' id='submit' type = \"button\">See the answer</a>";
 
-                    $i = $i+1;
+                    $i = $i + 1;
                 }
                 echo "</tbody>";
                 echo "</table></div>";
             } else {
                 echo "No one asked any question at the moment.";
-            }
-
-            function func(){
-
-                echo "<script>alert('AAAAAASDASD');</script>";
             }
         }
         ?>
@@ -187,6 +189,51 @@ if($count > 0){
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.1/jquery.min.js"></script>
+
+<script>
+    var total_id = "<?php Print( $button_ids); ?>";
+    var change_id = "<?php Print($update);?>";
+
+    $(total_id).click(function(e) {
+        $id = $(this).val();
+        $text = "newAnswer_" + $id;
+        //alert(document.getElementById($text).value);
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "submitanswers.php",
+            data: {
+                question_id: $id,
+                question_text: document.getElementById($text).value
+            },
+            success: function(result) {
+                alert('Answer sent');
+                location.reload();
+            },
+            error: function(result) {
+                alert("Couldn't sent the message");
+            }
+        });
+    });
+
+    $(change_id).click(function(e){
+
+        $changed = $(this).val();
+        //alert($(this).val());
+        $.ajax({
+            type:"POST",
+            url:"changeAnswer.php",
+            data:{question_id: $changed},
+
+            success: function(result){
+                window.location.href = "changeAnswer.php";
+            }
+        });
+    });
+
+</script>
+
 </body>
 </html>
 
