@@ -6,21 +6,8 @@ $person_id = $_SESSION['person_id'];
 $name = $_SESSION['name'];
 $surname = $_SESSION['surname'];
 
-$course_id = $_SESSION['course_id'];
-$course_id = 4;
-
-$sql = "SELECT course_name FROM course WHERE course_id = '$course_id'";
-$result = mysqli_query($link,$sql);
-
-$row = mysqli_fetch_array($result);
-$course_name = $row['course_name'];
-
-$sql = "SELECT A.question_id, Q.question_text FROM asks A, question Q 
-        WHERE A.course_id = '$course_id' AND A.question_id = Q.question_id";
-
-$result = mysqli_query($link,$sql);
-$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-
+$sql = "SELECT A.question_id, C.course_name, C.course_id, Q.question_text, Q.date FROM asks A, question Q, course C
+        WHERE A.student_id = '$person_id' AND A.question_id = Q.question_id AND A.course_id = C.course_id";
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +43,7 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 <div class="container">
     <div class="jumbotron mt-4">
-        <h1 class="display-4"><?php echo "$course_name"?> </h1>
+        <h1 class="display-4">Questions</h1>
         <hr class="my-4">
         <p class="lead"></p>
         <?php
@@ -69,11 +56,12 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
         else{
 
             $count = mysqli_num_rows($result);
-            //echo "$count2";
             if ($count > 0) {
-                echo "<div><table class='table container-fluid' data-toggle='table' data-pagination='true' data-search='true' data-show-pagination-switch='true'>
+                echo "<div><table class='table table-striped container-fluid' data-toggle='table' data-pagination='true' data-search='true' data-show-pagination-switch='true'>
                         <thead>
-                                <th>Questions</th>
+                                <th>Course Name</th>
+                                <th>Date</th>
+                                <th>Question</th>
                         </thead>
                 <tbody>";
 
@@ -99,7 +87,9 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
                             . "</div>";
                     }
 
-                    echo "<tr data-toggle='collapse' data-target='#collapsedRow_$i' class='accordion-toggle'><td>" . $q_result["question_text"] .
+                    echo "<tr data-toggle='collapse' data-target='#collapsedRow_$i' class='accordion-toggle'>
+                          <td>" . $q_result["course_name"] . "</td><td>". $q_result["date"] . "</td>".
+                         "<td>" . $q_result["question_text"] .
                         "</td><td>" . "<a class=\"btn btn-primary accordion-toggle collapsed\" data-parent='#accordion2' data-toggle=\"collapse\" data-target=\"#collapseOne_$i\" href=\"#collapseOne_$i\" >Answer</a></td>" .
                         "</tr><tr><td coldspan='12' class='hiddenRow' ><div class='accordion-body collapse' id='collapsedRow_$i'>
                         $html</div></td></tr>";
@@ -111,14 +101,13 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
                 echo "</tbody>";
                 echo "</table></div>";
             } else {
-                echo "No one asked any question at the moment.";
+                echo "You don't have any question to display!";
             }
         }
         ?>
         <br></br>
-        <!--<a class="btn btn-success btn-lg" href="publish-course.php" role="button">Return to the Course Page</a>-->
-        <a class="btn btn-success btn-lg ml-4" href="#" role="button">Return Course</a>
-        <a class="btn btn-success btn-lg ml-4" href="ask-question.php" role="button">Ask Question</a>
+        <a class="btn btn-success btn-lg" href="../student/home.php" role="button">Return Home</a>
+
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
