@@ -54,6 +54,9 @@ if (!$result = mysqli_query($link,$sql)) {
 				<li class="nav-item">
 					<a class="nav-link" href="add-money.php">Add Money</a>
 				</li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Q&A/myQuestions.php">My Questions</a>
+                </li>
 			</ul>
 		</div>
 
