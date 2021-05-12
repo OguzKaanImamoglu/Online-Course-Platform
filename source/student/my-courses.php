@@ -28,9 +28,6 @@ $surname = $_SESSION['surname'];
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="my-courses.php">My Courses<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="add-money.php">Add Money</a>
             </li>
             <li class="nav-item">
@@ -79,13 +76,10 @@ $surname = $_SESSION['surname'];
                         "</td><td>" . $q_result["name"]. " " . $q_result["surname"];
                     echo /** @lang text */
                         "<td>
-                        <form action='' method='post' id='formHiddenInputValue' name='formHiddenInputValue'>
-
-                            <input type='hidden' id='' name='cid' value='" . $q_result["course_id"] . "' />
-
-                            <button type='button' class='btn btn-success' data-toggle='modal' data-target='#exampleModal' id='submit'>
-                                Course Page
-                            </button>                        </form></td>";
+                        <form action='course-page.php' method='post' id='formHiddenInputValue' name='formHiddenInputValue'>
+                            <input type='hidden' id='cid' name='cid' value='" . $q_result["course_id"] . "' />
+                             <button onclick=\"location.href=course-page.php'\" class=\"mt-2 text-center btn btn-success\" >Course Page</button>
+                                                </form></td>";
 
                     echo "</td></tr>";
 
@@ -99,6 +93,7 @@ $surname = $_SESSION['surname'];
         ?>
         <br></br>
     </div>
+
 </div>
 </html>
 

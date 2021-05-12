@@ -56,7 +56,7 @@ $wallet = $row["wallet"];
 			</p>
 			<h3 class="display-5 mb-4">Your Courses</h3>
 			<?php 
-			
+
 			$sql = "SELECT  \n"
 
 			    . "  C.course_id, C.course_name, C.average_rating, total_student, \n"
@@ -77,18 +77,18 @@ $wallet = $row["wallet"];
 
 			    . "  FROM        enrolls\n"
 
-			    . "  WHERE   course_id IN (\n"
+			    . "  WHERE  course_id IN (\n"
 
 			    . "    SELECT course_id\n"
 
 			    . "    FROM course\n"
 
-			    . "    WHERE course_creator_id = 2)\n"
+			    . "    WHERE course_creator_id = $person_id)\n"
 
 			    . "  GROUP BY    course_id) course_student\n"
 
-			    . "  ON C.course_id = course_student.course_id";
-			
+			    . "  ON C.course_id = course_student.course_id WHERE course_creator_id = $person_id";
+
 
 			//$sql = "SELECT course_id, course_name, average_rating, course_price as price FROM course WHERE course_creator_id='$person_id'";
 

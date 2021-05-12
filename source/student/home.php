@@ -54,16 +54,16 @@ $wallet = $row["wallet"];
 			<h1 class="display-4">Welcome <?php echo "$name $surname"?></h1>
 			<p class="lead">You can see your wishlist, cart, and wallet below.</p>
 			<hr class="my-4">
-			<a href="">
+			<a href="wishlist.php">
 				<p class="lead">
 					<i class="fa fa-list fa-lg" aria-hidden="true"></i>
-					My Wishlist
+					Your Wishlist
 				</p>
 			</a>
-			<a href="">
+			<a href="cart.php">
 				<p class="lead">
 					<i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
-					My Cart
+					Your Cart
 				</p>
 			</a>
 			<p class="lead">
