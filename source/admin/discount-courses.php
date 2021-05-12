@@ -88,8 +88,8 @@
 			}
 			echo '<tfoot align = "center"><tr><td colspan="8"><button type="button" button style = "float; margin:10px; margin-top:20px" 
 				class="btn btn-success" data-toggle="modal" data-target="#exampleModal" id="submit">
-				Make a New Offer</button><button type="button" button style = "float; margin:10px; margin-top:20px" class="btn btn-success">
-				Pending Offers</button></td></tr></tfoot>';
+				Make a New Offer</button><a href="pending-offers.php" class="btn btn-success" style = "float; margin:10px; margin-top:20px">
+				Pending Offers</a></td></tr></tfoot>';
 			?>
 			<br></br>
 		</div>
