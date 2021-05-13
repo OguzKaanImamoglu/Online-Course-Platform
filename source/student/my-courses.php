@@ -6,6 +6,7 @@ $person_id = $_SESSION['person_id'];
 $name = $_SESSION['name'];
 $surname = $_SESSION['surname'];
 
+$course_ids = "#";
 ?>
 
 <!DOCTYPE html>
@@ -130,10 +131,14 @@ $surname = $_SESSION['surname'];
                             echo "<td>" . number_format($progress_percentage) . "%";
                         }
                     }
-                    echo /** @lang text */
-                        "<td>
-                            <a href='course-page.php?cid=" . $q_result["course_id"] . 
-                            "'class='mt-2 text-center btn btn-success'>Course Page</a></td>";
+                    $search = $q_result["course_id"];
+                    if($course_ids == "#")     $course_ids = $course_ids . $search;
+                    else        $course_ids = $course_ids. ",#" . $search;
+
+                    echo "<td>
+                        <form action='' method='post' id='formHiddenInputValue' name='formHiddenInputValue'>
+                            <button type='button' class='btn btn-success' data-toggle='modal' id='" . $q_result["course_id"] . "' name='" . $q_result["course_id"] . "' value='" . $q_result["course_id"] . "'>Course Page</button>
+                                                </form></td>";
                     echo "</td></tr>";
 
                 }
@@ -148,5 +153,37 @@ $surname = $_SESSION['surname'];
     </div>
 
 </div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.1/jquery.min.js"></script>
+
+
+<script>
+    var total_id = "<?php Print( $course_ids); ?>";
+
+    $(total_id).click(function(e) {
+        $id = $(this).val();
+        //alert(document.getElementById($text).value);
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "saveCourseid.php",
+            data: {
+                course_id: $id
+            },
+            success: function(result) {
+                //alert('Approved');
+                window.location.replace("course-page.php");
+            },
+            error: function(result) {
+                alert("Open course page error");
+            }
+        });
+    });
+
+</script>
+
 </html>
 

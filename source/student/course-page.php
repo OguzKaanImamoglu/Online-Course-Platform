@@ -6,11 +6,11 @@ $person_id = $_SESSION['person_id'];
 $name = $_SESSION['name'];
 $surname = $_SESSION['surname'];
 
-$cid = $_GET['cid'];
+//$cid = $_POST['cid'];
 
+$course_id = $_SESSION['course_id'];
 
-
-$sql1 =  "SELECT course_name FROM course WHERE course_id = $cid ";
+$sql1 =  "SELECT course_name FROM course WHERE course_id = $course_id ";
 $result1 = mysqli_query($link, $sql1);
 $row1 = mysqli_fetch_array($result1,MYSQLI_ASSOC);
 $cname = $row1['course_name'];
@@ -47,9 +47,7 @@ $cname = $row1['course_name'];
                 <a class="nav-link" href="../Q&A/myQuestions.php">My Questions</a>
             </li>
             <li class="nav-item">
-            <?php
-                echo "<a href='course-page.php?cid=$cid' class='nav-link'>Course Page</a>";
-            ?>
+                <a class="nav-link" href="course-page.php">Course Page</a>
             </li>
         </ul>
     </div>
@@ -58,8 +56,9 @@ $cname = $row1['course_name'];
 <div class="container">
     <button onclick="location.href='request-refund.php'" class="mt-2 text-center btn btn-primary">Request Refund</button>
     <button onclick="location.href='../Q&A/q&aforcourse.php'" class="mt-2 text-center btn btn-primary">Q&A Page</button>
+    <button onclick="location.href='assignments.php'" class="mt-2 text-center btn btn-primary">Assignments</button>
     <?php
-        echo "<a href='assignments.php?cid=$cid' class='mt-2 text-center btn btn-primary'>Assignments</a>";
+        //echo "<a href='assignments.php?cid=$course_id' class='mt-2 text-center btn btn-primary'>Assignments</a>";
     ?>
     <button onclick="location.href='rate.php'" class="mt-2 text-center btn btn-primary">Rate</button>
     <div class="jumbotron mt-4">
@@ -68,7 +67,7 @@ $cname = $row1['course_name'];
         <hr class="my-4">
         <h3 class="display-5 mb-4">Announcements</h3>
         <?php
-        $sql1 = "SELECT date, text FROM announcement WHERE course_id = $cid  ORDER BY date ";
+        $sql1 = "SELECT date, text FROM announcement WHERE course_id = '$course_id'  ORDER BY date ";
         $result1 = mysqli_query($link, $sql1);
 
         if (!$result1) {
@@ -110,7 +109,7 @@ $cname = $row1['course_name'];
         <hr class="my-4">
 
         <?php
-        $sql = "SELECT lecture_id, lecture_name, duration, description FROM lecture WHERE course_id = $cid ";
+        $sql = "SELECT lecture_id, lecture_name, duration, description FROM lecture WHERE course_id = '$course_id' ";
         $result = mysqli_query($link, $sql);
 
 
