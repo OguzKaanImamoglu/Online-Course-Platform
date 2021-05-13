@@ -142,7 +142,7 @@ $wallet = $row["wallet"];
 			?>
 			<br></br>
 			<a class="btn btn-success btn-lg" href="publish-course.php" role="button">Publish New Course</a>
-			<a class="btn btn-success btn-lg ml-4" href="#" role="button">See Discount Offers</a>
+			<a class="btn btn-success btn-lg ml-4" href="discount-offers.php" role="button">See Discount Offers</a>
 		</div>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
