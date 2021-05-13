@@ -5,6 +5,7 @@
 	$person_id = $_SESSION['person_id'];
     $cid = $_GET['cid'];
     $aid = $_GET['aid'];
+    $index = $_GET['index'];
  ?>
 
 <!DOCTYPE html>
@@ -46,7 +47,7 @@
             </li>
             <li class="nav-item">
             <?php
-                echo "<a href='see-attempts.php?cid=$cid&aid=$aid' class='nav-link'>Attempts</a>";
+                echo "<a href='see-attempts.php?cid=$cid&aid=$aid&index=$index' class='nav-link'>Attempts</a>";
             ?>
             </li>
 			</ul>
@@ -58,9 +59,9 @@
 
 	<div class="container">
 		<div class="jumbotron mt-4">
-            <h3 class="display-5 mb-4">Assignment Submission</h3>
             <?php 
-
+                
+                echo '<h3 class="display-5 mb-4">Assignment ' . $index . ' Submission</h3>';
                 //Find course name
                 $sql = "SELECT course_name
                         FROM course
@@ -89,6 +90,7 @@
             <?php
                 echo "<input type='hidden' id='aid' name='aid' value='$aid'/>";
                 echo "<input type='hidden' id='cid' name='cid' value='$cid'/>";
+                echo "<input type='hidden' id='index' name='index' value='$index'/>";
             ?>
             <input style="float: right" value="Send Assignment Submission" name="submit" type="submit">
             </form>

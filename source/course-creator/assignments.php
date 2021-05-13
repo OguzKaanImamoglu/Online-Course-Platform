@@ -22,20 +22,14 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="course-market.php">Course Market<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="my-courses.php">My Courses<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="add-money.php">Add Money</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="../Q&A/myQuestions.php">My Questions</a>
-            </li>
+					<a class="nav-link" href="discount-offers.php">Discount Offers<span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item">
+					<a class="nav-link" href="publish-course.php">Publish New Course</a>
+			</li>
             <li class="nav-item">
             <?php
-                echo "<a href='course-page.php?cid=$cid' class='nav-link'>Course Page</a>";
+                echo "<a href='course-page.php?course_id=$cid' class='nav-link'>Course Page</a>";
             ?>
             </li>
             <li class="nav-item">
@@ -52,17 +46,25 @@
 
 	<div class="container">
 		<div class="jumbotron mt-4">
-            <h3 class="display-5 mb-4">Assignments Status</h3>
+            <?php
+                $sql = "SELECT course_name
+                        FROM course
+                        WHERE course_id = '$cid'";
+                $result = mysqli_query($link, $sql);
+                $data = $result->fetch_assoc();
+	            $course_name = $data['course_name'];
+                echo '<h3 class="display-5 mb-4">Assignments for ' . $course_name . '</h3>';
+            ?>
 			<hr class="my-4">
 			<?php 
 
             //Display assignments of the course for student
-			$sql = "SELECT A.assignment_id, A.assignment_threshold, S.attempts
-                    FROM (SELECT assignment_id, student_id, COUNT(submission_time) AS attempts
-                    FROM submitted_assignment
-                    GROUP BY assignment_id, student_id
-                    HAVING student_id = '$person_id') AS S RIGHT OUTER JOIN assignment A ON A.assignment_id = S.assignment_id
-                    WHERE 	A.course_id = '$cid'";
+			$sql = "SELECT A.assignment_id, A.assignment_threshold, AG.ungraded_sub_count
+                    FROM (SELECT assignment_id, COUNT(student_id) AS ungraded_sub_count
+                         FROM submitted_assignment
+                         WHERE is_graded = FALSE
+                         GROUP BY assignment_id) AS AG RIGHT OUTER JOIN assignment A ON A.assignment_id = AG.assignment_id
+                    WHERE A.course_id = '$cid'";
 			$result = mysqli_query($link, $sql);
 
 			if (!$result) {
@@ -71,17 +73,15 @@
                 $count = mysqli_num_rows($result);
 				if ($count > 0) {
 					echo "<table class='table'>
-						<thead>
-                        <tr>
-                        <th>Assignment ID</th>
-							<th>Assignment</th>
-							<th>Threshold</th>
-							<th>Status</th>
-							<th>Attempt Count</th>
-                            <th>See Attempts</th>
-                        </tr>
-						</thead>";
-                    
+					<thead>
+					<tr>
+					<th>Assignment ID</th>
+						<th>Assignment</th>
+						<th>Threshold</th>
+						<th>Ungraded Submissions</th>
+						<th>Submissions</th>
+					</tr>
+					</thead>";
                     $iter = 1;
 					while ($q_result = mysqli_fetch_array($result)) {
 
@@ -90,29 +90,11 @@
                         echo '<td>' . 'Assignment ' . $iter . '</td>';
 						echo '<td>' . $q_result["assignment_threshold"] . '</td>';
 
-                        $aid = $q_result["assignment_id"];
-                        $sql2 = "SELECT	*
-                                FROM submitted_assignment S, assignment A
-                                WHERE S.assignment_id = '$aid' AND A.assignment_id = S.assignment_id AND S.student_id = '$person_id' 
-                                AND S.grade >= A.assignment_threshold AND S.is_graded = TRUE";
-                        $result2 = mysqli_query($link, $sql2);
-                        $count2 = mysqli_num_rows($result2);
+                        if($q_result["ungraded_sub_count"]==NULL){$subcount = 0;}
+                        else{$subcount = $q_result["ungraded_sub_count"];}
 
-                        if ($count2 > 0){
-                            $msg = "Successful";
-                        } else {
-                            $msg = "Not successful";
-                        }
-                        echo '<td>'. $msg . '</td>';
-
-                        if ($q_result["attempts"]==NULL){$attempts = 0;}
-                        else {$attempts = $q_result["attempts"];}
-                        echo '<td>' . $attempts . '</td>';
-                        if($attempts == 0){
-                            echo "<td>" . "<a href='see-attempts.php?cid=" . $cid . "&aid=". $q_result["assignment_id"] . "&index=" . $iter . "'>Make attempt</a>";
-                        } else {
-                            echo "<td>" . "<a href='see-attempts.php?cid=" . $cid . "&aid=" . $q_result["assignment_id"] . "&index=" . $iter . "'>See attempts</a>";
-                        }
+                        echo '<td>' . $subcount . '</td>';
+                        echo "<td>" . "<a href='see-subs.php?cid=" . $cid . "&aid=" . $q_result["assignment_id"] . "&index=" . $iter . "'>See Submissions</a>";
                         
                         $iter = $iter + 1;
 					}

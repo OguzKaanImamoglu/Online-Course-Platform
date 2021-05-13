@@ -52,6 +52,11 @@ if (!$result = mysqli_query($link,$sql)) {
 				<li class="nav-item">
 					<a class="nav-link" href="publish-course.php">Publish New Course</a>
 				</li>
+				<li class="nav-item">
+            	<?php
+                	echo "<a href='course-page.php?course_id=$selected_course_id' class='nav-link'>Course Page</a>";
+            	?>
+            	</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="../logout.php">Logout</a></li>
@@ -139,9 +144,10 @@ if (!$result = mysqli_query($link,$sql)) {
 						echo "<p class='text-center'>There is no lecture in this course.</p>";
 					}
 				}
+
+				echo '<a href="assignments.php?cid=' . $selected_course_id . '" class="btn btn-success mt-2">View Assignments</a>';
 			 ?>
 
-			<button type="button" class="btn btn-success mt-2">View Assignments</button>
 			<button type="button" class="btn btn-success mt-2 float-right">Q&A Page</button>
 
 		</div>

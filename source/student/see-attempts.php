@@ -5,6 +5,7 @@
 	$person_id = $_SESSION['person_id'];
     $cid = $_GET['cid'];
     $aid = $_GET['aid'];
+    $index = $_GET['index'];
  ?>
 
 <!DOCTYPE html>
@@ -46,7 +47,7 @@
             </li>
             <li class="nav-item">
             <?php
-                echo "<a href='see-attempts.php?cid=$cid&aid=$aid' class='nav-link'>Attempts</a>";
+                echo "<a href='see-attempts.php?cid=$cid&aid=$aid&index=$index' class='nav-link'>Attempts</a>";
             ?>
             </li>
 			</ul>
@@ -58,10 +59,10 @@
 
 	<div class="container">
 		<div class="jumbotron mt-4">
-            <h3 class="display-5 mb-4">Attempts for Assignment</h3>
-			<hr class="my-4">
 			<?php 
 
+            echo '<h3 class="display-5 mb-4">Attempts for Assignment ' . $index .  '</h3>';
+            echo '<hr class="my-4">';
             //Display attempts of the assignment for student
 			$sql = "SELECT submission_time, grade, is_graded
                     FROM submitted_assignment
@@ -77,6 +78,7 @@
             echo "<div>Threshold: " . $threshold . "</div>";
 
             $indicator = FALSE;
+            $processind = FALSE;
 
 			if (!$result) {
 				echo "<div style='float:left; width:1000px'>There are no attempts found for the assignment.</div>";
@@ -107,7 +109,7 @@
                             $msg = "Not successful";
                         } else if($q_result["is_graded"] == FALSE){
                             $msg = "Not graded";
-                            $indicator = TRUE;
+                            $processind = TRUE;
                         }
 
                         echo '<td>'. $msg . '</td>';
@@ -119,15 +121,20 @@
 					echo "<div style='float:left; width:1000px'>There are no attempts found for the assignment.</div>";
 				}
 			}
-            if($indicator == FALSE){
+            if($indicator == FALSE && $processind == FALSE){
                 echo "<div style='float:left; width:1000px; margin-left: auto; margin-right: auto; padding-bottom:20px'>You have not yet passed the assignment.</div>";
                 echo '<tfoot align = "center"><tr><td colspan ="4">
-                <center><a style = "float; margin:100px" href="submit-asgn.php?cid=' . $cid . '&aid=' . $aid . '" class="button-class">Make Submission</a></center>
+                <center><a style = "float; margin:100px" href="submit-asgn.php?cid=' . $cid . '&aid=' . $aid . '&index=' . $index .'" class="button-class">Make Submission</a></center>
                 </td></tr></tfoot>';
-            } else {
+            } else if ($indicator == TRUE && $processind == FALSE) {
                 echo "You have passed the assignment.";
                 echo '<tfoot align = "center"><tr><td colspan="4">
-                <a style = "float; margin:10px; margin-top:20px" href="submit-asgn.php?cid=' . $cid . '&aid=' . $aid . '" class="disabled">Make Submission</a>
+                <a style = "float; margin:10px; margin-top:20px" href="submit-asgn.php?cid=' . $cid . '&aid=' . $aid . '&index=' . $index .'" class="disabled">Make Submission</a>
+                </td></tr></tfoot>';
+            } else if ($indicator == FALSE && $processind == TRUE) {
+                echo "Please wait for instructor for grading.";
+                echo '<tfoot align = "center"><tr><td colspan="4">
+                <a style = "float; margin:10px; margin-top:20px" href="submit-asgn.php?cid=' . $cid . '&aid=' . $aid . '&index=' . $index .'" class="disabled">Make Submission</a>
                 </td></tr></tfoot>';
             }
 			?>
