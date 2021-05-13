@@ -10,6 +10,7 @@
     $aid = $_POST["aid"];
     $cid = $_POST["cid"];
     $answer = $_POST["answer"];
+    $index = $_POST["index"];
 
     echo $answer;
     echo $cid;
@@ -24,7 +25,7 @@
 	}
 	else {
 		echo '<script>alert("Submission is successful.");';
-		echo 'document.location = "see-attempts.php?cid=' . $cid . '&aid=' . $aid .'php";</script>';
+		echo 'document.location = "see-attempts.php?cid=' . $cid . '&aid=' . $aid . '&index=' . $index .'";</script>';
 	}
     mysqli_close($link);
 
