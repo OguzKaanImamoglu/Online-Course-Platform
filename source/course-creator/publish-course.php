@@ -20,9 +20,6 @@ if (isset($_POST['publish'])) {
 		$description = $_POST['description'];
 		$cert_price = $_POST['certificate-price'];
 
-		echo '<pre>'; print_r($_SESSION['lecture_array']); echo '</pre>';
-		echo '<pre>'; print_r($_SESSION['assignment_array']); echo '</pre>';
-
 		$sql = "INSERT INTO course(course_name, language, course_price, create_date, average_rating, category, course_description, certificate_price, course_creator_id)
 		VALUES ('$course_name', '$language', '$price', CURDATE(), '0', '$category', '$description', '$cert_price', '$person_id')";
 
@@ -45,16 +42,17 @@ if (isset($_POST['publish'])) {
 			}
 
 			for ($i = 0; $i < count($_SESSION['assignment_array']); $i++) {
-				$assignment_question = $_SESSION['assignment_array'][i]->assignment_question;
-				$assignment_threshold = $_SESSION['assignment_threshold'][i]->assignment_threshold;
+				$assignment_question = $_SESSION['assignment_array'][$i]->assignment_question;
+				$assignment_threshold = $_SESSION['assignment_array'][$i]->assignment_threshold;
 
-				$sql = "INSERT INTO assignment(assignment_question, threshold, course_id)
+				$sql = "INSERT INTO assignment(assignment_question, assignment_threshold, course_id)
 						VALUES  ('$assignment_question', '$assignment_threshold', '$course_id')";
 
 				if (!mysqli_query($link, $sql)) {
 					echo "ERROR : COULD NOT BE ADDED" . mysqli_error($link);
 				}
 			}
+			header("Location: home.php");
 		}
 
 		$_SESSION['lecture_array'] = array();

@@ -113,7 +113,6 @@ $wallet = $row["wallet"];
 				echo " " . $link -> error;
 			} else {
 				$count2 = mysqli_num_rows($result2);
-	 			echo "$count2";
 
 				if ($count2 > 0) {
 					echo "<table class='table table-striped table-hover'>
