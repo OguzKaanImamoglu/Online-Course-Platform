@@ -26,7 +26,7 @@
 					<a class="nav-link" href="refund-requests.php">Refund Requests<span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Discounts</a>
+					<a class="nav-link" href="discount-courses.php">Discounts</a>
 				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
@@ -42,7 +42,7 @@
 			
 			<p class="lead mt-4">
 				<a class="btn btn-success btn-lg" href="refund-requests.php" role="button">Refund Requests</a>
-				<a class="btn btn-success btn-lg" href="#" role="button">Discounts</a>
+				<a class="btn btn-success btn-lg" href="discount-courses.php" role="button">Discounts</a>
 			</p>
 		</div>
 	</div>

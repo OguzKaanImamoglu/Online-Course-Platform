@@ -82,7 +82,7 @@ class SQL{
                         "\tcourse_name VARCHAR(60) NOT NULL,\n" +
                         "language VARCHAR(50),\n" +
                         "course_price NUMERIC(5, 2) DEFAULT 0,\n" +
-                        "create_date DATE, \n" +
+                        "create_date DATE DEFAULT CURRENT_DATE, \n" +
                         "average_rating NUMERIC(2, 1) DEFAULT 0,\n" +
                         "category VARCHAR(30) CHECK (category in \n" +
                         "('Web Development', 'Mobile Software Development', \n" +
@@ -272,9 +272,9 @@ class SQL{
             if (!exist.next()) {
                 stmt.executeUpdate("CREATE TABLE discount(\n" +
                         "\tdiscount_id INT PRIMARY KEY AUTO_INCREMENT,\n" +
-                        "\tdiscounted_course_id INT,\n" +
+                        "\tdiscounted_course_id INT UNIQUE,\n" +
                         "\tallower_course_creator_id INT,\n" +
-                        "\tis_allowed BOOLEAN,\n" +
+                        "\tis_allowed BOOLEAN DEFAULT FALSE,\n" +
                         "\tstart_date DATE,\n" +
                         "\tend_date DATE,\n" +
                         "\tpercentage INT,\n" +

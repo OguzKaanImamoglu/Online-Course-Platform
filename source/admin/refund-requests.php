@@ -24,9 +24,12 @@
 					<a class="nav-link" href="refund-requests.php">Refund Requests<span class="sr-only">(current)</span></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Discounts</a>
+					<a class="nav-link" href="discount-courses.php">Discounts</a>
 				</li>
 			</ul>
+            <ul class="nav navbar-nav navbar-right">
+      			<li><a href="../logout.php">Logout</a></li>
+    		</ul>
 		</div>
 	</nav>
 
