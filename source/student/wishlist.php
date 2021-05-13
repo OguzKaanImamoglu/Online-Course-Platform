@@ -43,7 +43,7 @@ $wallet = $row["wallet"];
 				<li class="nav-item">
 					<a class="nav-link" href="add-money.php">Add Money</a>
 				</li>
-                <li class="nav-item">
+				<li class="nav-item">
                     <a class="nav-link" href="../Q&A/myQuestions.php">My Questions</a>
                 </li>
 			</ul>
@@ -106,7 +106,7 @@ $wallet = $row["wallet"];
 					if ($wallet < $q_result["price"]) {
 						echo "Not purchasable.";
 					} else {
-						echo "<a href='buy-course.php?course_id=";
+						echo "<a href='buy-course-from-wl.php?course_id=";
 						echo $q_result["course_id"];
 						echo "'>Buy Course</a>";
 					}
@@ -128,12 +128,12 @@ $wallet = $row["wallet"];
 					</div>";
 				}
 			} else {
-				echo "There is no course in your card.";
+				echo "<p>There is no course in your wishlist.</p>";
 			}
 
 			
 			$_SESSION["courses_in_cart"] = $courses_in_cart;
-			echo "Wallet: " . $wallet;
+			echo "<p>Wallet: " . $wallet . "</p>";
 		}
 		?>
 

@@ -2,7 +2,6 @@
 session_start();
 include('../sign-up/database.php');
 
-//$_SESSION['selected_course_id'] = $_POST['selected_course_id'];
 $selected_course_id = $_GET['course_id'];
 
 $sql = "SELECT 	C.course_name, C.course_price, C.create_date, C.language,
@@ -54,7 +53,7 @@ if (!$result = mysqli_query($link,$sql)) {
 				<li class="nav-item">
 					<a class="nav-link" href="add-money.php">Add Money</a>
 				</li>
-                <li class="nav-item">
+				<li class="nav-item">
                     <a class="nav-link" href="../Q&A/myQuestions.php">My Questions</a>
                 </li>
 			</ul>
@@ -70,14 +69,59 @@ if (!$result = mysqli_query($link,$sql)) {
 
 	<div class="container">
 		<div class="row">
+			<?php 
 
-			<div class="col-md-2 text-center">
-				<a href="add-cart.php?course_id=<?php print $selected_course_id?>">
-					<i class="fa fa-cart-plus fa-5x" style="margin-top: 20%"></i>
-					<br></br>
-					<label>Add to Cart</label>
-				</a>
-			</div>
+			$student_id = $_SESSION["person_id"];
+			$sql = "SELECT * 
+			FROM enrolls
+			WHERE course_id='$selected_course_id' AND student_id='$student_id'";
+
+			$cart_sql = "SELECT * 
+			FROM adds_to_cart
+			WHERE course_id='$selected_course_id' AND student_id='$student_id'";
+
+			if (!$cart_result = mysqli_query($link, $cart_sql)) {
+				echo $link.error;
+				die();
+			} else {
+				$cart_count = mysqli_num_rows($cart_result);
+
+				if ($cart_count > 0) {
+					echo "
+					<div class='col-md-2 text-center'>
+					<i class='fa fa-cart-plus fa-5x' style='margin-top: 20%'></i>
+					<p>This course is already in your cart.</p>
+					</div>
+					";
+				} else {
+					if (!$result = mysqli_query($link, $sql)) {
+						echo " " . $link -> error;
+						die();
+					} else {
+						$count = mysqli_num_rows($result);
+
+						if ($count > 0) {
+							echo "
+							<div class='col-md-2 text-center'>
+							<i class='fa fa-cart-plus fa-5x' style='margin-top: 20%'></i>
+							<p>You have already enrolled in this course.</p>
+							</div>
+							";
+						} else {
+							echo "
+							<div class='col-md-2 text-center'>
+							<a href='add-cart.php?course_id=$selected_course_id'>
+							<i class='fa fa-cart-plus fa-5x' style='margin-top: 20%'></i>
+							<br></br>
+							<label>Add to Cart</label>
+							</a>
+							</div>
+							";
+						}
+					}	
+				}
+			}
+			?>
 			<div class="col-md-8" style="background-color: #dadada;">
 				<dl class="row">
 					<dt class="col-sm-3 mt-4">Course Instructor</dt>
@@ -93,7 +137,7 @@ if (!$result = mysqli_query($link,$sql)) {
 					<dd class="col-sm-9 mt-4"><?php echo $average_rating; ?></dd>
 
 					<?php 
-						$sql = "SELECT 	C.course_id, C.course_name, C.language, C.average_rating, C.category,\n"
+					$sql = "SELECT 	C.course_id, C.course_name, C.language, C.average_rating, C.category,\n"
 
 					. "P.name, P.surname, D.percentage, D.start_date, D.end_date, \n"
 
@@ -120,39 +164,88 @@ if (!$result = mysqli_query($link,$sql)) {
 
 						if ($row["is_allowed"] == 0 || $row["is_allowed"] == "" || is_null($row["is_allowed"])) {
 							echo "
-								<dt class='col-sm-3 mt-4'>Price</dt>
-								<dd class='col-sm-9 mt-4'>" . number_format($row["price"], 2) . "$</dd>
+							<dt class='col-sm-3 mt-4'>Price</dt>
+							<dd class='col-sm-9 mt-4'>" . number_format($row["price"], 2) . "$</dd>
 							";
 
 							echo "
-								<dt class='col-sm-3 mt-4'>Discount</dt>
-								<dd class='col-sm-9 mt-4'> There is no discount on this course. </dd>
+							<dt class='col-sm-3 mt-4'>Discount</dt>
+							<dd class='col-sm-9 mt-4'> There is no discount on this course. </dd>
 							";
 						} else {
 							echo "
-								<dt class='col-sm-3 mt-4'>Price</dt>
-								<dd class='col-sm-9 mt-4'>" . number_format($row["price"], 2) . "$</dd>
+							<dt class='col-sm-3 mt-4'>Price</dt>
+							<dd class='col-sm-9 mt-4'>" . number_format($row["price"], 2) . "$</dd>
 							";
 
 							echo "
-								<dt class='col-sm-3 mt-4'>Discount</dt>
-								<dd class='col-sm-9 mt-4'>" . $row["percentage"] . " </dd>
+							<dt class='col-sm-3 mt-4'>Discount</dt>
+							<dd class='col-sm-9 mt-4'>" . $row["percentage"] . " </dd>
 							";
 						}
 					}
 
-					 ?>
-				
+					?>
+
 
 				</dl>
 			</div>
-			<div class="col-md-2 text-center">
-				<a href="add-wishlist.php?course_id=<?php print $selected_course_id?>">
-					<i class="fa fa-list fa-5x" style="margin-top: 20%"></i>
-					<br></br>
-					<label>Add to Wishlist</label>
-				</a>
-			</div>
+			<?php 
+
+			$student_id = $_SESSION["person_id"];
+			$sql = "SELECT * 
+			FROM enrolls
+			WHERE course_id='$selected_course_id' AND student_id='$student_id'";
+
+			$wishlist_sql = "SELECT * 
+			FROM adds_to_wishlist
+			WHERE course_id='$selected_course_id' AND $student_id='$student_id'";
+
+			if (!$wishlist_result = mysqli_query($link, $wishlist_sql)) {
+				echo $link -> error;
+				die();
+			} else {
+				$wishlist_count = mysqli_num_rows($wishlist_result);
+
+				if ($wishlist_count > 0) {
+					echo "
+					<div class='col-md-2 text-center'>
+					<i class='fa fa-list fa-5x' style='margin-top: 20%'></i>
+					<p>This course is already in your wishlist.</p>
+					</div>
+					";
+				} else {
+					if (!$result = mysqli_query($link, $sql)) {
+						echo " " . $link -> error;
+						die();
+					} else {
+						$count = mysqli_num_rows($result);
+
+						if ($count > 0) {
+							echo "
+							<div class='col-md-2 text-center'>
+							<i class='fa fa-list fa-5x' style='margin-top: 20%'></i>
+							<p>You have already enrolled in this course.</p>
+							</div>
+							";
+						} else {
+							echo "
+							<div class='col-md-2 text-center'>
+							<a href='add-wishlist.php?course_id=$selected_course_id'>
+							<i class='fa fa-list fa-5x' style='margin-top: 20%'></i>
+							<br></br>
+							<label>Add to Wishlist</label>
+							</a>
+							</div>
+							";
+						}
+					}	
+				}
+			}
+
+			
+			?>
+
 		</div>
 
 		<div class="row" style="margin-top: 40px;">
@@ -182,15 +275,15 @@ if (!$result = mysqli_query($link,$sql)) {
 					if (!$count) {
 						echo "There is no comment in this course.";
 					} else {
-						
+
 					}
 				}
 				?>
 			</div>
 		</div>
-		
+
 	</div>
-	
+
 
 
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

@@ -13,5 +13,4 @@ $sql = "INSERT INTO 	adds_to_cart(student_id, course_id)
 mysqli_query($link, $sql);
 
 header("Location: home.php");
-
 ?>
