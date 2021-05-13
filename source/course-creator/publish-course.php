@@ -34,7 +34,7 @@ if (isset($_POST['publish'])) {
 				$lecture_duration = $_SESSION['lecture_array'][$i]->lecture_duration;
 
 				$sql = "INSERT INTO lecture(course_id, lecture_id, lecture_name, duration, description) 
-						VALUES ('$course_id', '$i', '$lecture_name', '$lecture_duration', '$lecture_description')";
+				VALUES ('$course_id', '$i', '$lecture_name', '$lecture_duration', '$lecture_description')";
 
 				if (!mysqli_query($link, $sql)) {
 					echo "ERROR : COULD NOT BE ADDED" . mysqli_error($link);
@@ -153,10 +153,28 @@ if (isset($_POST['publish'])) {
 
 		if (isset($_POST['publish-lecture'])) {
 			$lecture = new Lecture();
-			echo "L name: " . $_POST['lecture-name'] . " L duration: " . $_POST['lecture-duration'] . " L description: " . $_POST['lecture-description'];
 
 			$lecture->lecture_name = $_POST['lecture-name'];
-			$lecture->lecture_duration = $_POST['lecture-duration'];
+
+			$duration = "0" . $_POST['lecture-duration-hour'] . ":";
+
+			if ($_POST["lecture-duration-minutes"] < 10) {
+				$duration = $duration . "0" . $_POST["lecture-duration-minutes"];
+			} else {
+				$duration = $duration . $_POST["lecture-duration-minutes"];
+			}
+
+			$duration .= ":";
+
+			if ($_POST["lecture-duration-seconds"] < 10) {
+				$duration = $duration . "0" . $_POST["lecture-duration-seconds"];
+			} else {
+				$duration = $duration . $_POST["lecture-duration-seconds"];
+			}
+
+			echo $duration;
+
+			$lecture->lecture_duration = $duration;
 			$lecture->lecture_description = $_POST['lecture-description'];
 
 			array_push($_SESSION['lecture_array'], $lecture);
@@ -196,11 +214,26 @@ if (isset($_POST['publish'])) {
 				<label for="formGroupExampleInput">Lecture Name</label>
 				<input type="text" class="form-control" id="lecture-name" name="lecture-name" placeholder="Enter Lecture Name" maxlength="64">
 			</div>
-			<div class="form-group">
-				<label for="price">Lecture Duration:</label>
-				<input type="number" class="form-control" id="lecture-duration" name="lecture-duration" step="0.01">
+
+			<div class="row g-2">
+				<div class="col-md">
+					<div class="form-floating">
+						<label for="price">Lecture Duration Hour:</label>
+						<input type="number" class="form-control" id="lecture-duration-hour" name="lecture-duration-hour" min="0" max="1" value="0">
+					</div>
+				</div>
+				<div class="col-md">
+					<div class="form-floating">
+						<label for="price">Lecture Duration Minutes:</label>
+				<input type="number" class="form-control" id="lecture-duration-minutes" name="lecture-duration-minutes" min="0" max="59" value="0">
+					</div>
+				</div>
+				<div class="col-md">
+					<label for="price">Lecture Duration Seconds:</label>
+					<input type="number" class="form-control" id="lecture-duration-seconds" name="lecture-duration-seconds" min="0" max="59" value="0">
+				</div>
 			</div>
-			<div class="form-group">
+			<div class="form-group mt-4">
 				<label for="description">Lecture Description</label>
 				<textarea class="form-control" id="lecture-description" name="lecture-description" rows="3" placeholder="Enter Lecture Description" maxlength="360"></textarea>
 			</div>

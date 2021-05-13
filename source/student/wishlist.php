@@ -21,7 +21,7 @@ $wallet = $row["wallet"];
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		function btnclick() {
-			window.location.href = "buy-all-in-cart.php";
+			window.location.href = "buy-all-in-wishlist.php";
 		}
 	</script>
 </head>
