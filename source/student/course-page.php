@@ -13,6 +13,7 @@ $result1 = mysqli_query($link, $sql1);
 $row1 = mysqli_fetch_array($result1,MYSQLI_ASSOC);
 
 $cname = $row1['course_name'];
+$lecture_ids = "#";
 
 $percentage = 0;
 ?>
@@ -126,12 +127,17 @@ $percentage = 0;
                             "</th><td>" . $q_result["description"] .
                             "</td><td>" . $q_result["duration"];
 
-                            echo /** @lang text */
-                            "<td>
-                            <form action='watch-lecture.php' method='post' id='formHiddenInputValue' name='formHiddenInputValue'>
-                            <input type='hidden' id='cid' name='lid' value='" . $q_result["lecture_id"] . "' />
-                            <button onclick=\"location.href=watch-lecture.php'\" class=\"mt-2 text-center btn btn-success\" >Open Lecture</button>
-                            </form></td>";
+                            $search = $q_result["lecture_id"];
+                            if($lecture_ids == "#")     $lecture_ids = $lecture_ids . $search;
+                            else        $lecture_ids = $lecture_ids. ",#" . $search;
+
+                            echo "<td>
+                        <form action='' method='post' id='formHiddenInputValue' name='formHiddenInputValue'>
+                            <button type='button' class='btn btn-success' data-toggle='modal' id='" . $q_result["lecture_id"] . "' name='" . $q_result["lecture_id"] . "' value='" . $q_result["lecture_id"] . "'>Watch Lecture</button>
+                                                </form></td>";
+                            echo "</td></tr>";
+
+
 
                             echo "</td></tr>";
 
@@ -303,7 +309,32 @@ $percentage = 0;
 </p>
 </div>
 
-</div>        
+</div>
+
+
+    <script>
+        var total_id = "<?php Print( $lecture_ids); ?>";
+
+        $(total_id).click(function(e) {
+            $id = $(this).val();
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "save-lecture-id.php",
+                data: {
+                    lecture_id: $id
+                },
+                success: function(result) {
+                    //alert('Approved');
+                    window.location.replace("watch-lecture.php");
+                },
+                error: function(result) {
+                    alert("Open lecture page error");
+                }
+            });
+        });
+
+    </script>
 
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
