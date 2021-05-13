@@ -15,7 +15,7 @@ foreach ($courses as $key => $value) {
 		THEN C.course_price * (( 100 - D.percentage ) / 100)
 		ELSE C.course_price END) as price
 		FROM course C LEFT OUTER JOIN discount D ON
-		C.course_id = D.discounted_course_id LEFT JOIN person P ON C.course_creator_id = P.person_id LEFT JOIN adds_to_cart AC
+		C.course_id = D.discounted_course_id LEFT JOIN person P ON C.course_creator_id = P.person_id LEFT JOIN adds_to_wishlist AC
 		ON AC.student_id='$student_id'
 		WHERE C.course_id=AC.course_id AND C.course_id='$course_id'";
 
