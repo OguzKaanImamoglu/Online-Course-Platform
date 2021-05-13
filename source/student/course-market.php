@@ -407,8 +407,6 @@ $wallet = $row["wallet"];
 								echo "There is no course found.";
 							}
 						}
-
-
 					}
 				}
 
