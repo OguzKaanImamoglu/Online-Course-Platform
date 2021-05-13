@@ -17,7 +17,12 @@ $course_name = $row['course_name'];
 $sql = "SELECT A.question_id, Q.question_text FROM asks A, question Q 
         WHERE A.course_id = '$course_id' AND A.question_id = Q.question_id";
 
+
 $result = mysqli_query($link,$sql);
+if (!$result) {
+    echo $link -> error;
+    die();
+}
 $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 ?>

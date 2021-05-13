@@ -3,7 +3,7 @@
     include('../sign-up/database.php');
 
 	$person_id = $_SESSION['person_id'];
-    $cid = $_GET['cid'];
+    $cid = $_SESSION['course_id'];
  ?>
 
 <!DOCTYPE html>

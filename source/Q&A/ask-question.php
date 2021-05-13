@@ -7,8 +7,6 @@ $name = $_SESSION['name'];
 $surname = $_SESSION['surname'];
 $course_id = $_SESSION['course_id'];
 
-$course_id = 4;
-
 $sql = "SELECT course_name FROM course WHERE course_id='$course_id'";
 
 $result = mysqli_query($link,$sql);
@@ -26,15 +24,17 @@ if (isset($_POST['sendQuestion'])) {
         $sql = "INSERT INTO question(question_text, date) VALUES('$question', CURDATE())";
 
         $result = mysqli_query($link, $sql);
+        if (!$result) {
+            echo "<script>alert('" . $link->error . "');</script>";
+        }
 
-        $sql = "SELECT MAX(question_id) as question_id FROM question";
-        $result = mysqli_query($link, $sql);
-
-        $row = mysqli_fetch_array($result);
-        $question_id = $row['question_id'];
+        $question_id = mysqli_insert_id($link);
 
         $sql = "INSERT INTO asks(question_id,student_id, course_id) VALUES('$question_id', '$person_id','$course_id')";
         $result = mysqli_query($link, $sql);
+         if (!$result) {
+            echo "<script>alert('" . $link->error . "');</script>";
+        }
 
         $message = "Question is sent to the teacher";
     }

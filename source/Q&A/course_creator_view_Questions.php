@@ -5,7 +5,6 @@ include('../sign-up/database.php');
 $person_id = $_SESSION['person_id'];
 
 $course_id = $_SESSION['course_id'];
-$course_id = 4;
 
 $sql = "SELECT course_name FROM course WHERE course_id = '$course_id'";
 $result = mysqli_query($link,$sql);
