@@ -22,6 +22,22 @@ $wallet = $row["wallet"];
 <head>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		jQuery(document).ready(function($) {
+		    $('.clickable-row').click(function() {
+		        var id = $(this).attr("src");
+		        //$.post("../student/redirect.php", {"selected_course_id": id});
+		        window.location.href = 'course-page.php?course_id=' + id;
+		        
+		    });
+		});
+	</script>
+	<style type="text/css">
+		.clickable-row {
+			cursor: pointer;
+		}
+	</style>
 </head>
 <body>  
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -90,8 +106,6 @@ $wallet = $row["wallet"];
 			    . "  ON C.course_id = course_student.course_id WHERE course_creator_id = $person_id";
 
 
-			//$sql = "SELECT course_id, course_name, average_rating, course_price as price FROM course WHERE course_creator_id='$person_id'";
-
 			$result2 = mysqli_query($link, $sql);
 
 			if (!$result2) {
@@ -102,7 +116,7 @@ $wallet = $row["wallet"];
 	 			echo "$count2";
 
 				if ($count2 > 0) {
-					echo "<table class='table'>
+					echo "<table class='table table-striped table-hover'>
 						<thead>
 							<th scope='col'>Course Id</th>
 							<th scope='col'>Course Name</th>
@@ -115,10 +129,10 @@ $wallet = $row["wallet"];
 					";
 
 					while ($q_result = mysqli_fetch_array($result2)) {
-						echo "<tr><th scope='row'>" . $q_result["course_id"] .
+						echo "<tr class='clickable-row' src=" . "'" . $q_result["course_id"] . "'" . "><th scope='row'>" . $q_result["course_id"] .
 							"</th><td>" . $q_result["course_name"] .
-							"</td><td>" . $q_result["price"] . 
-							"</td><td>" . $q_result["average_rating"];
+							"</td><td>" . number_format($q_result["price"], 2) . 
+							"$</td><td>" . $q_result["average_rating"];
 
 							if (is_null($q_result["total_student"])) {
 								echo "</td><td> 0";
