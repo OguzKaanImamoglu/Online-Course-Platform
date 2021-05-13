@@ -13,7 +13,7 @@ if(isset($_POST['lecture_watch'])){
     $sql1 =  "INSERT INTO progresses(student_id, course_id, lecture_id) VALUES ('$person_id', '$course_id', '$lecture_watch');";
 
     if (!mysqli_query($link, $sql1)) {
-        echo "ERROR : COULD NOT BE ADDED" . mysqli_error($link);
+        echo "ERROR : CANNOT BE ADDED" . mysqli_error($link);
     }
 }
 
