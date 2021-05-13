@@ -202,7 +202,7 @@ class SQL{
             exist = meta.getTables(null, null, "assignment", null);
             if (!exist.next()) {
                 stmt.executeUpdate("CREATE TABLE assignment(\n" +
-                        "\t\tassignment_id INT PRIMARY KEY,\n" +
+                        "\t\tassignment_id INT PRIMARY KEY AUTO_INCREMENT,\n" +
                         "\t\tassignment_question VARCHAR(100) NOT NULL,\n" +
                         "\t\tassignment_threshold INT,\n" +
                         "\t\tcourse_id INT,\n" +
@@ -210,7 +210,7 @@ class SQL{
                         "\t\tON DELETE CASCADE\n" +
                         "\t\tON UPDATE RESTRICT,\n" +
                         "\t\tCONSTRAINT check_threshold\n" +
-                        "\t\t\t\tCHECK (assignment_threshold>0)\n" +
+                        "\t\t\t\tCHECK (assignment_threshold>=0)\n" +
                         ") ENGINE = INNODB;\n");
             }else{
                 System.out.println("assignment EXIST");
@@ -224,7 +224,8 @@ class SQL{
                         "student_id INT,\n" +
                         "submission_time TIMESTAMP,\n" +
                         "\t\tassignment_answer VARCHAR(300) NOT NULL,\n" +
-                        "\t\tgrade INT,\n" +
+                        "\t\tgrade INT DEFAULT 0,\n" +
+                        "\t\tis_graded BOOLEAN DEFAULT FALSE,\n" +
                         "\t\tPRIMARY KEY (assignment_id, student_id, submission_time),\n" +
                         "\t\tFOREIGN KEY (assignment_id) REFERENCES assignment(assignment_id)\n" +
                         "\t\tON DELETE CASCADE\n" +
@@ -233,7 +234,7 @@ class SQL{
                         "\t\tON DELETE CASCADE\n" +
                         "\t\tON UPDATE RESTRICT,\n" +
                         "CONSTRAINT check_grade_validity\n" +
-                        "\t\t\tCHECK(grade > 0)\n" +
+                        "\t\t\tCHECK(grade >= 0)\n" +
                         ") ENGINE = INNODB;\n");
             }else{
                 System.out.println("submitted_assignment EXIST");

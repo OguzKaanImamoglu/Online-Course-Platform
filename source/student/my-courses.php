@@ -132,10 +132,8 @@ $surname = $_SESSION['surname'];
                     }
                     echo /** @lang text */
                         "<td>
-                        <form action='course-page.php' method='post' id='formHiddenInputValue' name='formHiddenInputValue'>
-                            <input type='hidden' id='cid' name='cid' value='" . $q_result["course_id"] . "' />
-                             <button onclick=\"location.href=course-page.php'\" class=\"mt-2 text-center btn btn-success\" >Course Page</button>
-                                                </form></td>";
+                            <a href='course-page.php?cid=" . $q_result["course_id"] . 
+                            "'class='mt-2 text-center btn btn-success'>Course Page</a></td>";
                     echo "</td></tr>";
 
                 }
