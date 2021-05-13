@@ -109,16 +109,16 @@
                         else {$attempts = $q_result["attempts"];}
                         echo '<td>' . $attempts . '</td>';
                         if($attempts == 0){
-                            echo "<td>" . "<a class = 'disabled' href='see-attempts.php?aid=" . $q_result["assignment_id"] . "'>See attempts</a>";
+                            echo "<td>" . "<a href='see-attempts.php?cid=" . $cid . "&aid=". $q_result["assignment_id"] . "'>Make attempt</a>";
                         } else {
-                            echo "<td>" . "<a href='see-attempts.php?aid=" . $q_result["assignment_id"] . "'>See attempts</a>";
+                            echo "<td>" . "<a href='see-attempts.php?cid=" . $cid . "&aid=" . $q_result["assignment_id"] . "'>See attempts</a>";
                         }
                         
                         $iter = $iter + 1;
 					}
 
 				} else {
-					echo "<div style='float:left; width:1000px'>There are no offerings found.</div>";
+					echo "<div style='float:left; width:1000px'>There are no assignments found.</div>";
 				}
 			}
 			?>
@@ -131,9 +131,5 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 <style>
-    a.disabled{
-        pointer-events: none;
-        color: gray;
-    }
 </style>
 </html>
