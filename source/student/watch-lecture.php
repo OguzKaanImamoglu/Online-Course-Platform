@@ -16,7 +16,7 @@ $result0 = mysqli_query($link, $sql0);
 $row0 = mysqli_fetch_array($result0,MYSQLI_ASSOC);
 
 # lecture name
-$sql1 =  "SELECT lecture_name, description FROM lecture WHERE lecture_id= '$lecture_id' ";
+$sql1 =  "SELECT lecture_name, description FROM lecture WHERE lecture_id= '$lecture_id' AND course_id = '$course_id'";
 $result1 = mysqli_query($link, $sql1);
 $row1 = mysqli_fetch_array($result1,MYSQLI_ASSOC);
 
