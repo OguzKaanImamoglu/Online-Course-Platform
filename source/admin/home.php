@@ -28,6 +28,9 @@
 				<li class="nav-item">
 					<a class="nav-link" href="discount-courses.php">Discounts</a>
 				</li>
+                <li class="nav-item">
+                    <a class="nav-link" href="stats.php">Stats</a>
+                </li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
       			<li><a href="../logout.php">Logout</a></li>
@@ -43,6 +46,7 @@
 			<p class="lead mt-4">
 				<a class="btn btn-success btn-lg" href="refund-requests.php" role="button">Refund Requests</a>
 				<a class="btn btn-success btn-lg" href="discount-courses.php" role="button">Discounts</a>
+                <a class="btn btn-success btn-lg" href="stats.php" role="button">Stats</a>
 			</p>
 		</div>
 	</div>

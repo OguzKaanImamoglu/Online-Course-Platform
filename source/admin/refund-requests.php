@@ -26,6 +26,11 @@
 				<li class="nav-item">
 					<a class="nav-link" href="discount-courses.php">Discounts</a>
 				</li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="stats.php">Stats</a>
+                </li>
+
 			</ul>
             <ul class="nav navbar-nav navbar-right">
       			<li><a href="../logout.php">Logout</a></li>
