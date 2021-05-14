@@ -48,12 +48,12 @@ $course_id = $_SESSION['course_id'];
 
 <div class="container">
     <div class="jumbotron mt-4">
-        <form action="" method="post">
+        <p action="" method="post">
             <h2 class="display-4">Your Comments Matter</h2>
             <hr class="my-4">
             <p class="lead">
                 <i class="" aria-hidden="true"></i>
-            <div class="form-group"><p>
+            <div class="form-group"><div>
                     <?php
                         $html = "";
                         $sql = "SELECT feedback_id FROM student_feedbacks WHERE student_id = '$person_id' AND course_id = '$course_id'";
@@ -73,7 +73,7 @@ $course_id = $_SESSION['course_id'];
             <textarea id='comment' name='comment' rows='6' cols='100'></textarea>
             <p>
                <div class='text-center'>
-                <a type='button' class='btn btn-success btn-md mt-4 middle'  id='submit' name='submit' value='submit' role='button'>Send Your Feedback</a></div></p>";
+                <button type='button' class='btn btn-success btn-md mt-4 middle'  id='submit' name='submit' value='submit' role='button'>Send Your Feedback</button></div></p>";
 
                             }
                             else{
@@ -92,16 +92,16 @@ $course_id = $_SESSION['course_id'];
                                 $rating = $row['rating'];
                                 $f_text = $row['feedback_note'];
                                 echo "<label>Your Rating: $rating</label>
-                                   <p>Your Comment</p><p>$f_text</p>
+                                   <p>Your Comment</p><p>$f_text</p><p>
 <div class='text-center'>
                 <button type='button' class='btn btn-success btn-md mt-4'  id='$f_id' name='$f_id' value='$f_id' role='button'>Change Your Feedback</button></div>
                             
-            </div>
-				<button class='btn btn-success btn-mg' href='course-page.php' role='button'>Return to the Course Page</button>";
+            </p>";
                             }
                         }
                         ?>
-
+                    <button type="submit" class='btn btn-success btn-mg' onclick="location.href = 'course-page.php'">Return to the Course Page</button>
+                </div></div></p>
             </form>
             </div>
             </p>

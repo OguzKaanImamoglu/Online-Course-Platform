@@ -73,18 +73,18 @@ $f_id = "";
                     if(!$result){
                         echo "SQL ERROR" . $link->error;
                     }else {
-
-                        echo "<label for='rating'>Your Rating: $rating </label>
-                    <input type='number' class='form-control' id='rating' name='rating' min='0' max='5'  required='required'>
-                    <p>Your Comment</p><p>$f_Text</p>
-            <textarea id='comment' name='comment' rows='6' cols='120'></textarea>
+                        $m = $_SESSION['float'];
+                        echo "<label for='rating'>Your Rating </label>
+                    <input type='number' class='form-control' id='rating' name='rating' min='0' max='5' value='$rating' required='required'>
+                    <p>Your Comment</p>
+            <textarea id='comment' name='comment' rows='6' cols='120'>$f_Text</textarea>
             <p>
                <div class='text-center'>
-                <button class='btn btn-success btn-mg mt-4 middle'  id='update' name='update'>Send Your Feedback</></div></p>
-                        <button class='btn btn-success btn-mg' href='course-page.php' role='button'>Return to the Course Page</button>";
-
+                <button class='btn btn-success btn-mg mt-4 middle'  id='update' name='update'>Send Your Feedback</button></div></p>";
                     }
-                    ?></p>
+                    ?>
+                    <button class='btn btn-success btn-mg' onclick="location.href = 'course-page.php'" role='button'>Return to the Course Page</button>
+                        </p>
             </div>
         </form>
     </div>
