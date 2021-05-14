@@ -10,7 +10,7 @@ $result = mysqli_query($link,$sql);
 $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 $wallet = $row["wallet"];
-
+$id_list = "#";
 ?>
 
 <!DOCTYPE html>
@@ -110,7 +110,16 @@ $wallet = $row["wallet"];
 						echo $q_result["course_id"];
 						echo "'>Buy Course</a>";
 					}
-					echo "</td></tr>";
+					$search = $q_result['course_id'];
+                    if($id_list == "#")     $id_list = $id_list . $search;
+                    else        $id_list = $id_list . ",#" . $search;
+
+
+                    echo "</td>
+                        <td><button type='button' class='btn btn-success' data-toggle='modal' id = '$search' value='$search'>Drop</button>
+</td>
+
+</tr>";
 
 					array_push($courses_in_cart, $q_result["course_id"]);
 					$total_price += $q_result["price"];
@@ -143,5 +152,33 @@ $wallet = $row["wallet"];
 	<script src='http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js'></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.1/jquery.min.js"></script>
+
+    <script>
+        var total_id = "<?php Print( $id_list); ?>";
+
+        $(total_id).click(function(e) {
+            $id = $(this).val();
+            //alert(document.getElementById($text).value);
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "dropCart.php",
+                data: {
+                    drop_id: $id
+                },
+                success: function(result) {
+                    //alert($id);
+                    location.reload();
+                },
+                error: function(result) {
+                    alert("Couldn't dropped the course!!");
+                }
+            });
+        });
+
+    </script>
+
+
 </body>
 </html>

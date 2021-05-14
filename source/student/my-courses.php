@@ -114,7 +114,7 @@ $course_ids = "#";
 
                             if (!$result3) {
                                 echo "Failed.";;
-                                echo " " . $link -> error;;
+                                echo " " . $link->error;;
                                 die();
                             }
 
@@ -122,13 +122,14 @@ $course_ids = "#";
 
                             if (!is_null($total_row)) {
                                 $total_lecture_count = $total_row["total_lecture_count"];
+
+
+                                //echo $total_lecture_count . " " . $watched_lecture_count;
+
+                                $progress_percentage = $watched_lecture_count * 100 / $total_lecture_count;
+
+                                echo "<td>" . number_format($progress_percentage) . "%";
                             }
-
-                            echo $total_lecture_count . " " . $watched_lecture_count;
-
-                            $progress_percentage = $watched_lecture_count * 100 / $total_lecture_count;
-
-                            echo "<td>" . number_format($progress_percentage) . "%";
                         }
                     }
                     $search = $q_result["course_id"];
