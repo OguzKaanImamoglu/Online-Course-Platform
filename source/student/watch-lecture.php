@@ -9,8 +9,14 @@ $surname = $_SESSION['surname'];
 $lecture_id = $_SESSION['lecture_id'];
 $course_id = $_SESSION['course_id'];
 
+# course name
 # lecture name
-$sql1 =  "SELECT lecture_name FROM lecture WHERE lecture_id= '$lecture_id' ";
+$sql0 =  "SELECT course_name FROM course WHERE course_id= '$course_id' ";
+$result0 = mysqli_query($link, $sql0);
+$row0 = mysqli_fetch_array($result0,MYSQLI_ASSOC);
+
+# lecture name
+$sql1 =  "SELECT lecture_name, description FROM lecture WHERE lecture_id= '$lecture_id' ";
 $result1 = mysqli_query($link, $sql1);
 $row1 = mysqli_fetch_array($result1,MYSQLI_ASSOC);
 
@@ -86,39 +92,74 @@ $sql4 = "INSERT INTO note(student_id, lecture_id, course_id, note_text) VALUES (
                 <a class="nav-link" href="course-page.php">Course Page</a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="watch-lecture.php">Watch Lecture</a>
+            </li>
+
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../logout.php">Logout</a></li>
         </ul>
     </div>
 </nav>
 
+<h3 class="display-5 mb-4">My Notes</h3>
+<div class="dropdown " align=center>
+    <button class="btn btn-dark btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Select Note
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <?php
+        $query ="SELECT	lecture_id, note_text, note_id FROM note WHERE student_id='$person_id' AND lecture_id='$lecture_id'  AND course_id = '$course_id'";
+
+        if (!$query) {
+            printf("There is an error: %s\n", mysqli_error($link));
+            exit();
+        }
+        $result = mysqli_query($link, $query);
+        while($row = mysqli_fetch_array($result)){
+            echo "<li><a href=\"#\" data-value=$row[note_id]>$row[note_text]</a></li></a>";
+        }
+        echo "</select>";
+        ?>
+    </ul>
+
+
+</div>
+
+
 <div class="container">
+    <div class="col-xl-50" style="padding-left: 10px; margin-top: 20px;">
 
 
 
-    <div class="dropdown">
-        <button class="btn btn-dark btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            Select Note
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-            <?php
-            $query ="SELECT	lecture_id, note_text, note_id FROM note WHERE student_id='$person_id' AND lecture_id='$lecture_id'  AND course_id = '$course_id'";
+    <style>
+        h3 {text-align: center;
+            border: 3px solid green;}
 
-            if (!$query) {
-                printf("There is an error: %s\n", mysqli_error($link));
-                exit();
-            }
-            $result = mysqli_query($link, $query);
-            while($row = mysqli_fetch_array($result)){
-                echo "<li><a href=\"#\" data-value=$row[note_id]>$row[note_text]</a></li></a>";
-            }
-            echo "</select>";
-            ?>
-        </ul>
-    </div>
-
+        h4 {text-align: center;}
+        h1 {text-align: center;}
+        h2 {text-align: center;
+            text-decoration: underline;}
+        h5 {text-align: center;}
+        h6 {text-align: center;}
+        p {text-align: center;}
+        /*div {text-align: center;}*/
+    </style>
 
     <div class="jumbotron mt-4">
-        <h3 class="display-5 mb-4"><?php echo $row1['lecture_name']?></h3>
-    <img src="os.jpg" alt="Italian Trulli">
+        <h1 class="display-5 mb-4 center"><?php echo $row0['course_name']?></h1>
+
+    <img src="os.jpg" alt="Italian Trulli" class="center">
+        <style>
+        .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+        }
+        </style>
 
 
         <p class="lead mt-4">
@@ -153,25 +194,32 @@ $sql4 = "INSERT INTO note(student_id, lecture_id, course_id, note_text) VALUES (
         <form action='' method='post' id='formHiddenInputValue' name='formHiddenInputValue'>
             <button type='button' class='btn btn-danger btn-lg' data-toggle='modal' id='play' name='play' value='play'>&#9658</button>
         </form>
+        <style>
+            form {
+                text-align: center;
+            }  margin-left: 40px;
+            }
+
+        </style>
+
         </p>
+        <h2 class="display-5 mb-4 center"><?php echo $row1['lecture_name']?></h2>
+        <h6 class="display-5 mb-4 center"><?php echo $row1['description']?></h6>
     </div>
+
+
 </div>
 
+    <form method="post">
+        <div class="form-group">
+            <label for="note">Take Note</label>
+            <textarea class="form-control" id="description" name="description" rows="3" placeholder="You can take notes" required="required" maxlength="200"></textarea>
+        </div>
 
+        <button type="submit" name="create" id="create" class="btn btn-primary">Create Note</button>
+        <div class="dropdown-divider"></div>
 
-
-
-
-<form method="post">
-    <div class="form-group">
-        <label for="note">Take Note</label>
-        <textarea class="form-control" id="description" name="description" rows="3" placeholder="You can take notes" required="required" maxlength="200"></textarea>
-    </div>
-
-    <button type="submit" name="create" id="create" class="btn btn-primary">Create Note</button>
-    <div class="dropdown-divider"></div>
-
-</form>
+    </form>
 
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
