@@ -219,7 +219,7 @@ $percentage = 0;
                         echo  "<button type='button' disabled class='btn btn-secondary' data-dismiss='modal'>Finish the course to give feedback</button>";
                         echo "<button type='submit' disabled name='send-request' class='btn btn-secondary float-right'>Finish the course to get Certificate</button>";
                     } else {
-                        echo  "<button type='button' class='btn btn-success' data-dismiss='modal'>Give Feedback</button>";
+                        echo  "<button type='sumbit' onclick=\"location.href='feedback.php'\" class='btn btn-success' data-dismiss='modal'>Give Feedback</button>";
                         echo "<button type='submit' onclick=\"location.href='get-certificate.php'\" name='send-request' class='btn btn-success float-right'>Get Certificate</button>";
                     }
                  ?>

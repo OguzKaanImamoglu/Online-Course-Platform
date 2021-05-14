@@ -46,6 +46,9 @@ $f_id = "";
                 <a class="nav-link" href="../Q&A/myQuestions.php">My Questions</a>
             </li>
         </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../logout.php">Logout</a></li>
+        </ul>
     </div>
 </nav>
 

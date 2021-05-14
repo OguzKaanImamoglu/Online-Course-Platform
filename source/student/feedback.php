@@ -40,6 +40,9 @@ $course_id = $_SESSION['course_id'];
                 <a class="nav-link" href="../Q&A/myQuestions.php">My Questions</a>
             </li>
         </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../logout.php">Logout</a></li>
+        </ul>
     </div>
 </nav>
 
@@ -47,7 +50,6 @@ $course_id = $_SESSION['course_id'];
     <div class="jumbotron mt-4">
         <form action="" method="post">
             <h2 class="display-4">Your Comments Matter</h2>
-            <!--<p class="lead">You can add money to your wallet below.</p>-->
             <hr class="my-4">
             <p class="lead">
                 <i class="" aria-hidden="true"></i>
