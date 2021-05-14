@@ -38,6 +38,9 @@ $sql = "SELECT A.question_id, C.course_name, C.course_id, Q.question_text, Q.dat
                 <a class="nav-link" href="../Q&A/myQuestions.php">My Questions</a>
             </li>
         </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../logout.php">Logout</a></li>
+        </ul>
     </div>
 </nav>
 

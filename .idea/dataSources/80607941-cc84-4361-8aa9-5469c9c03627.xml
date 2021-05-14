@@ -1133,6 +1133,7 @@ course_id</ColNames>
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
     </column>
     <column id="350" parent="290" name="assignment_question">
       <Position>2</Position>
@@ -1921,25 +1922,31 @@ course_id</ColNames>
     <column id="507" parent="310" name="grade">
       <Position>5</Position>
       <DataType>int|0s</DataType>
+      <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="508" parent="310" name="student_id">
+    <column id="508" parent="310" name="is_graded">
+      <Position>6</Position>
+      <DataType>tinyint(1)|0s</DataType>
+      <DefaultExpression>0</DefaultExpression>
+    </column>
+    <index id="509" parent="310" name="student_id">
       <ColNames>student_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="509" parent="310" name="PRIMARY">
+    <key id="510" parent="310" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>assignment_id
 student_id
 submission_time</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="510" parent="310" name="submitted_assignment_ibfk_1">
+    <foreign-key id="511" parent="310" name="submitted_assignment_ibfk_1">
       <ColNames>assignment_id</ColNames>
       <RefTableName>assignment</RefTableName>
       <RefColNames>assignment_id</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="511" parent="310" name="submitted_assignment_ibfk_2">
+    <foreign-key id="512" parent="310" name="submitted_assignment_ibfk_2">
       <ColNames>student_id</ColNames>
       <RefTableName>student</RefTableName>
       <RefColNames>student_id</RefColNames>

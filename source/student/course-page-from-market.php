@@ -268,7 +268,6 @@ if (!$result = mysqli_query($link,$sql)) {
 					echo "There is comments in this course.";
 					echo " " . $link -> error;
 				} else {
-					$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 					$count = mysqli_num_rows($result);
 
@@ -276,6 +275,20 @@ if (!$result = mysqli_query($link,$sql)) {
 						echo "There is no comment in this course.";
 					} else {
 
+                        echo "<table class='table'>
+                                    <thead>
+                                    <th scope='col'>Name Surname</th>
+                                    <th scope='col'>Comment</th>
+                                    </thead>
+                            <tbody>";
+
+                        while($q_result = mysqli_fetch_array($result)){
+                            $name = $q_result['name'] . " " . $q_result['surname'];
+                            $comment = $q_result['feedback_note'];
+                            echo "<tr><td>'$name'</td><td>'$comment'</td></tr>";
+                        }
+                        echo "</tbody>";
+                        echo "</table>";
 					}
 				}
 				?>

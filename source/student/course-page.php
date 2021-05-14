@@ -42,15 +42,19 @@ $percentage = 0;
                     <a class="nav-link" href="my-courses.php">My Courses<span class="sr-only">(current)</span></a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="add-money.php">Add Money</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../Q&A/myQuestions.php">My Questions</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+            <li class="nav-item">
+                <a class="nav-link" href="add-money.php">Add Money</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../Q&A/myQuestions.php">My Questions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="course-page.php">Course Page</a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
 
 
     <div class="row">
@@ -210,7 +214,7 @@ $percentage = 0;
 
                 <br></br>
 
-                <?php 
+                <?php
                     if ($percentage != 100) {
                         echo  "<button type='button' disabled class='btn btn-secondary' data-dismiss='modal'>Finish the course to give feedback</button>";
                         echo "<button type='submit' disabled name='send-request' class='btn btn-secondary float-right'>Finish the course to get Certificate</button>";
@@ -224,7 +228,7 @@ $percentage = 0;
 
         <div class="col-md-2" style="margin-top: 50px;">
             <p>
-                <?php 
+                <?php
                 $sql = "SELECT * FROM refund_requests WHERE student_id='$person_id' AND course_id='$course_id'";
 
                 if (!$result = mysqli_query($link, $sql)) {
@@ -256,7 +260,7 @@ $percentage = 0;
                   </button>
               </div>
 
-              <?php 
+              <?php
               if (isset($_POST["send-request"])) {
                 $reason = $_POST['requestReason'];
                 $sql = "INSERT INTO refund(reason) VALUES('$reason')";
@@ -273,7 +277,7 @@ $percentage = 0;
                 if (!mysqli_query($link, $sql)) {
                     echo $link -> error;
                     die();
-                } 
+                }
             }
             ?>
 

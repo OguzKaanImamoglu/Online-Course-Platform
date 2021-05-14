@@ -5,8 +5,6 @@
     define('DB_PASSWORD', 'lY38nY8F');
     define('DB_NAME', 'can_alpay');
 
-
-
     $charset = "utf8mb4";
     try {
         $link = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);

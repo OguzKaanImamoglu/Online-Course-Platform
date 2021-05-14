@@ -13,14 +13,14 @@ class SQL{
             ResultSet exist = meta.getTables(null, null, "person", null);
             if (!exist.next()) {
                 stmt.executeUpdate("CREATE TABLE person(" +
-                    "person_id INT PRIMARY KEY AUTO_INCREMENT," +
-                    "username VARCHAR(24) NOT NULL UNIQUE," +
-                    "email VARCHAR(64) NOT NULL UNIQUE," +
-                    "name VARCHAR(32) NOT NULL," +
-                    "surname VARCHAR(32) NOT NULL, " +
-                    "password VARCHAR(32) NOT NULL, " +
-                    "date_of_birth DATE DEFAULT NULL" +
-                    ")ENGINE = INNODB;");
+                        "person_id INT PRIMARY KEY AUTO_INCREMENT," +
+                        "username VARCHAR(24) NOT NULL UNIQUE," +
+                        "email VARCHAR(64) NOT NULL UNIQUE," +
+                        "name VARCHAR(32) NOT NULL," +
+                        "surname VARCHAR(32) NOT NULL, " +
+                        "password VARCHAR(32) NOT NULL, " +
+                        "date_of_birth DATE DEFAULT NULL" +
+                        ")ENGINE = INNODB;");
             }else{
                 System.out.println("PERSON EXIST");
             }
