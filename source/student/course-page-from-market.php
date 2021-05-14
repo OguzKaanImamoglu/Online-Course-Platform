@@ -57,6 +57,9 @@ if (!$result = mysqli_query($link,$sql)) {
                     <a class="nav-link" href="../Q&A/myQuestions.php">My Questions</a>
                 </li>
 			</ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="../logout.php">Logout</a></li>
+            </ul>
 		</div>
 
 	</nav>
@@ -258,7 +261,7 @@ if (!$result = mysqli_query($link,$sql)) {
 		<div class="row text-center" style="margin-top: 20px;">
 			<div class="col-md-8 mx-auto" style="background-color: #dadada;">
 				<?php 
-				$sql = "SELECT	P.name, P.surname, F.feedback_note
+				$sql = "SELECT	P.name, P.surname, F.feedback_note, F.rating
 				FROM	student_feedbacks SF, feedback F, person P
 				WHERE	SF.student_id=P.person_id AND
 				SF.course_id='$selected_course_id' AND
@@ -279,13 +282,15 @@ if (!$result = mysqli_query($link,$sql)) {
                                     <thead>
                                     <th scope='col'>Name Surname</th>
                                     <th scope='col'>Comment</th>
+                                    <th scope='col'>Rate/5</th>                                    
                                     </thead>
                             <tbody>";
 
                         while($q_result = mysqli_fetch_array($result)){
                             $name = $q_result['name'] . " " . $q_result['surname'];
                             $comment = $q_result['feedback_note'];
-                            echo "<tr><td>'$name'</td><td>'$comment'</td></tr>";
+                            $rate = $q_result['rating'];
+                            echo "<tr><td>$name</td><td>$comment</td><td>$rate</td></tr>";
                         }
                         echo "</tbody>";
                         echo "</table>";
