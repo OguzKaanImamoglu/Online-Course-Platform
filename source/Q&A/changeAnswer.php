@@ -67,7 +67,7 @@ if (isset($_POST['sendAnswer'])) {
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="../course-creator/discount-offers.php">Discount Offers<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="../course-creator/discount-offers.php">Discount Offers</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="../course-creator/publish-course.php">Publish New Course</a>
