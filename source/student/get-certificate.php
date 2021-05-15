@@ -87,8 +87,12 @@ if (!$assignment_result) {
                 <a class="nav-link" href="../student/add-money.php">Add Money</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="../student/myCertificates.php">My Certificates</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="../Q&A/myQuestions.php">My Questions</a>
             </li>
+
             <li class="nav-item">
                 <a class="nav-link" href="course-page.php">Course Page</a>
             </li>
@@ -134,8 +138,6 @@ if (!$assignment_result) {
 
             }
             else if ($can_get_certificate) {
-
-
                 //echo "<script>alert('$cc_name');</script>";
 
                 $text = "";
@@ -184,6 +186,8 @@ if (!$assignment_result) {
                         die();
                     }
                 }
+            }else{
+                echo "<div>Requirements don't meet. Finish lectures and assignments to earn certificate!</div>";
             }
 
         ?>

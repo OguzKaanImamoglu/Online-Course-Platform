@@ -40,6 +40,9 @@ $wallet = $row["wallet"];
 					<a class="nav-link" href="add-money.php">Add Money</a>
 				</li>
                 <li class="nav-item">
+                    <a class="nav-link" href="../student/myCertificates.php">My Certificates</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="../Q&A/myQuestions.php">My Questions</a>
                 </li>
 			</ul>

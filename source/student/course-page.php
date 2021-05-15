@@ -46,6 +46,9 @@ $percentage = 0;
                 <a class="nav-link" href="add-money.php">Add Money</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="../student/myCertificates.php">My Certificates</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="../Q&A/myQuestions.php">My Questions</a>
             </li>
             <li class="nav-item">
@@ -53,6 +56,9 @@ $percentage = 0;
             </li>
 
         </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="../logout.php">Logout</a></li>
+            </ul>
     </div>
 </nav>
 

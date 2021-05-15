@@ -35,10 +35,10 @@ $id_list = "#";
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item">
-					<a class="nav-link active" href="course-market.php">Course Market<span class="sr-only">(current)</span></a>
+					<a class="nav-link active" href="course-market.php">Course Market</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="my-courses.php">Your Courses</a>
+					<a class="nav-link" href="my-courses.php">My Courses</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="add-money.php">Add Money</a>

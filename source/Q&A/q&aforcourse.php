@@ -43,7 +43,7 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Course Market <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">Course Market</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">My Courses</a>
@@ -52,7 +52,13 @@ $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
                 <a class="nav-link" href="../student/add-money.php">Add Money</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="../student/myCertificates.php">My Certificates</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="../Q&A/myQuestions.php">My Questions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../student/course-page.php">Course Page</a>
             </li>
         </ul>
     </div>

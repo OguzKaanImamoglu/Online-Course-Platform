@@ -37,6 +37,9 @@ if (isset($_POST['sendQuestion'])) {
         }
 
         $message = "Question is sent to the teacher";
+
+        header('location:q&aforcourse.php');
+
     }
 
     echo "<script>alert('$message');</script>";
@@ -60,7 +63,7 @@ if (isset($_POST['sendQuestion'])) {
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Course Market <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">Course Market </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">My Courses</a>
@@ -69,7 +72,13 @@ if (isset($_POST['sendQuestion'])) {
                 <a class="nav-link" href="../student/add-money.php">Add Money</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="../student/myCertificates.php">My Certificates</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="../Q&A/myQuestions.php">My Questions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../student/course-page.php">Course Page</a>
             </li>
         </ul>
     </div>

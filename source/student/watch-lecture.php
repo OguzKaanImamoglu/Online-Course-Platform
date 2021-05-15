@@ -64,9 +64,8 @@ $sql4 = "INSERT INTO note(student_id, lecture_id, course_id, note_text) VALUES (
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="home.php">Home</a>
+    <a class="navbar-brand" href="../student/home.php">Home</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -74,15 +73,16 @@ $sql4 = "INSERT INTO note(student_id, lecture_id, course_id, note_text) VALUES (
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="course-market.php">Course Market<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="../student/course-market.php">Course Market <span class="sr-only">(current)</span></a>
             </li>
-
             <li class="nav-item">
-                <a class="nav-link" href="my-courses.php">My Courses<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="../student/my-courses.php">My Courses</a>
             </li>
-
             <li class="nav-item">
-                <a class="nav-link" href="add-money.php">Add Money</a>
+                <a class="nav-link" href="../student/add-money.php">Add Money</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../student/myCertificates.php">My Certificates</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="../Q&A/myQuestions.php">My Questions</a>
@@ -93,16 +93,15 @@ $sql4 = "INSERT INTO note(student_id, lecture_id, course_id, note_text) VALUES (
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="watch-lecture.php">Watch Lecture</a>
+                <a class="nav-link" href="watch-lecture.php">Course Lectures</a>
             </li>
-
         </ul>
-
         <ul class="nav navbar-nav navbar-right">
             <li><a href="../logout.php">Logout</a></li>
         </ul>
     </div>
 </nav>
+
 
 <h3 class="display-5 mb-4">My Notes</h3>
 <div class="dropdown " align=center>

@@ -23,21 +23,23 @@ $course_id = $_SESSION['course_id'];
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="course-market.php">Course Market</a>
+                <a class="nav-link" href="../student/course-market.php">Course Market <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="my-courses.php">My Courses</a>
+                <a class="nav-link" href="../student/my-courses.php">My Courses</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="course-page.php">Course Page</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="../student/add-money.php">Add Money</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="../student/myCertificates.php">My Certificates</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="../Q&A/myQuestions.php">My Questions</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="course-page.php">Course Page</a>
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
