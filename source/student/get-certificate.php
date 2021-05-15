@@ -68,63 +68,127 @@ if (!$assignment_result) {
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
-<body>  
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="../student/home.php">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="../student/course-market.php">Course Market <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../student/my-courses.php">My Courses</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../student/add-money.php">Add Money</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../Q&A/myQuestions.php">My Questions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="course-page.php">Course Page</a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../logout.php">Logout</a></li>
+        </ul>
+    </div>
+</nav>
 	<div class="container">
-		<button onclick="location.href='home.php'" style="margin-top: 50px;" class="text-center btn btn-primary">Back to Home</button>
-		<button onclick="location.href='../logout.php'" style="margin-top: 50px;" class="text-center btn btn-primary float-right">Logout</button>
-		<?php 
+        <button onclick="location.href='course-page.php'" style="margin-top: 50px;" class="text-center btn btn-primary">Back to Course Page</button>
 
-			if ($can_get_certificate) {
+        <?php
 
-				$text = "";
+            $sql_cer = "SELECT certificate_id FROM earns WHERE student_id = '$person_id' AND course_id = '$course_id'";
+            $exist = mysqli_query($link, $sql_cer);
 
-				$text .= "
-					<div class='card mt-4'>
-					<div class='card-header'>
-					   <h3>Congratulations</h3>
-					</div>
-					  <div class='card-body'>" ;
+            $sql_cc = "SELECT P.name, P.surname FROM person P, course C WHERE P.person_id = C.course_creator_id AND C.course_id = '$course_id'";
+            $result_cc = mysqli_query($link, $sql_cc);
+            $co = mysqli_num_rows($result_cc);
+            $cc = mysqli_fetch_array($result_cc);
 
-				$text .= "<p style='text-align: right'>" . date("Y/m/d") . "</p>";
+            $cc_name = $cc["name"] ." ". $cc['surname'];
+            $count = mysqli_num_rows($exist);
+            if($count){
+                $cert = mysqli_fetch_array($exist);
+                $c = $cert['certificate_id'];
+                $sql_cer = "SELECT c.date, c.text FROM certificate c WHERE c.certificate_id = '$c'";
+                $exist = mysqli_query($link, $sql_cer);
+                $cert = mysqli_fetch_array($exist);
+                $cert_text = $cert['text'];
+                $date = $cert['date'];
 
-				$text .= $name . " " . $surname . "
-				by completing all lectures and assignments of 
-				"; 
-				$text .= $course_name . ", you have right to earn this certificate.";
-				$text .= "<p class='mt-4'>Cemre Biltekin - CEO of Coursemy</p>";
+                echo "<div class='card mt-4'>
+                    <div class='card-header'>
+                       <h3>Congratulations</h3>
+                    </div>
+                      <div class='card-body'>
+                      <p style='text-align: right'> $date</p>
+                      $cert_text
+                      <p class = 'mt-4'>$cc_name - Course Teacher</p>
+                  <p class='mt-4'>Cemre Biltekin - CEO of Coursemy</p>";
 
-					  $text .= "</div>
-					</div>
-				";
+            }
+            else if ($can_get_certificate) {
 
-				echo $text;
 
-				$text = $name . " " . $surname . " Congratulations. " . $course_name . " " . date("Y/m/d");
- 
-				$sql = "INSERT INTO 	certificate(date, text)
-						VALUES (CURDATE(), '$text')";
+                //echo "<script>alert('$cc_name');</script>";
 
-				$result = mysqli_query($link, $sql);
+                $text = "";
 
-				if (!$result) {
-					echo $link->error;
-					die();
-				} else {
-					$id = mysqli_insert_id($link);
+                $text = $text . "
+                    <div class='card mt-4'>
+                    <div class='card-header'>
+                       <h3>Congratulations</h3>
+                    </div>
+                      <div class='card-body'>" ;
 
-					$sql = "INSERT INTO earns(student_id, course_id, certificate_id)
-							VALUES ('$person_id', '$course_id', '$id')";
+                $text .= "<p style='text-align: right'>" . date("Y/m/d") . "</p>";
 
-					if (!mysqli_query($link, $sql)) {
-						echo $link->error;
-						die();
-					}
-				}
-			}
-		 ?>
+                $text .= $name . " " . $surname . "
+                by completing all lectures and assignments of 
+                ";
+                $text .= $course_name . ", you have right to earn this certificate.";
+                $text .= "<p class = 'mt-4'>$cc_name - Course Teacher</p>";
+                $text .= "<p class='mt-4'>Cemre Biltekin - CEO of Coursemy</p>";
+
+                $text .= "</div>
+                    </div>
+                ";
+
+                echo $text;
+
+                $text = $name . " " . $surname . " by completing all lectures and assignments " . $course_name. ", you have right to earn this certificate.";
+
+                $sql = "INSERT INTO 	certificate(date, text)
+                        VALUES (CURDATE(), '$text')";
+
+                $result = mysqli_query($link, $sql);
+
+                if (!$result) {
+                    echo $link->error;
+                    die();
+                } else {
+
+                    $id = mysqli_insert_id($link);
+
+                    $sql = "INSERT INTO earns(student_id, course_id, certificate_id)
+                            VALUES ('$person_id', '$course_id', '$id')";
+
+                    if (!mysqli_query($link, $sql)) {
+                        echo $link->error;
+                        die();
+                    }
+                }
+            }
+
+        ?>
 	</div>
-		
+
 
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 	<script src='http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js'></script>
