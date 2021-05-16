@@ -39,17 +39,17 @@ $percentage = 0;
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="my-courses.php">My Courses</a>
+                    <a class="nav-link" href="my-courses.php">Your Courses</a>
                 </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="add-money.php">Add Money</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../student/myCertificates.php">My Certificates</a>
+                <a class="nav-link" href="../student/myCertificates.php">Your Certificates</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../Q&A/myQuestions.php">My Questions</a>
+                <a class="nav-link" href="../Q&A/myQuestions.php">Your Questions</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="course-page.php">Course Page</a>

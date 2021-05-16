@@ -38,16 +38,16 @@ $id_list = "#";
                 <a class="nav-link" href="../student/course-market.php">Course Market</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../student/my-courses.php">My Courses</a>
+                <a class="nav-link" href="../student/my-courses.php">Your Courses</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="../student/add-money.php">Add Money</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../student/myCertificates.php">My Certificates</a>
+                <a class="nav-link" href="../student/myCertificates.php">Your Certificates</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../Q&A/myQuestions.php">My Questions</a>
+                <a class="nav-link" href="../Q&A/myQuestions.php">Your Questions</a>
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -91,6 +91,7 @@ $id_list = "#";
 				<th scope='col'>Instructor Name</th>
 				<th scope='col'>Discount</th>
 				<th scope='col'></th>
+				<th scope='col'></th>
 				</thead>
 				<tbody>
 				";
@@ -122,7 +123,7 @@ $id_list = "#";
 
 
                     echo "</td>
-                        <td><button type='button' class='btn btn-success' data-toggle='modal' id = '$search' value='$search'>Drop</button>
+                        <td><button type='button' class='btn btn-danger' data-toggle='modal' id = '$search' value='$search'>Drop</button>
 </td>
 
 </tr>";

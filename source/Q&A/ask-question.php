@@ -66,7 +66,7 @@ if (isset($_POST['sendQuestion'])) {
                 <a class="nav-link" href="#">Course Market </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">My Courses</a>
+                <a class="nav-link" href="#">Your Courses</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="../student/add-money.php">Add Money</a>
@@ -75,7 +75,7 @@ if (isset($_POST['sendQuestion'])) {
                 <a class="nav-link" href="../student/myCertificates.php">My Certificates</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../Q&A/myQuestions.php">My Questions</a>
+                <a class="nav-link" href="../Q&A/myQuestions.php">Your Questions</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="../student/course-page.php">Course Page</a>
@@ -99,7 +99,7 @@ if (isset($_POST['sendQuestion'])) {
                 <button type="submit" name="sendQuestion" class="btn btn-success btn-md mt-4" role="button">Submit your question</button>
                 <a class="btn btn-success btn-md mt-4" href="q&aforcourse.php" role="button">Return Course Questions</a>
                 <a class="btn btn-success btn-md mt-4" href="../student/course-page.php" role="button">Return to the Course Page</a>
-                <a class="btn btn-success btn-md mt-4 float-right" href="../Q&A/myQuestions.php" role="button">Open My Questions</a>
+                <a class="btn btn-success btn-md mt-4 float-right" href="../Q&A/myQuestions.php" role="button">Open Your Questions</a>
 
             </p>
         </form>

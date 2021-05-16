@@ -27,13 +27,13 @@
                 <a class="nav-link" href="course-market.php">Course Market<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="my-courses.php">My Courses<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="my-courses.php">Your Courses<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="add-money.php">Add Money</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../Q&A/myQuestions.php">My Questions</a>
+                <a class="nav-link" href="../Q&A/myQuestions.php">Your Questions</a>
             </li>
             <li class="nav-item">
             <?php

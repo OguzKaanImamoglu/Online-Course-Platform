@@ -85,6 +85,7 @@ $id_list = "#";
 				<th scope='col'>Instructor Name</th>
 				<th scope='col'>Discount</th>
 				<th scope='col'></th>
+				<th scope='col'></th>
 				</thead>
 				<tbody>
 				";
@@ -116,7 +117,7 @@ $id_list = "#";
 
 
                     echo "</td>
-                        <td><button type='button' class='btn btn-success' data-toggle='modal' id = '$search' value='$search'>Drop</button>";
+                        <td><button type='button' class='btn btn-danger' data-toggle='modal' id = '$search' value='$search'>Drop</button>";
 					echo "</td></tr>";
 
 					array_push($courses_in_cart, $q_result["course_id"]);

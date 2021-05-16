@@ -44,7 +44,7 @@
 	<div class="container">
 		<div class="jumbotron mt-4">
 			<h1 class="display-4">Welcome Admin <?php echo "$name $surname"?></h1>
-			<p class="lead">You can check refund requests or offer discounts below.</p>
+			<p class="lead">You can check refund requests, offer discounts, see complaints and stats below.</p>
 			
 			<p class="lead mt-4">
 				<a class="btn btn-success btn-lg" href="refund-requests.php" role="button">Refund Requests</a>
