@@ -3,10 +3,12 @@ class SQL{
     public static void main(String args[]){
         try{
             Class.forName("com.mysql.jdbc.Driver");
-
+/*
             Connection con=DriverManager.getConnection(
                     "jdbc:mysql://dijkstra.cs.bilkent.edu.tr:3306/can_alpay","can.alpay","lY38nY8F");
-
+            */
+            Connection con=DriverManager.getConnection(
+                    "jdbc:mysql://127.0.0.1:3306/project353?characterEncoding=utf8","root","password");
             Statement stmt=con.createStatement();
             DatabaseMetaData meta = con.getMetaData();
             //Person Table
@@ -21,9 +23,14 @@ class SQL{
                         "password VARCHAR(32) NOT NULL, " +
                         "date_of_birth DATE DEFAULT NULL" +
                         ")ENGINE = INNODB;");
+
+                //USERNAME INDEX
+                stmt.executeUpdate("CREATE INDEX idx_username ON person(username)");
             }else{
                 System.out.println("PERSON EXIST");
             }
+
+
 
             // Student Table
             exist = meta.getTables(null, null, "student", null);
@@ -95,9 +102,15 @@ class SQL{
                         "CONSTRAINT check_course_price_validity CHECK (course_price >= 0),\n" +
                         "CONSTRAINT check_average_rating_validity CHECK (average_rating >= 0 AND average_rating <= 5),\n" +
                         ") ENGINE = INNODB;\n");
+
+                //course creator index
+                stmt.executeUpdate("CREATE INDEX idx_courses_course_creator_id ON course(course_creator_id)");
+
             }else{
                 System.out.println("course EXIST");
             }
+
+
 
             // enrolls Table
             exist = meta.getTables(null, null, "enrolls", null);
@@ -262,6 +275,10 @@ class SQL{
                         "\tON DELETE CASCADE\n" +
                         "\tON UPDATE RESTRICT\n" +
                         ") ENGINE = INNODB;\n");
+
+                //courses_id index
+                stmt.executeUpdate("CREATE INDEX idx_ann_course_id ON announcement(course_id)");
+
             }else{
                 System.out.println("announcement EXIST");
             }
