@@ -118,6 +118,7 @@ $course_id = $_SESSION['course_id'];
 
 <script>
     let total_id = "#<?php Print( $f_id); ?>";
+    let pr = "<?php print($_SESSION['float']);?>";
 
     $("#submit").click(function(e) {
         text = document.getElementById("comment").value;

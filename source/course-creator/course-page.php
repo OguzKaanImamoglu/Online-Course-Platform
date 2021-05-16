@@ -2,9 +2,7 @@
 session_start();
 include('../sign-up/database.php');
 
-$selected_course_id = $_GET['course_id'];
-
-$_SESSION["course_id"] = $selected_course_id;
+$selected_course_id = $_SESSION['course_id'];
 
 $sql = "SELECT 	C.course_name, C.course_price, C.create_date, C.language,
 C.course_description, C.average_rating, P.name, P.surname
@@ -47,16 +45,15 @@ if (!$result = mysqli_query($link,$sql)) {
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item">
-					<a class="nav-link" href="discount-offers.php">Discount Offers<span class="sr-only">(current)</span></a>
+					<a class="nav-link" href="discount-offers.php">Discount Offers</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="publish-course.php">Publish New Course</a>
 				</li>
-				<li class="nav-item">
-            	<?php
-                	echo "<a href='course-page.php?course_id=$selected_course_id' class='nav-link'>Course Page</a>";
-            	?>
-            	</li>
+                <li class="nav-item">
+                    <a class="nav-link" href="course-page.php">Course Page</a>
+                </li>
+
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="../logout.php">Logout</a></li>
@@ -145,7 +142,7 @@ if (!$result = mysqli_query($link,$sql)) {
 					}
 				}
 
-				echo '<a href="assignments.php?cid=' . $selected_course_id . '" class="btn btn-success mt-2">View Assignments</a>';
+				echo '<a href="assignments.php" class="btn btn-success mt-2">View Assignments</a>';
 			 ?>
 
 			<button type="button" onclick= "location.href = '../Q&A/course_creator_view_Questions.php'" class="btn btn-success mt-2 float-right">Q&A Page</button>

@@ -6,7 +6,7 @@
 
     //Get assignment id
     $aid = $_GET['aid'];
-    $cid = $_GET['cid'];
+    $cid = $_SESSION['course_id'];
     $index = $_GET['index'];
  ?>
 
@@ -33,12 +33,12 @@
 			</li>
             <li class="nav-item">
             <?php
-                echo "<a href='course-page.php?course_id=$cid' class='nav-link'>Course Page</a>";
+                echo "<a href='course-page.php' class='nav-link'>Course Page</a>";
             ?>
             </li>
             <li class="nav-item">
             <?php
-                echo "<a href='assignments.php?cid=$cid' class='nav-link'>Assignments</a>";
+                echo "<a href='assignments.php' class='nav-link'>Assignments</a>";
             ?>
             </li>
             <li class="nav-item">

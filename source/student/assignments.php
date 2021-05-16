@@ -34,14 +34,10 @@
                 <a class="nav-link" href="../Q&A/myQuestions.php">My Questions</a>
             </li>
             <li class="nav-item">
-            <?php
-                echo "<a href='course-page.php?cid=$cid' class='nav-link'>Course Page</a>";
-            ?>
+                <a href='course-page.php' class='nav-link'>Course Page</a>
             </li>
             <li class="nav-item">
-            <?php
-                echo "<a href='assignments.php?cid=$cid' class='nav-link'>Assignments</a>";
-            ?>
+                <a href='assignments.php' class='nav-link'>Assignments</a>
             </li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
