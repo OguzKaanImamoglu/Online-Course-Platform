@@ -9,6 +9,8 @@ $sql = "SELECT certificate_id, course_id FROM earns WHERE student_id = '$person_
 
 $result = mysqli_query($link, $sql);
 
+$total_id = "#";
+
 ?>
 
 
@@ -85,11 +87,19 @@ $result = mysqli_query($link, $sql);
                     $result3 = mysqli_query($link, $sql_date_name);
                     $r = mysqli_fetch_array($result3);
                     $course_name = $r['course_name'];
+
+                    if($total_id == "#")     $total_id = $total_id . $course_search;
+                    else        $total_id = $total_id . ",#" . $course_search;
+                    echo
+                    "<script>
+                    alert($total_id);
+                    </script>";
+
                     echo '<tr>';
                     echo '<td>' . $course_name . '</td>';
                     echo '<td>' . $date. '</td>';
                     echo '<td>'.
-"<button onclick=\"location.href=" . "'get-certificate.php'\" class='btn btn-primary'>View Certificate</button>".
+"<button  class='btn btn-primary' id = '$course_search' value = '$course_search'>View Certificate</button>".
 "</td></tr>";
                     $i = $i+1;
                 }
@@ -103,11 +113,39 @@ $result = mysqli_query($link, $sql);
         <br></br>
         <a class="btn btn-success btn-lg" href="../student/home.php" role="button">Return Home</a>
 
+
+
+
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.1/jquery.min.js"></script>
+
+
+<script>
+    var change_id = "<?php Print( $total_id); ?>";
+        $(change_id).click(function(e){
+$changed = $(this).val();
+//alert($(this).val());
+$.ajax({
+type:"POST",
+url:"saveCourseid.php",
+data:{course_id: $changed},
+
+success: function(result){
+//alert('Rejected');
+window.location.replace("get-certificate.php");
+},
+error: function(result) {
+alert("Certificate Error");
+}
+});
+});
+</script>
+
+
 </body>
 </html>
 
