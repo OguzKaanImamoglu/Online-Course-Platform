@@ -8,6 +8,8 @@ $person_id = $_SESSION['person_id'];
 $course_id = $_SESSION['course_id'];
 
 $f_id = "";
+//$aa  = $_SESSION['float'] ;
+//echo "<script>alert($aa);</script>";
 
 ?>
 
@@ -74,7 +76,6 @@ $f_id = "";
                     if(!$result){
                         echo "SQL ERROR" . $link->error;
                     }else {
-                        $m = $_SESSION['float'];
                         echo "<label for='rating'>Your Rating </label>
                     <input type='number' class='form-control' id='rating' name='rating' min='0' max='5' value='$rating' required='required'>
                     <p>Your Comment</p>
@@ -84,7 +85,7 @@ $f_id = "";
                 <button class='btn btn-success btn-mg mt-4 middle'  id='update' name='update'>Send Your Feedback</button></div></p>";
                     }
                     ?>
-                    <button class='btn btn-success btn-mg' onclick="location.href = 'course-page.php'" role='button'>Return to the Course Page</button>
+                    <button type='button' class='btn btn-success btn-mg' onclick="location.href = 'course-page.php'" role='button'>Return to the Course Page</button>
                         </p>
             </div>
         </form>

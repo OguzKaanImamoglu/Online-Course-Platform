@@ -4,7 +4,7 @@ include('../sign-up/database.php');
 
 $person_id = $_SESSION['person_id'];
 $course_id = $_SESSION['course_id'];
-
+$f_id = "";
 ?>
 
 <!DOCTYPE html>
@@ -49,66 +49,66 @@ $course_id = $_SESSION['course_id'];
 </nav>
 
 <div class="container">
-    <div class="jumbotron mt-4">
+    <form class="jumbotron mt-4">
         <p action="" method="post">
-            <h2 class="display-4">Your Comments Matter</h2>
-            <hr class="my-4">
-            <p class="lead">
-                <i class="" aria-hidden="true"></i>
-            <div class="form-group"><div>
-                    <?php
-                        $html = "";
-                        $sql = "SELECT feedback_id FROM student_feedbacks WHERE student_id = '$person_id' AND course_id = '$course_id'";
+        <h2 class="display-4">Your Comments Matter</h2>
+        <hr class="my-4">
+        <p class="lead">
+            <i class="" aria-hidden="true"></i>
+        <div class="form-group"><div>
+                <?php
+                $html = "";
+                $sql = "SELECT feedback_id FROM student_feedbacks WHERE student_id = '$person_id' AND course_id = '$course_id'";
 
-                        $result = mysqli_query($link, $sql);
-                        if(!$result){
-                            echo "SQL ERROR";
-                        }else{
-                            $count = mysqli_num_rows($result);
+                $result = mysqli_query($link, $sql);
+                if(!$result){
+                    echo "SQL ERROR";
+                }else{
+                    $count = mysqli_num_rows($result);
 
-                            if($count == 0){
-                                $field = "$". "_SESSION['comment']";
+                    if($count == 0){
+                        $field = "$". "_SESSION['comment']";
 
-                                echo"<label for='rating'>Your Rating</label>
+                        echo"<label for='rating'>Your Rating</label>
                     <input type='number' class='form-control' id='rating' name='rating' min='0' max='5'  required='required'>
                     <p>Your Comment</p>
             <textarea id='comment' name='comment' rows='6' cols='100'></textarea>
             <p>
                <div class='text-center'>
-                <button type='button' class='btn btn-success btn-md mt-4 middle'  id='submit' name='submit' value='submit' role='button'>Send Your Feedback</button></div></p>";
-
-                            }
-                            else{
-                                $row = mysqli_fetch_array($result);
-                                $f_id = $row['feedback_id'];
+             
+                        <button type='button' class='btn btn-success btn-md mt-4 middle'  id='submit' name='submit' value='submit' role='button'>Send Your Feedback</button></div></p>";
 
 
-                                $sql = "SELECT feedback_note, rating FROM feedback WHERE feedback_id = '$f_id'";
+                    }
+                    else{
+                        $row = mysqli_fetch_array($result);
+                        $f_id = $row['feedback_id'];
 
-                                $result = mysqli_query($link,$sql);
-                                if(!$result){
-                                    echo "Error occurred";
-                                }
-                                $row = mysqli_fetch_array($result);
 
-                                $rating = $row['rating'];
-                                $f_text = $row['feedback_note'];
-                                echo "<label>Your Rating: $rating</label>
+                        $sql = "SELECT feedback_note, rating FROM feedback WHERE feedback_id = '$f_id'";
+
+                        $result = mysqli_query($link,$sql);
+                        if(!$result){
+                            echo "Error occurred";
+                        }
+                        $row = mysqli_fetch_array($result);
+
+                        $rating = $row['rating'];
+                        $f_text = $row['feedback_note'];
+                        echo "<label>Your Rating: $rating</label>
                                    <p>Your Comment</p><p>$f_text</p><p>
 <div class='text-center'>
                 <button type='button' class='btn btn-success btn-md mt-4'  id='$f_id' name='$f_id' value='$f_id' role='button'>Change Your Feedback</button></div>
                             
             </p>";
-                            }
-                        }
-                        ?>
-                    <button type="submit" class='btn btn-success btn-mg' onclick="location.href = 'course-page.php'">Return to the Course Page</button>
-                </div></div></p>
-            </form>
-            </div>
-            </p>
-        </form>
-    </div>
+                    }
+                }
+                ?>
+                <button type="button" class='btn btn-success btn-mg' onclick="location.href = 'course-page.php'">Return to the Course Page</button>
+            </div></div></p>
+        </hr>
+    </form>
+</div>
 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -118,8 +118,6 @@ $course_id = $_SESSION['course_id'];
 
 <script>
     let total_id = "#<?php Print( $f_id); ?>";
-    let pr = "<?php print($_SESSION['float']);?>";
-
     $("#submit").click(function(e) {
         text = document.getElementById("comment").value;
         rate = document.getElementById("rating").value;
@@ -142,6 +140,8 @@ $course_id = $_SESSION['course_id'];
             }
         });
     });
+
+
 
     $(total_id).click(function(e) {
         $id = $(this).val();
@@ -169,4 +169,3 @@ $course_id = $_SESSION['course_id'];
 
 </body>
 </html>
-

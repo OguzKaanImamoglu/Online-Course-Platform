@@ -28,7 +28,7 @@ if(isset($_POST['feedback_note']) && isset($_POST['rating'])){
 
     $result = mysqli_query($link, $sql);
 
-    if(!result){
+    if(!$result){
         echo "ERROR " . $link->error;
     }else{
         $count = mysqli_num_rows($result);
@@ -40,8 +40,10 @@ if(isset($_POST['feedback_note']) && isset($_POST['rating'])){
                 $total += $q_result['rating'];
             }
             $rate = $total / (float) $count;
-            $_SESSION['float'] = $rate;
+
             $sql = "UPDATE course SET average_rating = '$rate' WHERE course_id = '$course_id'";
+            $result = mysqli_query($link, $sql);
+
         }
     }
 }
