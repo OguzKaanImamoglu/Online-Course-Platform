@@ -44,7 +44,7 @@
 
     <div class="container">
         <?php 
-            $sql = "SELECT * FROM complaint C, student_complaints SC, person P, course Co WHERE 
+            $sql = "SELECT * FROM complaint_view WHERE 
                 C.complaint_id=SC.complaint_id AND P.person_id=SC.student_id AND
                 SC.course_id=Co.course_id
             ";
