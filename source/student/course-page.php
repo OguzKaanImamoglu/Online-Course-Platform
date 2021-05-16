@@ -35,7 +35,7 @@ $percentage = 0;
                 if (!mysqli_query($link, $sql)) {
                     echo '<script>alert("INSERT INTO refund_requests failed.");</script>';
                 }
-                echo '<script>alert("Refund request is successfull");</script>';
+
         }
 ?>
 

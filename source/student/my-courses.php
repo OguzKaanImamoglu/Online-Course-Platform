@@ -72,7 +72,7 @@ $course_ids = "#";
                 echo /** @lang text */
                 "<table class='table'>
 							<thead>
-							<th scope='col'>Course Id</th>
+						
 							<th scope='col'>Course Name</th>
 							<th scope='col'>Instructor Name</th>
                             <th scope='col'>Progress</th>
@@ -82,8 +82,7 @@ $course_ids = "#";
 							";
 
                 while ($q_result = mysqli_fetch_array($result)) {
-                    echo "<tr><th scope='row'>" . $q_result["course_id"] .
-                        "</th><td>" . $q_result["course_name"] .
+                    echo "<tr><td>" . $q_result["course_name"] .
                         "</td><td>" . $q_result["name"]. " " . $q_result["surname"];
 
 

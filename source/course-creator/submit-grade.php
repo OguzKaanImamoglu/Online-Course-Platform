@@ -24,7 +24,7 @@
 		echo '<script>alert("Grading failed.");</script>';
 	}
 	else {
-		echo '<script>alert("Grading is successful.");';
+		echo '<script>';
 		echo 'document.location = "see-subs.php?cid=' . $cid . '&aid=' . $aid . '&index=' . $index .'";</script>';
 	}
     mysqli_close($link);

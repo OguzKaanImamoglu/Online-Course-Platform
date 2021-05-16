@@ -35,7 +35,7 @@ $id_list = "#";
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item">
-					<a class="nav-link active" href="course-market.php">Course Market</a>
+					<a class="nav-link" href="course-market.php">Course Market</a>
 				</li>
                 <li class="nav-item">
                     <a class="nav-link" href="Notifications.php">Notifications</a>
@@ -46,6 +46,9 @@ $id_list = "#";
 				<li class="nav-item">
 					<a class="nav-link" href="add-money.php">Add Money</a>
 				</li>
+                <li class="nav-item">
+                    <a class="nav-link" href="myCertificates.php">My Certificates</a>
+                </li>
 				<li class="nav-item">
                     <a class="nav-link" href="../Q&A/myQuestions.php">My Questions</a>
                 </li>
@@ -56,6 +59,7 @@ $id_list = "#";
 	<h1 class="text-center mt-4 mb-4">My Wishlist</h1>
 
 	<div class="container">
+        <div class="jumbotron mt-4">
 		<?php 
 		$sql = "SELECT C.course_id, C.course_name, C.course_price, C.average_rating,
 		P.name, P.surname, D.percentage,
@@ -147,7 +151,7 @@ $id_list = "#";
 			echo "<p>Wallet: " . $wallet . "</p>";
 		}
 		?>
-
+        </div>
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

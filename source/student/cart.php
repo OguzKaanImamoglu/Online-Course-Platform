@@ -62,6 +62,7 @@ $id_list = "#";
 	<h1 class="text-center mt-4 mb-4">My Cart</h1>
 
 	<div class="container">
+        <div class="jumbotron mt-4">
 		<?php 
 		$sql = "SELECT C.course_id, C.course_name, C.course_price, C.average_rating,
 		P.name, P.surname, D.percentage,
@@ -152,10 +153,10 @@ $id_list = "#";
 
 			
 			$_SESSION["courses_in_cart"] = $courses_in_cart;
-			echo "Wallet: " . $wallet;
+			echo "<p>Wallet: " . $wallet."</p>";
 		}
 		?>
-
+        </div>
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

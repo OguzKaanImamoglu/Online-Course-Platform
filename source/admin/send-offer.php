@@ -29,7 +29,7 @@
 		echo '<script>alert("Discount insertion failed.");</script>';
 	}
 	else {
-		echo '<script>alert("Discount insertion is successful.");';
+		echo '<script>';
 		echo 'document.location = "discount-courses.php";</script>';
 	}
     mysqli_close($link);

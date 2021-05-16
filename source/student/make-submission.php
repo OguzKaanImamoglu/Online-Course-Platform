@@ -24,7 +24,7 @@
 		echo '<script>alert("Submission failed.");</script>';
 	}
 	else {
-		echo '<script>alert("Submission is successful.");';
+		echo '<script>';
 		echo 'document.location = "see-attempts.php?cid=' . $cid . '&aid=' . $aid . '&index=' . $index .'";</script>';
 	}
     mysqli_close($link);
