@@ -87,8 +87,157 @@ if (isset($_POST['publish'])) {
 	</nav>
 	<h1 class="display-4 text-center mt-4 mb-4">New Course</h1>
 	<div class="container">
-		<form method="post">
+        <?php
+        class Lecture
+        {
+            public $lecture_name;
+            public $lecture_duration;
+            public $lecture_description;
+        }
+
+        if (isset($_POST['publish-lecture'])) {
+            $lecture = new Lecture();
+
+            $lecture->lecture_name = $_POST['lecture-name'];
+
+            $duration = "0" . $_POST['lecture-duration-hour'] . ":";
+
+            if ($_POST["lecture-duration-minutes"] < 10) {
+                $duration = $duration . "0" . $_POST["lecture-duration-minutes"];
+            } else {
+                $duration = $duration . $_POST["lecture-duration-minutes"];
+            }
+
+            $duration .= ":";
+
+            if ($_POST["lecture-duration-seconds"] < 10) {
+                $duration = $duration . "0" . $_POST["lecture-duration-seconds"];
+            } else {
+                $duration = $duration . $_POST["lecture-duration-seconds"];
+            }
+
+
+
+            $lecture->lecture_duration = $duration;
+            $lecture->lecture_description = $_POST['lecture-description'];
+
+            array_push($_SESSION['lecture_array'], $lecture);
+        }
+        ?>
+
+        <p class="font-weight-bold mt-4 text-center">Lectures</p>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Lecture Name</th>
+                <th>Description</th>
+                <th>Duration</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+
+                <?php
+
+                for ($i = 0; $i < count($_SESSION['lecture_array']); $i++) {
+                    echo '<tr>';
+                    echo '<td>' . $_SESSION['lecture_array'][$i]->lecture_name . '</td>';
+                    echo '<td>' . $_SESSION['lecture_array'][$i]->lecture_description . '</td>';
+                    echo '<td>' . $_SESSION['lecture_array'][$i]->lecture_duration . '</td>';
+                    echo '</tr>';
+                }
+                ?>
+            </tr>
+            </tbody>
+        </table>
+
+
+        <form method="post">
+            <p class="font-weight-bold">Add Lecture(s)</p>
+            <div class="form-group">
+                <label for="formGroupExampleInput">Lecture Name</label>
+                <input type="text" class="form-control" id="lecture-name" name="lecture-name" placeholder="Enter Lecture Name" maxlength="64">
+            </div>
+
+            <div class="row g-2">
+                <div class="col-md">
+                    <div class="form-floating">
+                        <label for="price">Lecture Duration Hour:</label>
+                        <input type="number" class="form-control" id="lecture-duration-hour" name="lecture-duration-hour" min="0" max="1" value="0">
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-floating">
+                        <label for="price">Lecture Duration Minutes:</label>
+                        <input type="number" class="form-control" id="lecture-duration-minutes" name="lecture-duration-minutes" min="0" max="59" value="0">
+                    </div>
+                </div>
+                <div class="col-md">
+                    <label for="price">Lecture Duration Seconds:</label>
+                    <input type="number" class="form-control" id="lecture-duration-seconds" name="lecture-duration-seconds" min="0" max="59" value="0">
+                </div>
+            </div>
+            <div class="form-group mt-4">
+                <label for="description">Lecture Description</label>
+                <textarea class="form-control" id="lecture-description" name="lecture-description" rows="3" placeholder="Enter Lecture Description" maxlength="360"></textarea>
+            </div>
+            <button type="submit" name="publish-lecture" id="publish-lecture" class="btn btn-success">Add Lecture</button>
+        </form>
+
+        <?php
+        class Assignment
+        {
+            public $assignment_question;
+            public $assignment_threshold;
+        }
+
+        if (isset($_POST['publish-assignment'])) {
+            $assignment = new Assignment();
+
+            $assignment->assignment_question = $_POST['assignment_question'];
+            $assignment->assignment_threshold = $_POST['assignment_threshold'];
+
+            array_push($_SESSION['assignment_array'], $assignment);
+        }
+        ?>
+
+        <p class="font-weight-bold mt-4 text-center">Assignments</p>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Assignment Question</th>
+                <th>Threshold</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <?php
+                for ($i = 0; $i < count($_SESSION['assignment_array']); $i++) {
+                    echo '<tr>';
+                    echo '<td>' . $_SESSION['assignment_array'][$i]->assignment_question . '</td>';
+                    echo '<td>' . $_SESSION['assignment_array'][$i]->assignment_threshold . '</td>';
+                    echo '</tr>';
+                }
+                ?>
+            </tr>
+            </tbody>
+        </table>
+        <form method="post">
+            <p class="font-weight-bold">Add Assignment(s)</p>
+            <div class="form-group">
+                <label for="formGroupExampleInput">Assignment Question</label>
+                <input type="text" class="form-control" id="assignment_question" name="assignment_question" placeholder="Enter Assignment Question" maxlength="100">
+            </div>
+            <div class="form-group">
+                <label for="price">Assignment Threshold</label>
+                <input type="number" class="form-control" id="assignment_threshold" name="assignment_threshold" min="0" max="100" value="0">
+            </div>
+            <button type="submit" name="publish-assignment" id="publish-assignment" class="btn btn-success">Add Assignment</button>
+        </form>
+
+        <form method="post">
 			<div class="form-group">
+                <p class="font-weight-bold mt-4 text-center">Course Info</p>
 				<label for="formGroupExampleInput">Course Name</label>
 				<input type="text" class="form-control" id="course-name" name="course-name" placeholder="Enter Course Name" required="required" maxlength="60">
 			</div>
@@ -143,153 +292,6 @@ if (isset($_POST['publish'])) {
 
 		</form>
 
-		<?php 
-		class Lecture
-		{
-			public $lecture_name;
-			public $lecture_duration;
-			public $lecture_description;
-		}
-
-		if (isset($_POST['publish-lecture'])) {
-			$lecture = new Lecture();
-
-			$lecture->lecture_name = $_POST['lecture-name'];
-
-			$duration = "0" . $_POST['lecture-duration-hour'] . ":";
-
-			if ($_POST["lecture-duration-minutes"] < 10) {
-				$duration = $duration . "0" . $_POST["lecture-duration-minutes"];
-			} else {
-				$duration = $duration . $_POST["lecture-duration-minutes"];
-			}
-
-			$duration .= ":";
-
-			if ($_POST["lecture-duration-seconds"] < 10) {
-				$duration = $duration . "0" . $_POST["lecture-duration-seconds"];
-			} else {
-				$duration = $duration . $_POST["lecture-duration-seconds"];
-			}
-
-			echo $duration;
-
-			$lecture->lecture_duration = $duration;
-			$lecture->lecture_description = $_POST['lecture-description'];
-
-			array_push($_SESSION['lecture_array'], $lecture);
-		}
-		?>
-
-		<p class="font-weight-bold mt-4 text-center">Lectures</p>
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Lecture Name</th>
-					<th>Description</th>
-					<th>Duration</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-
-					<?php 
-
-					for ($i = 0; $i < count($_SESSION['lecture_array']); $i++) {
-						echo '<tr>';
-						echo '<td>' . $_SESSION['lecture_array'][$i]->lecture_name . '</td>';
-						echo '<td>' . $_SESSION['lecture_array'][$i]->lecture_description . '</td>';
-						echo '<td>' . $_SESSION['lecture_array'][$i]->lecture_duration . '</td>';
-						echo '</tr>';
-					}
-					?>
-				</tr>
-			</tbody>
-		</table>
-
-
-		<form method="post">
-			<p class="font-weight-bold">Add Lecture(s)</p>
-			<div class="form-group">
-				<label for="formGroupExampleInput">Lecture Name</label>
-				<input type="text" class="form-control" id="lecture-name" name="lecture-name" placeholder="Enter Lecture Name" maxlength="64">
-			</div>
-
-			<div class="row g-2">
-				<div class="col-md">
-					<div class="form-floating">
-						<label for="price">Lecture Duration Hour:</label>
-						<input type="number" class="form-control" id="lecture-duration-hour" name="lecture-duration-hour" min="0" max="1" value="0">
-					</div>
-				</div>
-				<div class="col-md">
-					<div class="form-floating">
-						<label for="price">Lecture Duration Minutes:</label>
-				<input type="number" class="form-control" id="lecture-duration-minutes" name="lecture-duration-minutes" min="0" max="59" value="0">
-					</div>
-				</div>
-				<div class="col-md">
-					<label for="price">Lecture Duration Seconds:</label>
-					<input type="number" class="form-control" id="lecture-duration-seconds" name="lecture-duration-seconds" min="0" max="59" value="0">
-				</div>
-			</div>
-			<div class="form-group mt-4">
-				<label for="description">Lecture Description</label>
-				<textarea class="form-control" id="lecture-description" name="lecture-description" rows="3" placeholder="Enter Lecture Description" maxlength="360"></textarea>
-			</div>
-			<button type="submit" name="publish-lecture" id="publish-lecture" class="btn btn-success">Add Lecture</button>
-		</form>
-
-		<?php 
-		class Assignment
-		{
-			public $assignment_question;
-			public $assignment_threshold;
-		}
-
-		if (isset($_POST['publish-assignment'])) {
-			$assignment = new Assignment();
-
-			$assignment->assignment_question = $_POST['assignment_question'];
-			$assignment->assignment_threshold = $_POST['assignment_threshold'];
-
-			array_push($_SESSION['assignment_array'], $assignment);
-		}
-		?>
-
-		<p class="font-weight-bold mt-4 text-center">Assignments</p>
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Assignment Question</th>
-					<th>Threshold</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<?php 
-					for ($i = 0; $i < count($_SESSION['assignment_array']); $i++) {
-						echo '<tr>';
-						echo '<td>' . $_SESSION['assignment_array'][$i]->assignment_question . '</td>';
-						echo '<td>' . $_SESSION['assignment_array'][$i]->assignment_threshold . '</td>';
-						echo '</tr>';
-					}
-					?>
-				</tr>
-			</tbody>
-		</table>
-		<form method="post">
-			<p class="font-weight-bold">Add Assignment(s)</p>
-			<div class="form-group">
-				<label for="formGroupExampleInput">Assignment Question</label>
-				<input type="text" class="form-control" id="assignment_question" name="assignment_question" placeholder="Enter Assignment Question" maxlength="100">
-			</div>
-			<div class="form-group">
-				<label for="price">Assignment Threshold</label>
-				<input type="number" class="form-control" id="assignment_threshold" name="assignment_threshold" min="0" max="100" value="0">
-			</div>
-			<button type="submit" name="publish-assignment" id="publish-assignment" class="btn btn-success">Add Assignment</button>
-		</form>
 
 
 		<div style="height: 100px"></div>

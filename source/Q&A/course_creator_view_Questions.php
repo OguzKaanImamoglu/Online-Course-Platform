@@ -21,7 +21,7 @@ $result = mysqli_query($link,$sql2);
 
 $count = mysqli_num_rows($result);
 
-$val = $_REQUEST['request'];
+
 
 /*
 if($count > 0){
@@ -182,7 +182,7 @@ $update = "#";
         ?>
         <br></br>
         <!--<a class="btn btn-success btn-lg" href="publish-course.php" role="button">Return to the Course Page</a>-->
-        <a class="btn btn-success btn-lg ml-4" href="#" role="button">Return Course</a>
+        <a class="btn btn-success btn-lg ml-4" href="../course-creator/course-page.php" role="button">Return Course</a>
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

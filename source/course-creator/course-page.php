@@ -4,7 +4,7 @@ include('../sign-up/database.php');
 
 $selected_course_id = $_GET['course_id'];
 
-$_SESSION["selected_course_id"] = $selected_course_id;
+$_SESSION["course_id"] = $selected_course_id;
 
 $sql = "SELECT 	C.course_name, C.course_price, C.create_date, C.language,
 C.course_description, C.average_rating, P.name, P.surname
@@ -148,7 +148,7 @@ if (!$result = mysqli_query($link,$sql)) {
 				echo '<a href="assignments.php?cid=' . $selected_course_id . '" class="btn btn-success mt-2">View Assignments</a>';
 			 ?>
 
-			<button type="button" class="btn btn-success mt-2 float-right">Q&A Page</button>
+			<button type="button" onclick= "location.href = '../Q&A/course_creator_view_Questions.php'" class="btn btn-success mt-2 float-right">Q&A Page</button>
 
 		</div>
 		<div class="col-md-3" style="padding-right: 50px;">
