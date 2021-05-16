@@ -161,7 +161,53 @@ if (!$result = mysqli_query($link,$sql)) {
 	<div class="row">
 
 	</div>
-	
+    <div class="row" style="margin-top: 40px;">
+        <div class="col-md-8 mx-auto">
+            <h3 style="text-align: center">Comments</h3>
+        </div>
+    </div>
+
+
+    <div class="row text-center" style="margin-top: 20px;">
+        <div class="col-md-8 mx-auto" style="background-color: #dadada;">
+            <?php
+            $sql = "SELECT	P.name, P.surname, F.feedback_note, F.rating
+				FROM	student_feedbacks SF, feedback F, person P
+				WHERE	SF.student_id=P.person_id AND
+				SF.course_id='$selected_course_id' AND
+				SF.feedback_id=F.feedback_id";
+
+            if (!$result = mysqli_query($link,$sql)) {
+
+            } else {
+
+                $count = mysqli_num_rows($result);
+
+                if (!$count) {
+                    echo "There is no comment in this course.";
+                } else {
+
+                    echo "<table class='table'>
+                                    <thead>
+                                    <th scope='col'>Name Surname</th>
+                                    <th scope='col'>Comment</th>
+                                    <th scope='col'>Rate/5</th>                                    
+                                    </thead>
+                            <tbody>";
+
+                    while($q_result = mysqli_fetch_array($result)){
+                        $name = $q_result['name'] . " " . $q_result['surname'];
+                        $comment = $q_result['feedback_note'];
+                        $rate = $q_result['rating'];
+                        echo "<tr><td>$name</td><td>$comment</td><td>$rate</td></tr>";
+                    }
+                    echo "</tbody>";
+                    echo "</table>";
+                }
+            }
+            ?>
+        </div>
+    </div>
 
 
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

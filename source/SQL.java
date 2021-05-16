@@ -3,12 +3,10 @@ class SQL{
     public static void main(String args[]){
         try{
             Class.forName("com.mysql.jdbc.Driver");
-/*
+
             Connection con=DriverManager.getConnection(
                     "jdbc:mysql://dijkstra.cs.bilkent.edu.tr:3306/can_alpay","can.alpay","lY38nY8F");
-            */
-            Connection con=DriverManager.getConnection(
-                    "jdbc:mysql://127.0.0.1:3306/project353?characterEncoding=utf8","root","password");
+
             Statement stmt=con.createStatement();
             DatabaseMetaData meta = con.getMetaData();
             //Person Table
@@ -472,7 +470,7 @@ class SQL{
                 stmt.executeUpdate("\n" +
                         "CREATE TRIGGER update_rating4 AFTER UPDATE ON feedback FOR EACH ROW\n" +
                         "  BEGIN\n" +
-                        "  SET @cc_id = (SELECT DISTINCT course_creator_id FROM course C, student_feedbacks sf WHERE (c.course_id = sf.course_id AND NEW.feedback_id = sf.feedback_id));\n" +
+                        "  SET @cc_id = (SELECT DISTINCT C.course_creator_id FROM course C, student_feedbacks sf WHERE (C.course_id = sf.course_id AND NEW.feedback_id = sf.feedback_id));\n" +
                         "  SET @COUNT=(SELECT COUNT(*) FROM course WHERE (course_creator_id=@cc_id));\n" +
                         "  SET @SUM = (SELECT SUM(average_rating) FROM course WHERE (course_creator_id = @cc_id));\n" +
                         "  IF @COUNT=0 THEN\n" +
