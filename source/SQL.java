@@ -398,6 +398,38 @@ class SQL{
                         "\tFOREIGN KEY (feedback_id) references feedback(feedback_id)\n" +
                         "\t\t\t\tON UPDATE RESTRICT\n" +
                         ") ENGINE = INNODB;\n");
+
+
+                stmt.executeUpdate("\n" +
+                        "CREATE TRIGGER update_rating AFTER INSERT ON student_feedbacks FOR EACH ROW\n" +
+                        "  BEGIN\n" +
+                        "  SET @COUNT=(SELECT COUNT(*) FROM student_feedbacks WHERE (course_id=NEW.course_id));\n" +
+                        "  SET @SUM = (SELECT SUM(f.rating) FROM feedback f, student_feedbacks sf WHERE (f.feedback_id = sf.feedback_id AND sf.course_id = NEW.course_id));\n" +
+                        "  IF @COUNT=0 THEN\n" +
+                        "  UPDATE course SET average_rating = 0 WHERE course_id = NEW.course_id;\n" +
+                        "  ELSE\n" +
+                        "  UPDATE course SET average_rating = (@SUM * 1.0)/(@COUNT * 1.0) WHERE course_id = NEW.course_id;\n" +
+                        "  END IF;\n" +
+                        "  END;\n" +
+                        "  \n" +
+                        "  \n");
+
+                stmt.executeUpdate("\n" +
+                        "CREATE TRIGGER update_rating2 AFTER UPDATE ON feedback FOR EACH ROW\n" +
+                        "  BEGIN\n" +
+                        "  SET @c_id = (SELECT course_id FROM student_feedbacks WHERE feedback_id = NEW.feedback_id);\n"+
+                        "  SET @COUNT=(SELECT COUNT(*) FROM student_feedbacks WHERE (course_id=@c_id));\n" +
+                        "  SET @SUM = (SELECT SUM(f.rating) FROM feedback f, student_feedbacks sf WHERE (f.feedback_id = sf.feedback_id AND sf.course_id = @c_id));\n" +
+                        "  IF @COUNT=0 THEN\n" +
+                        "  UPDATE course SET average_rating = 0 WHERE course_id = @c_id;\n" +
+                        "  ELSE\n" +
+                        "  UPDATE course SET average_rating = (@SUM * 1.0)/(@COUNT * 1.0) WHERE course_id = @c_id;\n" +
+                        "  END IF;\n" +
+                        "  END;\n" +
+                        "  \n" +
+                        "  \n");
+
+
             }else{
                 System.out.println("student_feedbacks EXIST");
             }
@@ -480,6 +512,7 @@ class SQL{
             }else{
                 System.out.println("answers EXIST");
             }
+
 
             con.close();
         }catch(Exception e){ System.out.println(e);}
