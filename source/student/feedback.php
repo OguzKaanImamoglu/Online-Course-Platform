@@ -132,7 +132,7 @@ $f_id = "";
                 rating: rate
             },
             success: function (result) {
-                alert('Successfully send your feedback!');
+                alert('Successfully send the feedback!');
                 location.reload();
             },
             error: function (result) {
@@ -169,3 +169,4 @@ $f_id = "";
 
 </body>
 </html>
+

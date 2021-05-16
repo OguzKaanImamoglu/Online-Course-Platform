@@ -23,29 +23,6 @@ if(isset($_POST['feedback_note']) && isset($_POST['rating'])){
     $result = mysqli_query($link, $sql);
 
 
-    $sql = "SELECT f.rating FROM feedback f, student_feedbacks  sf WHERE sf.feedback_id = f.feedback_id AND sf.course_id = '$course_id'";
-
-
-    $result = mysqli_query($link, $sql);
-
-    if(!$result){
-        echo "ERROR " . $link->error;
-    }else{
-        $count = mysqli_num_rows($result);
-
-        if($count == 0){
-            echo "Error! No feedback found";
-        }else{
-            while($q_result = mysqli_fetch_array($result)){
-                $total += $q_result['rating'];
-            }
-            $rate = $total / (float) $count;
-
-            $sql = "UPDATE course SET average_rating = '$rate' WHERE course_id = '$course_id'";
-            $result = mysqli_query($link, $sql);
-
-        }
-    }
 }
 
 ?>
