@@ -38,14 +38,14 @@ if (!$assignment_result) {
 		$assg_id = $assignment_id_array[$i];
 
 		$student_sql = "SELECT	*
-						FROM	submitted_assignments
-						WHERE	assignment_id='$assg_id' AND
-								student_id='$person_id' AND
-								grade >= threshold";
+						FROM	submitted_assignment a, assignment b
+						WHERE	a.assignment_id='$assg_id' AND
+								a.student_id='$person_id' AND
+								a.grade >= b.assignment_threshold AND a.assignment_id = b.assignment_id";
 
 		$student_result = mysqli_query($link, $student_sql);
 
-		if (!$student_result) {
+		if ($student_result) {
 			if (mysqli_num_rows($student_result) > 0) {
 				$passed_assignment = $passed_assignment + 1;
 			}
