@@ -344,7 +344,7 @@ class SQL{
                         "feedback_id INT PRIMARY KEY AUTO_INCREMENT,\n" +
                         "feedback_note VARCHAR(360) NOT NULL,\n" +
                         "rating NUMERIC(2,1) DEFAULT 0,\n" +
-                        "CONSTRAINT check_rating CHECK (rating > 0)\n" +
+                        "CONSTRAINT check_rating CHECK (rating >= 0)\n" +
                         ") ENGINE = INNODB;\n");
             }else{
                 System.out.println("feedback EXIST");
