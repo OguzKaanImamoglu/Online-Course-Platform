@@ -77,6 +77,7 @@ $wallet = $row["wallet"];
 			<p class="lead mt-4">
 				<a class="btn btn-success btn-lg" href="course-market.php" role="button">Course Market</a>
 				<a class="btn btn-success btn-lg" href="my-courses.php" role="button">My Courses</a>
+                <a class="btn btn-success btn-lg" href="notifications.php" role="button">Notifications</a>
 			</p>
 		</div>
 	</div>

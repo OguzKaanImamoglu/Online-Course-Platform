@@ -154,7 +154,7 @@ $percentage = 0;
                         echo "</tbody>";
                         echo "</table>";
                     } else {
-                        echo "There is no course found.";
+                        echo "There is no lecture found.";
                     }
 
                     $sql2 = "SELECT  course_id, student_id, COUNT(lecture_id) as lecture_count
@@ -165,7 +165,7 @@ $percentage = 0;
                     $result2 = mysqli_query($link,$sql2);
 
                     if (!$result2) {
-                        echo "There is no course found.";
+                        echo "There is no lecture found.";
                         echo " " . $link -> error;
                         die();
                     } else {
@@ -234,7 +234,7 @@ $percentage = 0;
         <div class="col-md-2" style="margin-top: 50px;">
             <p>
                 <?php
-                $sql = "SELECT * FROM refund_requests WHERE student_id='$person_id' AND course_id='$course_id'";
+                $sql = "SELECT * FROM refund_requests RR, refund R WHERE student_id='$person_id' AND course_id='$course_id' AND R.refund_id = RR.refund_id AND R.is_assessed = 0";
 
                 if (!$result = mysqli_query($link, $sql)) {
                     echo $link->error;
@@ -283,6 +283,8 @@ $percentage = 0;
                     echo $link -> error;
                     die();
                 }
+                  echo '<script>alert("Refund request is rejected.");</script>';
+                  header("location: course-page.php");
             }
             ?>
 
