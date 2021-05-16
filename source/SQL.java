@@ -459,11 +459,11 @@ class SQL{
                         "  BEGIN\n" +
                         "  SET @cc_id = (SELECT DISTINCT course_creator_id FROM course WHERE (course_id = NEW.course_id));\n" +
                         "  SET @COUNT=(SELECT COUNT(*) FROM course WHERE (course_creator_id=@cc_id));\n" +
-                        "  SET @SUM = (SELECT SUM(average_rating) FROM course (WHERE course_creator_id = @cc_id));\n" +
+                        "  SET @SUM = (SELECT SUM(average_rating) FROM course WHERE (course_creator_id = @cc_id));\n" +
                         "  IF @COUNT=0 THEN\n" +
-                        "  UPDATE course_creator SET rating = 0 WHERE course_creator_id = @cc_id;\n" +
+                        "  UPDATE course_creator SET RATING = 0 WHERE course_creator_id = @cc_id;\n" +
                         "  ELSE\n" +
-                        "  UPDATE course_creator SET rating = (@SUM * 1.0)/(@COUNT * 1.0) WHERE course_creator_id = @cc_id;\n" +
+                        "  UPDATE course_creator SET RATING = (@SUM * 1.0)/(@COUNT * 1.0) WHERE course_creator_id = @cc_id;\n" +
                         "  END IF;\n" +
                         "  END;\n" +
                         "  \n" +
@@ -474,11 +474,11 @@ class SQL{
                         "  BEGIN\n" +
                         "  SET @cc_id = (SELECT DISTINCT course_creator_id FROM course C, student_feedbacks sf WHERE (c.course_id = sf.course_id AND NEW.feedback_id = sf.feedback_id));\n" +
                         "  SET @COUNT=(SELECT COUNT(*) FROM course WHERE (course_creator_id=@cc_id));\n" +
-                        "  SET @SUM = (SELECT SUM(average_rating) FROM course (WHERE course_creator_id = @cc_id));\n" +
+                        "  SET @SUM = (SELECT SUM(average_rating) FROM course WHERE (course_creator_id = @cc_id));\n" +
                         "  IF @COUNT=0 THEN\n" +
-                        "  UPDATE course_creator SET rating = 0 WHERE course_creator_id = @cc_id;\n" +
+                        "  UPDATE course_creator SET RATING = 0 WHERE course_creator_id = @cc_id;\n" +
                         "  ELSE\n" +
-                        "  UPDATE course_creator SET rating = (@SUM * 1.0)/(@COUNT * 1.0) WHERE course_creator_id = @cc_id;\n" +
+                        "  UPDATE course_creator SET RATING = (@SUM * 1.0)/(@COUNT * 1.0) WHERE course_creator_id = @cc_id;\n" +
                         "  END IF;\n" +
                         "  END;\n" +
                         "  \n" +
