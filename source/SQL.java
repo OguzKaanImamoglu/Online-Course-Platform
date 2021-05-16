@@ -382,7 +382,7 @@ class SQL{
             }else{
                 System.out.println("student_complaints EXIST");
             }
-
+    //asdas
             // student_feedbacks Table
             exist = meta.getTables(null, null, "student_feedbacks", null);
             if (!exist.next()) {
