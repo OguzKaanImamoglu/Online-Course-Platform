@@ -22,8 +22,8 @@ $wallet = $row["wallet"];
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function($) {
-		    $('.clickable-row').click(function() {
-		        var id = $(this).attr("src");
+			$('.clickable-row').click(function() {
+				var id = $(this).attr("src");
 		        //$.post("../student/redirect.php", {"selected_course_id": id});
 		        window.location.href = 'course-page-from-market.php?course_id=' + id;
 		    });
@@ -36,38 +36,38 @@ $wallet = $row["wallet"];
 	</style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="../student/home.php">Home</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="../student/home.php">Home</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="../student/course-market.php">Course Market</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="Notifications.php">Notifications</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="../student/my-courses.php">Your Courses</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="../student/add-money.php">Add Money</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="../student/myCertificates.php">Your Certificates</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="../Q&A/myQuestions.php">Your Questions</a>
-            </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="../logout.php">Logout</a></li>
-        </ul>
-    </div>
-</nav>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="../student/course-market.php">Course Market</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="Notifications.php">Notifications</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="../student/my-courses.php">Your Courses</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="../student/add-money.php">Add Money</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="../student/myCertificates.php">Your Certificates</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="../Q&A/myQuestions.php">Your Questions</a>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="../logout.php">Logout</a></li>
+			</ul>
+		</div>
+	</nav>
 
 	<div class="container">
 		<div class="container">
@@ -195,10 +195,24 @@ $wallet = $row["wallet"];
 								"</td><td>" . $q_result["category"] . 
 								"</td><td>" . $q_result["name"] . " " . $q_result["surname"];
 
-								if (is_null($q_result["percentage"])) {
+
+								$id = $q_result["course_id"];
+
+								$discount_query = "SELECT * FROM discount WHERE discounted_course_id = '$id'";
+								$discount_result = mysqli_query($link, $discount_query);
+								$count = mysqli_num_rows($discount_result);
+
+								$discount_rows = mysqli_fetch_array($discount_result);
+
+
+								if ($count == 0 || is_null($discount_rows)) {
 									echo "</td><td> 0";
 								} else {
-									echo "</td><td>" . $q_result["percentage"];
+									if ($discount_rows["is_allowed"] == '0') {
+										echo "</td><td> 0";
+									} else {
+										echo "</td><td>" . $discount_rows["percentage"] . "%";
+									}
 								}
 								echo "</td></tr>";
 							}

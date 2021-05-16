@@ -253,8 +253,8 @@ $pending = $row1["COUNT(*)"];
     }
 </style>
 
-<div class="center">
-<button type='submit' onclick="location.href='home.php'" name='home' class='btn btn-success btn-lg float.right'>Go to Home</button>";
+<div>
+    <button type='submit' onclick="location.href='home.php'" name='home' class='btn btn-success btn-lg float-right'>Go to Home</button>
 </div>
 
 

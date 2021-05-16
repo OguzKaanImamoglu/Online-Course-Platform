@@ -121,6 +121,8 @@ $total_id = "#";
 			    . "  ON C.course_id = course_student.course_id WHERE course_creator_id = $person_id";
 
 
+
+
 			$result2 = mysqli_query($link, $sql);
 
 			if (!$result2) {
@@ -149,17 +151,30 @@ $total_id = "#";
 							"</td><td>" . number_format($q_result["price"], 2) . 
 							"$</td><td>" . $q_result["average_rating"];
 
+
+							$discount_query = "SELECT * FROM discount WHERE discounted_course_id = '$id'";
+							$discount_result = mysqli_query($link, $discount_query);
+							$count = mysqli_num_rows($discount_result);
+
+							$discount_rows = mysqli_fetch_array($discount_result);
+
+
 							if (is_null($q_result["total_student"])) {
 								echo "</td><td> 0";
 							} else {
 								echo "</td><td>" . $q_result["total_student"];
 							}
 
-							if (is_null($q_result["percentage"])) {
+							if ($count == 0 || is_null($discount_rows)) {
 								echo "</td><td> 0";
 							} else {
-								echo "</td><td>" . $q_result["percentage"];
+								if ($discount_rows["is_allowed"] == '0') {
+									echo "</td><td> 0";
+								} else {
+									echo "</td><td>" . $discount_rows["percentage"] . "%";
+								}
 							}
+
 							echo "</td></tr>";
 					}
 					echo "</tbody>";
