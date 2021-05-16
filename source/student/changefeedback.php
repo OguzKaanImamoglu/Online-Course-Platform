@@ -8,6 +8,8 @@ $person_id = $_SESSION['person_id'];
 $course_id = $_SESSION['course_id'];
 
 $f_id = "";
+$aa = $_SESSION['float'];
+echo "<script>alert($aa);</script>";
 
 ?>
 

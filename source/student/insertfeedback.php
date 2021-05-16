@@ -41,9 +41,11 @@ if(isset($_POST['feedback_note']) && isset($_POST['rating'])){
             }
             $rate = $total / (float) $count;
             $_SESSION['float'] = $rate;
+
             $sql = "UPDATE course SET average_rating = '$rate' WHERE course_id = '$course_id'";
+
+            $result = mysqli_query($link, $sql);
         }
     }
 }
-
 ?>
