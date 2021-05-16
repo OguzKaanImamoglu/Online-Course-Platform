@@ -66,7 +66,7 @@ $best_name = $row1["name"];
 $best_surname = $row1["surname"];
 
 
-$sql1 =  "SELECT COUNT(*) FROM refund WHERE is_approved <> 1";
+$sql1 =  "SELECT COUNT(*) FROM refund WHERE is_assessed <> 1";
 $result1 = mysqli_query($link, $sql1);
 $row1 = mysqli_fetch_array($result1,MYSQLI_ASSOC);
 $pending = $row1["COUNT(*)"];
@@ -98,6 +98,9 @@ $pending = $row1["COUNT(*)"];
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="stats.php">Stats</a>
+            </li>
+            <li class="nav-item">
+                    <a class="nav-link" href="complaints.php">Complaints</a>
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
