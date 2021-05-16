@@ -37,6 +37,9 @@ $id_list = "#";
 				<li class="nav-item">
 					<a class="nav-link active" href="course-market.php">Course Market</a>
 				</li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Notifications.php">Notifications</a>
+                </li>
 				<li class="nav-item">
 					<a class="nav-link" href="my-courses.php">My Courses</a>
 				</li>

@@ -76,6 +76,9 @@ $sql4 = "INSERT INTO note(student_id, lecture_id, course_id, note_text) VALUES (
                 <a class="nav-link" href="../student/course-market.php">Course Market</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="Notifications.php">Notifications</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="../student/my-courses.php">My Courses</a>
             </li>
             <li class="nav-item">

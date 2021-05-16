@@ -26,6 +26,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="course-market.php">Course Market<span class="sr-only">(current)</span></a>
             </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Notifications.php">Notifications</a>
+                </li>
             <li class="nav-item">
                 <a class="nav-link" href="my-courses.php">Your Courses<span class="sr-only">(current)</span></a>
             </li>

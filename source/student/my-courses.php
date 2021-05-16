@@ -28,6 +28,9 @@ $course_ids = "#";
                 <a class="nav-link" href="../student/course-market.php">Course Market</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="Notifications.php">Notifications</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="../student/my-courses.php">Your Courses</a>
             </li>
             <li class="nav-item">
@@ -82,7 +85,7 @@ $course_ids = "#";
                     echo "<tr><th scope='row'>" . $q_result["course_id"] .
                         "</th><td>" . $q_result["course_name"] .
                         "</td><td>" . $q_result["name"]. " " . $q_result["surname"];
-                    
+
 
                     $student_id = $person_id;
                     $course_id = $q_result["course_id"];
@@ -190,4 +193,3 @@ $course_ids = "#";
 </script>
 
 </html>
-

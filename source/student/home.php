@@ -32,6 +32,9 @@ $wallet = $row["wallet"];
 				<li class="nav-item">
 					<a class="nav-link" href="course-market.php">Course Market</a>
 				</li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Notifications.php">Notifications</a>
+                </li>
 				<li class="nav-item">
 					<a class="nav-link" href="my-courses.php">Your Courses</a>
 				</li>
