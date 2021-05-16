@@ -3,7 +3,7 @@
     include('../sign-up/database.php');
 
 	$person_id = $_SESSION['person_id'];
-    $cid = $_GET['cid'];
+    $cid = $_SESSION['course_id'];
  ?>
 
 <!DOCTYPE html>
@@ -28,14 +28,10 @@
 					<a class="nav-link" href="publish-course.php">Publish New Course</a>
 			</li>
             <li class="nav-item">
-            <?php
-                echo "<a href='course-page.php?course_id=$cid' class='nav-link'>Course Page</a>";
-            ?>
+                <a href='course-page.php' class='nav-link'>Course Page</a>
             </li>
             <li class="nav-item">
-            <?php
-                echo "<a href='assignments.php?cid=$cid' class='nav-link'>Assignments</a>";
-            ?>
+                <a href='assignments.php' class='nav-link'>Assignments</a>
             </li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
@@ -53,6 +49,7 @@
                 $result = mysqli_query($link, $sql);
                 $data = $result->fetch_assoc();
 	            $course_name = $data['course_name'];
+
                 echo '<h3 class="display-5 mb-4">Assignments for ' . $course_name . '</h3>';
             ?>
 			<hr class="my-4">

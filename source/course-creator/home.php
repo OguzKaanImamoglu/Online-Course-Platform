@@ -15,6 +15,7 @@ $result = mysqli_query($link,$sql);
 $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 
 $wallet = $row["wallet"];
+$total_id = "#";
 ?>
 
 <!DOCTYPE html>
@@ -26,10 +27,24 @@ $wallet = $row["wallet"];
 	<script type="text/javascript">
 		jQuery(document).ready(function($) {
 		    $('.clickable-row').click(function() {
-		        var id = $(this).attr("src");
+		        $id = $(this).attr("src");
+                $.ajax({
+                    type: "POST",
+                    url: "course-id.php",
+                    data: {
+                        course_id: $id
+                    },
+                    success: function(result) {
+                        //alert('Approved');
+                        window.location.href = 'course-page.php';
+                    },
+                    error: function(result) {
+                        alert("Accept error");
+                    }
+                });
+
 		        //$.post("../student/redirect.php", {"selected_course_id": id});
-		        window.location.href = 'course-page.php?course_id=' + id;
-		        
+
 		    });
 		});
 	</script>
@@ -128,7 +143,8 @@ $wallet = $row["wallet"];
 					";
 
 					while ($q_result = mysqli_fetch_array($result2)) {
-						echo "<tr class='clickable-row' src=" . "'" . $q_result["course_id"] . "'" . "><th scope='row'>" . $q_result["course_id"] .
+					    $id = $q_result['course_id'];
+						echo "<tr class='clickable-row' id = '$id' src=" . "'" . $q_result["course_id"] . "'" . "><th scope='row'>" . $q_result["course_id"] .
 							"</th><td>" . $q_result["course_name"] .
 							"</td><td>" . number_format($q_result["price"], 2) . 
 							"$</td><td>" . $q_result["average_rating"];

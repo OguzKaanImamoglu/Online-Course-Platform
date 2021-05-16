@@ -110,7 +110,7 @@ $rejected_id = "#";
                 echo '</tbody></table>';
 
             } else {
-                echo "There are no refund requests.";
+                echo "There are no discount offers.";
             }
         }
         ?>
