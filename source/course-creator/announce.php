@@ -3,7 +3,7 @@ session_start();
 include('../sign-up/database.php');
 
 
-$selected_course_id = $_SESSION["selected_course_id"];
+$selected_course_id = $_SESSION["course_id"];
 
 $text = $_POST["announcement"];
 

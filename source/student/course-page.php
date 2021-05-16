@@ -88,7 +88,7 @@ $percentage = 0;
 
                     while ($q_result1 = mysqli_fetch_array($result1)) {
                         echo "<tr><th scope='row'>" . $q_result1["date"] .
-                        "</th><td style='word-wrap: break-word; min-width: 10px; max-width: 150px;'> <p>" . $q_result1["text"] ."bmvklfdmklbvdlkmfvblnkmdfvbnmkldfvbnmlkdfnmlvkbnldfjkvbfdsfasdasdfasdfasdfasdfasdf". "</p>";
+                        "</th><td style='word-wrap: break-word; min-width: 10px; max-width: 150px;'> <p>" . $q_result1["text"] . "</p>";
 
                         echo "</td></tr>";
 

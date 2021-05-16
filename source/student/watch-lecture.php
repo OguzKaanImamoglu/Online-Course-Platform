@@ -103,7 +103,7 @@ $sql4 = "INSERT INTO note(student_id, lecture_id, course_id, note_text) VALUES (
 </nav>
 
 
-<h3 class="display-5 mb-4">My Notes</h3>
+<h3 class="display-5 mb-4">My Notes:</h3>
 <div class="dropdown " align=center>
     <button class="btn btn-dark btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
         Select Note
@@ -134,8 +134,7 @@ $sql4 = "INSERT INTO note(student_id, lecture_id, course_id, note_text) VALUES (
 
 
     <style>
-        h3 {text-align: center;
-            border: 3px solid green;}
+        h3 {text-align: center;}
 
         h4 {text-align: center;}
         h1 {text-align: center;}

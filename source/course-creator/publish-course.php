@@ -83,6 +83,9 @@ if (isset($_POST['publish'])) {
 					<a class="nav-link" href="">Publish New Course</a>
 				</li>
 			</ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="../logout.php">Logout</a></li>
+            </ul>
 		</div>
 	</nav>
 	<h1 class="display-4 text-center mt-4 mb-4">New Course</h1>

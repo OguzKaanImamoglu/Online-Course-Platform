@@ -118,7 +118,7 @@ if (isset($_POST['save'])) {
                 <div class="form-group">
                     <button type="submit" name="save" class="btn btn-success btn-lg btn-block">Register Now</button>
                 </div>
-                <div class="text-center">Already have an account? <a href="../index.php">Sign in</a></div>
+                <div class="text-center">Already have an account? <a href="../index.php">Login</a></div>
             </form>
         </div>
     </div>
