@@ -50,7 +50,7 @@ $worst_course = $row1["course_name"];
 
 $sql1 = "SELECT name, surname FROM person WHERE person_id = (SELECT course_creator_id
 FROM course_creator
-WHERE RATING = (SELECT MIN(RATING) FROM course_creator))";
+WHERE RATING = (SELECT MIN(RATING) FROM course_creator LIMIT 1) LIMIT 1)";
 $result1 = mysqli_query($link, $sql1);
 $row1 = mysqli_fetch_array($result1,MYSQLI_ASSOC);
 $worst_name = $row1["name"];
@@ -59,7 +59,7 @@ $worst_surname = $row1["surname"];
 
 $sql1 = "SELECT name, surname FROM person WHERE person_id = (SELECT course_creator_id
 FROM course_creator
-WHERE RATING = (SELECT MAX(RATING) FROM course_creator))";
+WHERE RATING = (SELECT MAX(RATING) FROM course_creator LIMIT 1) LIMIT 1)";
 $result1 = mysqli_query($link, $sql1);
 $row1 = mysqli_fetch_array($result1,MYSQLI_ASSOC);
 $best_name = $row1["name"];
