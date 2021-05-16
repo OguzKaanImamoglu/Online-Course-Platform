@@ -57,7 +57,7 @@ class SQL{
                         "\tON DELETE CASCADE\n" +
                         "\tON UPDATE RESTRICT,\n" +
                         "\twallet NUMERIC(10, 2) DEFAULT 0,\n" +
-                        "\tRATING NUMERIC(2,1) DEFAULT 0,\n" +
+                        "\trating NUMERIC(2,1) DEFAULT 0,\n" +
                         "\tPRIMARY KEY (course_creator_id),\n" +
                         "\tCONSTRAINT check_course_creator_rating_positivity\n" +
                         "\t\tCHECK (rating >= 0 AND rating <= 5),\n" +
@@ -348,6 +348,8 @@ class SQL{
                         "\tcomplaint_note VARCHAR(360) NOT NULL,\n" +
                         "\tcomplaint_date DATE NOT NULL\n" +
                         ") ENGINE = INNODB;\n");
+
+
             }else{
                 System.out.println("complaint EXIST");
             }
@@ -394,6 +396,13 @@ class SQL{
                         "ON DELETE CASCADE\n" +
                         "\tON UPDATE RESTRICT\n" +
                         ") ENGINE INNODB;\n");
+
+                stmt.executeUpdate("CREATE VIEW complaint_view AS\n" +
+                        "SELECT C.complaint_id, complaint_note, complaint_date, P.person_id, Co.course_id, name, surname, course_name\n" +
+                        "FROM complaint C, student_complaints SC, person P, course Co\n" +
+                        "WHERE \n" +
+                        "C.complaint_id=SC.complaint_id AND P.person_id=SC.student_id AND\n" +
+                        "SC.course_id=Co.course_id\n");
             }else{
                 System.out.println("student_complaints EXIST");
             }
@@ -439,6 +448,37 @@ class SQL{
                         "  UPDATE course SET average_rating = 0 WHERE course_id = @c_id;\n" +
                         "  ELSE\n" +
                         "  UPDATE course SET average_rating = (@SUM * 1.0)/(@COUNT * 1.0) WHERE course_id = @c_id;\n" +
+                        "  END IF;\n" +
+                        "  END;\n" +
+                        "  \n" +
+                        "  \n");
+
+
+                stmt.executeUpdate("\n" +
+                        "CREATE TRIGGER update_rating3 AFTER INSERT ON student_feedbacks FOR EACH ROW\n" +
+                        "  BEGIN\n" +
+                        "  SET @cc_id = (SELECT DISTINCT course_creator_id FROM course WHERE (course_id = NEW.course_id));\n" +
+                        "  SET @COUNT=(SELECT COUNT(*) FROM course WHERE (course_creator_id=@cc_id));\n" +
+                        "  SET @SUM = (SELECT SUM(average_rating) FROM course (WHERE course_creator_id = @cc_id));\n" +
+                        "  IF @COUNT=0 THEN\n" +
+                        "  UPDATE course_creator SET rating = 0 WHERE course_creator_id = @cc_id;\n" +
+                        "  ELSE\n" +
+                        "  UPDATE course_creator SET rating = (@SUM * 1.0)/(@COUNT * 1.0) WHERE course_creator_id = @cc_id;\n" +
+                        "  END IF;\n" +
+                        "  END;\n" +
+                        "  \n" +
+                        "  \n");
+
+                stmt.executeUpdate("\n" +
+                        "CREATE TRIGGER update_rating4 AFTER UPDATE ON feedback FOR EACH ROW\n" +
+                        "  BEGIN\n" +
+                        "  SET @cc_id = (SELECT DISTINCT course_creator_id FROM course C, student_feedbacks sf WHERE (c.course_id = sf.course_id AND NEW.feedback_id = sf.feedback_id));\n" +
+                        "  SET @COUNT=(SELECT COUNT(*) FROM course WHERE (course_creator_id=@cc_id));\n" +
+                        "  SET @SUM = (SELECT SUM(average_rating) FROM course (WHERE course_creator_id = @cc_id));\n" +
+                        "  IF @COUNT=0 THEN\n" +
+                        "  UPDATE course_creator SET rating = 0 WHERE course_creator_id = @cc_id;\n" +
+                        "  ELSE\n" +
+                        "  UPDATE course_creator SET rating = (@SUM * 1.0)/(@COUNT * 1.0) WHERE course_creator_id = @cc_id;\n" +
                         "  END IF;\n" +
                         "  END;\n" +
                         "  \n" +
