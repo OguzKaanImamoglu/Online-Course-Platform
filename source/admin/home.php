@@ -31,6 +31,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="stats.php">Stats</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="complaints.php">Complaints</a>
+                </li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
       			<li><a href="../logout.php">Logout</a></li>
@@ -47,6 +50,7 @@
 				<a class="btn btn-success btn-lg" href="refund-requests.php" role="button">Refund Requests</a>
 				<a class="btn btn-success btn-lg" href="discount-courses.php" role="button">Discounts</a>
                 <a class="btn btn-success btn-lg" href="stats.php" role="button">Stats</a>
+                <a class="btn btn-danger btn-lg" href="complaints.php" role="button">Complaints</a>
 			</p>
 		</div>
 	</div>

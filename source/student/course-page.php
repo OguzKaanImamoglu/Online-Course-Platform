@@ -99,7 +99,6 @@ $percentage = 0;
                     echo "There is no announcement found.";
                 }
             }
-
             ?>
         </div>
         <div class="col-md-7" style="margin-top: 50px; padding-left: 25px; padding-right: 25px;">
@@ -310,13 +309,18 @@ $percentage = 0;
 
 </div>
 
+<div style="margin-right: 50px;">
+    <p>
+    <a class="btn btn-success btn-md btn-block" style="margin-right: 30px;" href="../Q&A/q&aforcourse.php" role="button">Q&A Page</a>
+</p>
+<p>
+    <a class="btn btn-success btn-md btn-block" href="assignments.php" role="button">Assignments</a>
+</p>
+<p>
+    <a class="btn btn-danger btn-md btn-block" href="create-complaint.php" role="button">Make a Complaint</a>
+</p>
+</div>
 
-<p>
-    <a class="btn btn-success btn-md" href="../Q&A/q&aforcourse.php" role="button">Q&A Page</a>
-</p>
-<p>
-    <a class="btn btn-success btn-md" href="assignments.php" role="button">Assignments</a>
-</p>
 </div>
 
 </div>
