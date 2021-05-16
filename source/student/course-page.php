@@ -18,6 +18,27 @@ $lecture_ids = "#";
 $percentage = 0;
 ?>
 
+<?php
+              if (isset($_POST["send-request"])) {
+                $reason = $_POST['requestReason'];
+                $sql = "INSERT INTO refund(reason) VALUES('$reason')";
+
+                if (!mysqli_query($link, $sql)) {
+                    echo $link -> error;
+                    die();
+                }
+
+                $latest_id =  mysqli_insert_id($link);
+
+                $sql = "INSERT INTO refund_requests VALUES('$latest_id', '$person_id', '$course_id')";
+
+                if (!mysqli_query($link, $sql)) {
+                    echo '<script>alert("INSERT INTO refund_requests failed.");</script>';
+                }
+                echo '<script>alert("Refund request is successfull");</script>';
+        }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -234,14 +255,14 @@ $percentage = 0;
         <div class="col-md-2" style="margin-top: 50px;">
             <p>
                 <?php
-                $sql = "SELECT * FROM refund_requests RR, refund R WHERE student_id='$person_id' AND course_id='$course_id' AND R.refund_id = RR.refund_id AND R.is_assessed = 0";
+                $sql = "SELECT * FROM refund_requests RR, refund R WHERE student_id='$person_id' AND course_id='$course_id' AND R.refund_id = RR.refund_id";
 
+                $result = 0;
                 if (!$result = mysqli_query($link, $sql)) {
                     echo $link->error;
                     die();
                 } else {
                     $count = mysqli_num_rows($result);
-
                     if (!$count) {
                         echo "<button type='button' class='btn btn-success btn-md' data-toggle='modal' data-target='#exampleModal'>
                         Request Refund
@@ -265,28 +286,7 @@ $percentage = 0;
                   </button>
               </div>
 
-              <?php
-              if (isset($_POST["send-request"])) {
-                $reason = $_POST['requestReason'];
-                $sql = "INSERT INTO refund(reason) VALUES('$reason')";
-
-                if (!mysqli_query($link, $sql)) {
-                    echo $link -> error;
-                    die();
-                }
-
-                $latest_id =  mysqli_insert_id($link);
-
-                $sql = "INSERT INTO refund_requests VALUES('$latest_id', '$person_id', '$course_id')";
-
-                if (!mysqli_query($link, $sql)) {
-                    echo $link -> error;
-                    die();
-                }
-                  echo '<script>alert("Refund request is rejected.");</script>';
-                  header("location: course-page.php");
-            }
-            ?>
+              
 
 
             <form method="post">
