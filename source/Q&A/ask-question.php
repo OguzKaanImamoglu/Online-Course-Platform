@@ -63,26 +63,33 @@ if (isset($_POST['sendQuestion'])) {
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Course Market </a>
+                <a class="nav-link" href="../student/course-market.php">Course Market</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Your Courses</a>
+                <a class="nav-link" href="../student/notifications.php">Notifications</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../student/my-courses.php">My Courses</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="../student/add-money.php">Add Money</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../student/myCertificates.php">Your Certificates</a>
+                <a class="nav-link" href="../student/myCertificates.php">My Certificates</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../Q&A/myQuestions.php">Your Questions</a>
+                <a class="nav-link" href="../Q&A/myQuestions.php">My Questions</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="../student/course-page.php">Course Page</a>
             </li>
         </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../logout.php">Logout</a></li>
+        </ul>
     </div>
 </nav>
+
 
 <div class="container">
     <div class="jumbotron mt-4">
