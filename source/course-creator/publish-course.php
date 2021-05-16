@@ -18,10 +18,9 @@ if (isset($_POST['publish'])) {
 		$language = $_POST['language'];
 		$category = $_POST['category'];
 		$description = $_POST['description'];
-		$cert_price = $_POST['certificate-price'];
 
-		$sql = "INSERT INTO course(course_name, language, course_price, create_date, average_rating, category, course_description, certificate_price, course_creator_id)
-		VALUES ('$course_name', '$language', '$price', CURDATE(), '0', '$category', '$description', '$cert_price', '$person_id')";
+		$sql = "INSERT INTO course(course_name, language, course_price, create_date, average_rating, category, course_description, course_creator_id)
+		VALUES ('$course_name', '$language', '$price', CURDATE(), '0', '$category', '$description', '$person_id')";
 
 		if (!mysqli_query($link, $sql)) {
 			echo "ERROR : COULD NOT BE ADDED" . mysqli_error($link);
@@ -276,10 +275,6 @@ if (isset($_POST['publish'])) {
 					<option value="Maths">Maths</option>
 					<option value="Others">Others</option>
 				</select>
-			</div>
-			<div class="form-group">
-				<label for="certificate-price">Certificate Price (between 0 and 300)</label>
-				<input type="number" class="form-control" id="certificate-price" name="certificate-price" min="0" max="300" value="0" required="required">
 			</div>
 			<div class="form-group">
 				<label for="description">Course Description</label>

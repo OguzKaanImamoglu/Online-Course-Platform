@@ -44,10 +44,7 @@
 
     <div class="container">
         <?php 
-            $sql = "SELECT * FROM complaint_view WHERE 
-                C.complaint_id=SC.complaint_id AND P.person_id=SC.student_id AND
-                SC.course_id=Co.course_id
-            ";
+            $sql = "SELECT * FROM complaint_view";
 
             $result = mysqli_query($link, $sql);
             if (!$result) {

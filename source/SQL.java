@@ -88,14 +88,12 @@ class SQL{
                         "('Web Development', 'Mobile Software Development', \n" +
                         "'Programming Languages', 'Game Development', 'Database Management System', 'Business', 'Management', 'Economics', 'Finance', 'Information Technology', 'Cyber Security', 'Maths', 'Gastronomy', 'Others')),\n" +
                         "course_description VARCHAR(200),\n" +
-                        "certificate_price NUMERIC(5, 2) DEFAULT 0,\n" +
                         "course_creator_id INT,\n" +
                         "FOREIGN KEY (course_creator_id) REFERENCES     \tcourse_creator(course_creator_id)\n" +
                         "ON DELETE CASCADE\n" +
                         "ON UPDATE RESTRICT,\n" +
                         "CONSTRAINT check_course_price_validity CHECK (course_price >= 0),\n" +
                         "CONSTRAINT check_average_rating_validity CHECK (average_rating >= 0 AND average_rating <= 5),\n" +
-                        "CONSTRAINT check_certificate_price_validity CHECK (certificate_price >= 0)" +
                         ") ENGINE = INNODB;\n");
             }else{
                 System.out.println("course EXIST");
