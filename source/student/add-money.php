@@ -45,16 +45,16 @@ if (isset($_POST['save'])) {
                 <a class="nav-link" href="Notifications.php">Notifications</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../student/my-courses.php">Your Courses</a>
+                <a class="nav-link" href="../student/my-courses.php">My Courses</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="../student/add-money.php">Add Money</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../student/myCertificates.php">Your Certificates</a>
+                <a class="nav-link" href="../student/myCertificates.php">My Certificates</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../Q&A/myQuestions.php">Your Questions</a>
+                <a class="nav-link" href="../Q&A/myQuestions.php">My Questions</a>
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -75,7 +75,7 @@ if (isset($_POST['save'])) {
 				<label for="quantity">Quantity (between 1 and 250):</label>
 				<input type="number" id="quantity" name="quantity" min="1" max="250" value="1">
 				<p>
-                    <button type="submit" name="save" class="btn btn-success btn-md mt-4">Add Money to Your Wallet</button>
+                    <button type="submit" name="save" class="btn btn-success btn-md mt-4">Add Money to Wallet</button>
 				</p>
 			</form>	
 		</div>

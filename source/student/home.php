@@ -36,17 +36,17 @@ $wallet = $row["wallet"];
                     <a class="nav-link" href="Notifications.php">Notifications</a>
                 </li>
 				<li class="nav-item">
-					<a class="nav-link" href="my-courses.php">Your Courses</a>
+					<a class="nav-link" href="my-courses.php">My Courses</a>
 				</li>
 
 				<li class="nav-item">
 					<a class="nav-link" href="add-money.php">Add Money</a>
 				</li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../student/myCertificates.php">Your Certificates</a>
+                    <a class="nav-link" href="../student/myCertificates.php">My Certificates</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../Q&A/myQuestions.php">Your Questions</a>
+                    <a class="nav-link" href="../Q&A/myQuestions.php">My Questions</a>
                 </li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
@@ -63,13 +63,13 @@ $wallet = $row["wallet"];
 			<a href="wishlist.php">
 				<p class="lead">
 					<i class="fa fa-list fa-lg" aria-hidden="true"></i>
-					Your Wishlist
+					My Wishlist
 				</p>
 			</a>
 			<a href="cart.php">
 				<p class="lead">
 					<i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i>
-					Your Cart
+					My Cart
 				</p>
 			</a>
 			<p class="lead">

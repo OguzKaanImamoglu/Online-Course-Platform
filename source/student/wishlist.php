@@ -53,7 +53,7 @@ $id_list = "#";
 		</div>
 	</nav>
 
-	<h1 class="text-center mt-4 mb-4">Your Wishlist</h1>
+	<h1 class="text-center mt-4 mb-4">My Wishlist</h1>
 
 	<div class="container">
 		<?php 

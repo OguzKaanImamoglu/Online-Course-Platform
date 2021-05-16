@@ -28,13 +28,13 @@
                     <a class="nav-link" href="Notifications.php">Notifications</a>
                 </li>
             <li class="nav-item">
-                <a class="nav-link" href="my-courses.php">Your Courses<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="my-courses.php">My Courses<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="add-money.php">Add Money</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../Q&A/myQuestions.php">Your Questions</a>
+                <a class="nav-link" href="../Q&A/myQuestions.php">My Questions</a>
             </li>
             <li class="nav-item">
                 <a href='course-page.php' class='nav-link'>Course Page</a>

@@ -19,20 +19,20 @@ if (isset($_POST['save'])) {
     $first_name = ucfirst($first_name);
     $last_name = ucfirst($last_name);
 
-    echo "\nemail: " . $email . "\n";
-    echo "\nusername: " . $username . "\n";
-    echo "\nfirst_name " . $first_name . "\n";
-    echo "\nlast_name " . $last_name . "\n";
-    echo "\npassword " . $password . "\n";
-    echo "\ncpass " . $cpass . "\n";
-    echo "\nbirth: " . $date_of_birth . "\n";
+//    echo "\nemail: " . $email . "\n";
+//    echo "\nusername: " . $username . "\n";
+//    echo "\nfirst_name " . $first_name . "\n";
+//    echo "\nlast_name " . $last_name . "\n";
+//    echo "\npassword " . $password . "\n";
+//    echo "\ncpass " . $cpass . "\n";
+//    echo "\nbirth: " . $date_of_birth . "\n";
 
     /*INSERT INTO person (username, email, name, surname, password, date_of_birth) VALUES ('ayse123', 'ayse@hotmail.com', 'ayse', 'lastname', 'asdasd', '2021-05-09')*/
     $sql = "INSERT INTO person (username, email, name, surname, password, date_of_birth)
             VALUES ('$username', '$email', '$first_name', '$last_name', '$password', '$date_of_birth')";
 
     if (!mysqli_query($link, $sql)) {
-        echo "ERROR : COULD NOT BE ADDED" . mysqli_error($link);
+//        echo "ERROR : COULD NOT BE ADDED" . mysqli_error($link);
         if ( strpos(mysqli_error($link), 'username')) {
             $duplicate_username = "* Username already exists.";
         }
