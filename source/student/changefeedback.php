@@ -9,7 +9,7 @@ $course_id = $_SESSION['course_id'];
 
 $f_id = "";
 $aa = $_SESSION['float'];
-echo "<script>alert($aa);</script>";
+//echo "<script>alert($aa);</script>";
 
 ?>
 
