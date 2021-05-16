@@ -149,7 +149,7 @@ $sql4 = "INSERT INTO note(student_id, lecture_id, course_id, note_text) VALUES (
     <div class="jumbotron mt-4">
         <h1 class="display-5 mb-4 center"><?php echo $row0['course_name']?></h1>
 
-    <img src="os.jpg" alt="Italian Trulli" class="center">
+    <img src="lecture.jpg" alt="Italian Trulli" class="center">
         <style>
         .center {
         display: block;
