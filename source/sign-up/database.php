@@ -1,8 +1,8 @@
 <?php
-    define('DB_SERVER', 'dijkstra.ug.bcc.bilkent.edu.tr');
-    define('DB_USERNAME', 'can.alpay');
+    define('DB_SERVER', '');
+    define('DB_USERNAME', '');
     define('DB_PASSWORD', '');
-    define('DB_NAME', 'can_alpay');
+    define('DB_NAME', '');
 
     $charset = "utf8mb4";
     try {
