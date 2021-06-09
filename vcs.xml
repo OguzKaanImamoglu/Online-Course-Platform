@@ -6,9 +6,13 @@
           <option name="url" value="https://github.com/OguzKaanImamoglu/Online-Course-Platform.git" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.com/iVis-at-Bilkent/newt.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
-    <option name="cloneParentDir" value="C:\Users\abdul\OneDrive\Desktop\CS353" />
+    <option name="cloneParentDir" value="C:\Users\abdul\OneDrive\Desktop\GSoC" />
   </component>
   <component name="Vcs.Log.App.Settings">
     <option name="COLUMN_ID_ORDER">
